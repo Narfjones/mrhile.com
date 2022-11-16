@@ -1,3 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+div,
+object,
+iframe,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+header,
+article,
+figure {
+  display: block;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
 body {
   font-family: 'Roboto', sans-serif;
   color: #101010;
@@ -67,7 +99,7 @@ body {
 .hero_area {
   background-image: url(../images/hero-bg.jpg);
   background-size: cover;
-  height:50em;
+  height:auto;
 }
 
 .sub_page .hero_area {
@@ -628,3 +660,356 @@ a:focus {
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
+
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+div,
+object,
+iframe,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+header,
+article,
+figure {
+  display: block;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/************End Reset**************/
+
+/*global elements____________________________________*/
+body {
+  font-family: "Roboto", "Helvetica Neue", "Arial", sans-serif;
+  font-size: 105%;
+  color: #333;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+article {
+  padding: 5px;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
+button {
+  font-family: "Roboto", "Helvetica Neue", "Arial", sans-serif;
+  font-size: 1em;
+  margin: 0.3em;
+}
+
+input {
+  font-family: Monaco, monospace;
+  font-size: 90%;
+  border: 10px;
+  margin: 0.2em;
+}
+input[type="number"] {
+  background: #eee;
+}
+input[type="text"] {
+  background: #eee;
+}
+input:focus {
+  outline: 0;
+}
+
+canvas {
+  margin: 0px;
+  box-shadow: 2px 2px 8px #aaa;
+  border-radius: 5px;
+  user-select: none;
+}
+a {
+  text-decoration: none;
+  color: #2793c7;
+}
+a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+summary {
+  cursor: pointer;
+  outline: none;
+}
+hr {
+  border: 0;
+  border-bottom: 1px solid #aaa;
+}
+
+::selection {
+  color: white;
+  background: #2793c7;
+}
+
+pre {
+  overflow-x: auto;
+  background-color: #eee;
+}
+
+table {
+  margin: 5px auto;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+  width: 100%;
+}
+
+tr:hover {
+  background: #f4f4f4;
+}
+
+th,
+td {
+  text-align: center;
+  border: 1px solid #eee;
+  padding: 0.25rem;
+  border-collapse: collapse;
+}
+th {
+  background: #444;
+  color: #fff;
+}
+
+.black {
+  background-color: #000;
+}
+
+.rainbow {
+  background: linear-gradient(red, orange, yellow, green, cyan, blue, violet);
+  font-weight: 900;
+  color: #fff;
+}
+.ion {
+  background: #fef;
+}
+
+/*classes_________________________________________*/
+.back {
+  text-align: center;
+  margin: 10em 0em 0em 0em;
+  padding: 2em 0em 0.4em 0em;
+}
+
+.underlined {
+  margin-top: 2em;
+  margin-bottom: .5em;
+  border-bottom: 1px solid #aaa;
+  font-weight: 300;
+  font-size: 2.2em;
+}
+.strikeout {
+  text-decoration: line-through;
+}
+
+.center {
+  text-align: center;
+  padding: 0;
+  margin: auto;
+  display: block;
+}
+
+.highlight {
+  color: #fff;
+  background-color: #2793c7;
+  /*color: #000;
+  background-color: #ffcdf0;*/
+  border-radius: 5px;
+  margin: 0px 2px 0px 2px;
+  padding: 0px 2px 0px 2px;
+}
+
+.definition {
+  color: #000;
+  background-color: #ddeef6;
+  padding: 1em;
+  margin: 1em 0em 1em 0em;
+  border-radius: 1em;
+  line-height: 1.6;
+  font-size: 110%;
+}
+.definition em {
+  color: #888;
+  font-weight: 300;
+}
+
+.example {
+  margin: 8em 0em 8em 0em;
+}
+
+.derive {
+  background-color: #e6f9f0;
+  padding: 1.3em;
+  border-radius: 1em;
+}
+
+.quote {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 120%;
+  padding: 0.5em 2em;
+  /* border-radius: 20px; */
+  /* background: #eee; */
+}
+
+/*math tex rendering __________________________*/
+
+.katex {
+  font-size: 1.5em;
+}
+
+/*2 Equal-Width Columns that combine in the article________________*/
+@media screen and (min-width: 43em) {
+  .col-group {
+    overflow: hidden;
+  }
+  .col-group > div {
+    float: left;
+    width: 50%;
+  }
+}
+
+/* Grid with auto placement ______________________________________*/
+.listing {
+  list-style: none;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+.listing li {
+  display: flex;
+  flex-direction: column;
+}
+
+/* front page grid ________________________________________________*/
+.listing-style {
+  overflow: hidden;
+  padding: 0.5em 0 0 0.5em;
+  max-width: 1300px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.listing-style li {
+  padding: 0 0.5em 0.5em 0;
+}
+
+.listing-style a {
+  color: #555;
+}
+
+.listing-style a:hover {
+  color: #2793c7;
+}
+
+.listing-style h2 {
+  border-bottom: 1px solid #aaa;
+  font-weight: 400;
+  margin-bottom: 0.1em;
+}
+
+/* fake Grid ________________________________________________*/
+.wrapper {
+  display: grid;
+  grid-template-columns: 292px 292px;
+  grid-gap: 16px;
+}
+
+.wrapper > div {
+  /* border: 1px solid #aaa; */
+  background: #fff;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/* Header setup_________________________________*/
+
+header h1 {
+  margin: 0.4em;
+  font-size: 5em;
+  font-weight: 300;
+}
+
+header h1 a {
+  color: #fff;
+  text-decoration: none;
+}
+
+header h1 a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 650px) {
+  header h1 {
+    font-size: 3em;
+  }
+  .definition {
+    padding: 10px;
+    font-size: 100%;
+  }
+  .katex {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .side-graphics {
+    visibility: hidden;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .side-graphics-wide {
+    visibility: hidden;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .display-over-1100 {
+    display: none;
+  }
+}
+
+.draw-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 8s ease-in forwards;
+  /*   animation: dash 4s ease-in alternate infinite; */
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: opacity 2s ease-in forwards;
+}
+
+@keyframes opacity {
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	/>
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<title>mrhile.com</title>
+
+	<!-- slider stylesheet -->
+	<link
+		rel="stylesheet"
+		type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"
+	/>
+	
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css" />
+
+	<!-- fonts style -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Raleway:400,700|Roboto:400,700&display=swap"
+		rel="stylesheet"
+	/>
+	<!-- Custom styles for this template -->
+	<link href="../../../css/style.css" rel="stylesheet" />
+	<!-- responsive style -->
+	<link href="../../../css/responsive.css" rel="stylesheet" />
+
+	<link rel="stylesheet" type="text/css" href="../../../lib/katex/katex.min.css">
+	<script src="../../../lib/katex/katex.min.js"></script>
+	<script src="../../../lib/katex/contrib/auto-render.min.js"></script>
+	</head>
+<body>
+<div class="hero_area">
+<!-- header section strats -->
+<header class="header_section">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-11 offset-md-1 px-0">
+		<nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+			<a class="navbar-brand" href="index.html">
+			<span>
+				mrhile.com
+			</span>
+			</a>
+			<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+			>
+			<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div
+			class="collapse navbar-collapse"
+			id="navbarSupportedContent"
+			>
+			<div
+				class="d-flex ml-auto flex-column flex-lg-row align-items-center"
+			>
+				<ul class="navbar-nav ">
+				<li class="nav-item">
+					<a class="nav-link pl-0" href="../../../index.html"
+					>Home <span class="sr-only">(current)</span></a
+					>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="../../../notes.html"> Physics </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../blog.html"> Aviation </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> Simulations </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> Projects </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> About Me</a>
+				</li>
+				</ul>
+			</div>
+			</div>
+		</nav>
+		</div>
+	</div>
+	</div>
+</header>
+</div>
+	<article>
+		<h2 class='underlined'>Thermodynamics</h2>
+		<p>Thermodynamics is the study of the relations between heat, work, temperature, and energy. The laws of thermodynamics describe how the energy in a system changes and whether the system can perform useful work on its surroundings.</p>
+		<h1 class='underlined'>Energy Loss and Gain in a System</h1>
+		<br>
+		<div class="col-group">
+			<div>
+				<canvas id="canvas0" width='250' height='445' onclick="particles(this)"> </canvas>
+				<br>
+				<button id="pause">pause</button>
+				<button id="energy">friction: OFF</button>
+			</div>
+			<div>
+				As the ball in the simulation falls, energy transfers from gravitational to kinetic. As it rises, energy transfers from kinetic
+				to gravitational.
+				<p>Energy is conserved. This means that if we add up the total energy of a system it will always be the same value, unless
+					some energy enters or leaves the system we are tracking.</p>
+				<p>Turn friction on and observe what happens.</p>
+				<br>
+				<p>The kinetic energy gradually leaves the ball as it changes into a type of energy called heat.</p>
+				<p>
+					<strong>Heat</strong> is the random motion of particles. More heat leads to higher temperatures.</p>
+
+			</div>
+		</div>
+		<p>So the internal energy of a system is always conserved, unless energy enters or leaves our system.</p>
+		<div class='definition'>
+			<p>The
+				<strong>first law of thermodynamics</strong> says that the change in internal energy of a system is equal to heat flow into a
+				system plus work done by the system.</p>
+			<h1>$$\Delta E = Q - W$$</h1>
+			\( E \) = total internal energy of a system [J]
+			<br>\( Q \) = Heat, thermal energy added(+) or removed(-) from system [J]
+			<br>\( W \) = work done by a system [J]
+		</div>
+
+		<div class='example'>
+			<b>Example:</b> Compressing a volume of gas does 100 J of work, but at the same time the gas
+			<strong>losses</strong> 200 J of heat to the surroundings. What is the change in the internal energy of the gas? Will the gas
+			increase of decrease in temperature?
+			<details>
+				<summary>solution</summary>
+				$$\Delta E = Q - W$$ $$\Delta E = -200 - 100$$ $$\Delta E = -300\,\mathrm{J}$$ $$\text{The gas will decrease in temperature}$$
+			</details>
+		</div>
+
+		<b>Example:</b> A 0.43 kg soccer ball kicked at 10 m/s rolls down a 30 m tall hill. We already solved this problem and got
+		a final velocity of 26.2 m/s for the ball.
+		<br>
+		<br>When actually performing the experiment we found at the bottom of the hill the ball only has a speed of 20.0m/s. Calculate
+		the energy loss for the ball. How could the ball have lost energy?
+		<details>
+			<summary>solution</summary>
+			$$\text{energy difference = calculated - experimental}$$ $$\Delta E = \tfrac{1}{2}mv^{2} - \tfrac{1}{2}mv^{2}$$ $$\Delta
+			E = \tfrac{1}{2}(0.43)(26.2)^{2} - \tfrac{1}{2}(0.43)(20.0)^{2}$$ $$\Delta E = 147.6\, \mathrm{J} - 86\, \mathrm{J}$$
+			$$\Delta E = 61.6 \, \mathrm{J}$$ $$\text{The energy loss was probably from friction.}$$
+		</details>
+		</div>
+		<h1 class='underlined' id="entropy">Entropy</h1>
+		<p>
+			<strong>Entropy</strong> is hard to define because different fields use the term to describe slightly different ideas. The definitions
+			of entropy are all loosely centered around disorder. A high entropy system of particles is not organized. A low entropy
+			system is very orderly, but how do you measure order?
+		</p>
+		<p>
+			Well, order is whatever you decide. Often order is defined as a concentration of temperature, pressure, volume, or density.
+			Many of these concentrations are able to do
+			<a href="../../energy/1-intro/index.html#work">work</a>. In the simulation below, the work we want done is rotating the rotor. What state of the system would make the
+			rotor turn?
+		</p>
+		<p>
+			Click the clear button to remove the particles. Click inside the simulation to add some particles. Try to place the particles
+			in a state that will turn the rotor.
+		</p>
+		<canvas class='center' id='entropy1' height='300' width='600'> </canvas>
+
+		<style>
+			.wrapper {
+				display: grid;
+				grid-gap: 0px;
+				grid-template-columns: 200px 200px 200px;
+			}
+
+			.a {
+				grid-column: 1;
+				grid-row: 1;
+			}
+
+			.b {
+				grid-column: 2;
+				grid-row: 1;
+			}
+
+			.c {
+				grid-column: 3;
+				grid-row: 1;
+			}
+		</style>
+		<div class="wrapper">
+			<div class="a center">
+				time rate
+				<br>
+				<input type="range" id='time-rate-slider' min="0" max="5" step="1" value="1">
+			</div>
+			<div class="b center">
+				<button id="clear1">clear</button>
+			</div>
+			<div class="c center">
+				rotor external power
+				<br>
+				<input type="range" id='rotor-slider' min="-0.1" max="0.1" step="0.1" value="0">
+			</div>
+
+		</div>
+		<p>
+			The system is in high entropy when the particles are evenly spread out. If your system gets in this state, adjust the slider
+			to power the rotor from an external power source. The spinning rotor lowers entropy and puts the system back in a state
+			that can do work.
+		</p>
+		<p>
+			<a href="https://en.wikipedia.org/wiki/Entropy">Entropy</a> plays an important role in thermochemistry, heat transfer, and information theory.</p>
+
+		<!-- <p>
+			Entropy can be defined in many other ways. Entropy as dispersal of temperature is useful for understanding engines. If a
+			system has high entropy, the temperature is the same throughout the system. A low entropy system might have a sections
+			with very low or very high temperature. These pockets of temperature difference can be made to do work, like in a
+			<a href="http://www.animatedengines.com/">combustion engine
+			</a>.
+		</p> -->
+		<!-- <p>
+			In chemical reactions, entropy is calculated as the ratio of energy to temperature. This give a prediction of free enrgy
+			avoidable for a chemical reaction.
+		</p> -->
+
+		<!-- <p>
+			In chemical reactions, entropy is defined as low before an irreversible reaction or when chemical equilibrium is unbalanced.
+			Paper has low entropy before I burn it. After it's been burned, it has high entropy.
+		</p> -->
+		<!-- <p>
+			Energy is required for power plants, cell phones, cars, life. Energy only produces work when a system is in a low entropy
+			state as defined by each system. Low entropy for a car is gasoline. A human will not get work from gasoline, we need tacos.
+		</p> -->
+
+		<h1 class='underlined'>Arrow of Time</h1>
+		<p>
+			If you were to watch a video of th Earth orbiting the sun, it would be difficult to tell if the video was running forwards
+			or backwards. Simple physical systems don't have a clear forwards or backwards.
+		</p>
+		<p>
+			If you were to watch a glass of water fall off a table, it would be very clear the direction of time. This is because the
+			entropy of the glass of water is rapidly increasing.
+		</p>
+		<p>
+			The laws of physics are time reversible. Nature behaves the same moving forwards or backwards in time. The only exception
+			is entropy. (also the weak nuclear force)
+		</p>
+		<div class="definition">
+			The second law of thermodynamics states that entropy of an isolated system doesn't decrease over time.
+		</div>
+		<p>
+			The second law is true for all the different formulations of entropy. As time moves forward entropy either increases or stays
+			the same. Over time things spread out and move towards a balanced equilibrium. These high entropy states have less ability
+			to do work.
+		</p>
+		<p>
+			A human body as a thermodynamics system keeps it's ability to do work by adding low entropy substances, like food, oxygen,
+			and water. We also lower our entropy by releasing high entropy substances, like carbon dioxide, urine, and feces.
+		</p>
+		<p>
+			The Earth can be viewed as a thermodynamics system. As time goes on the energy density of Earth spreads out and losses the
+			ability to do work. But the Earth isn't isolated. Low entropy light from the sun is added to our system and lowers our
+			entropy. High entropy infrared light exits our system as the Earth cools.
+		</p>
+		<p>
+			Inside the Sun, nuclear fusion converts hydrogen into helium and heat. Heat in the form of light strikes the Earth. Sunlight
+			is a low entropy source that is harnessed by plants to produce work. We are able to order our world because the system
+			of Earth is able to get work out of sunlight.
+		</p>
+
+
+	</article>
+	<div class='back'>
+		<a href="../../../index.html">Back</a>
+	</div>
+	<script src='../../../lib/randomColor.min.js'></script>
+	<script src="energy.js"></script>
+	<script src='../../../lib/matter.min.js'></script>
+	<script src="entropy1.js"></script>
+	<script>
+		renderMathInElement(document.body);
+	</script>
+</body>
+
+</html>

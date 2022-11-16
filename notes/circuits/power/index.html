@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	/>
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<title>mrhile.com</title>
+
+	<!-- slider stylesheet -->
+	<link
+		rel="stylesheet"
+		type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"
+	/>
+	
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css" />
+
+	<!-- fonts style -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Raleway:400,700|Roboto:400,700&display=swap"
+		rel="stylesheet"
+	/>
+	<!-- Custom styles for this template -->
+	<link href="../../../css/style.css" rel="stylesheet" />
+	<!-- responsive style -->
+	<link href="../../../css/responsive.css" rel="stylesheet" />
+
+	<link rel="stylesheet" type="text/css" href="../../../lib/katex/katex.min.css">
+	<script src="../../../lib/katex/katex.min.js"></script>
+	<script src="../../../lib/katex/contrib/auto-render.min.js"></script>
+	</head>
+<body>
+<div class="hero_area">
+<!-- header section strats -->
+<header class="header_section">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-11 offset-md-1 px-0">
+		<nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+			<a class="navbar-brand" href="index.html">
+			<span>
+				mrhile.com
+			</span>
+			</a>
+			<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+			>
+			<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div
+			class="collapse navbar-collapse"
+			id="navbarSupportedContent"
+			>
+			<div
+				class="d-flex ml-auto flex-column flex-lg-row align-items-center"
+			>
+				<ul class="navbar-nav ">
+				<li class="nav-item">
+					<a class="nav-link pl-0" href="../../../index.html"
+					>Home <span class="sr-only">(current)</span></a
+					>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="../../../notes.html"> Physics </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../blog.html"> Aviation </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> Simulations </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> Projects </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> About Me</a>
+				</li>
+				</ul>
+			</div>
+			</div>
+		</nav>
+		</div>
+	</div>
+	</div>
+</header>
+</div>
+	<article>
+		<h2 class='underlined'>Power</h2>
+		<p>Power is defined as the rate that energy changes over time. Power measures the rate that voltage sources, like batteries,
+			convert energy into electrical energy. Power could also measure the rate that electrical components convert electrical
+			energy in other forms, like heat or light.</p>
+		<div class='definition'>
+			<h1>$$P = \frac{E}{\Delta t}$$</h1> \(P\) = power [W, J/s, watt]
+			<br> \(E\) = energy [J, joules]
+			<br> \(\Delta t\) = time period [s, second]
+		</div>
+		<h2 class='underlined'>Electrical Power</h2>
+		<p>Watt is the unit of power. The wattage of an electrical appliance gives you an idea of how much electrical energy the appliance
+			converts. An 800 W microwave uses 800 J per second. A 1600 W microwave will heat food much faster because it uses up twice
+			that much energy per second.</p>
+		<details class='derive'>
+			<summary>derivation of electrical power</summary>
+			<p> We can convert power into electrical terms with some substitution</p>
+			$$P = \frac{E}{\Delta t} \quad \quad \quad E = {\color{#00f}Vq} \quad \quad \quad I = \color{#f00} \frac{q}{\Delta t}$$ $$P
+			= \frac{{\color{#00f}Vq}}{\Delta t}$$ $$P = {\color{#f00}\frac{q}{\Delta t}}V$$ $$P = IV$$
+			<p>If we combine P=IV with Ohm's law we can get another power equation</p>
+			$$P=IV \quad \quad \quad V=IR$$ $$P=I(IR)$$ $$P=I^2R$$
+		</details>
+
+		<div class='definition'>
+			<h1> $$P = IV$$ $$P = I^2R$$</h1>
+			\(P\) = power [W, watt, J/s]
+			<br> \(I\) = current [A, amp]
+			<br> \(V\) = voltage [V, volt]
+			<br>\(R\) = resistance [Ω, ohm]
+		</div>
+
+
+		<div class='example'>
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="300" class='center'>
+				<path d="M 100 50 h 110
+				l10 10 l10 -20 l10 20 l10 -20 l10 20 l10 -20 l10 20 l 10 -10 h 110
+				v 60 l10 10 l-20 10 l20 10 l-20 10 l20 10 l-20 10 l20 10 l-10 10 v60
+				h -110 l-10 10 l-10 -20 l-10 20 l-10 -20 l-10 20 l-10 -20 l-10 20 l-10 -10
+				h -110 v-87 m-40 0 h 80 m-20 -15 h-40 m20 0 v -100" fill='none' stroke="#333" stroke-width="4" stroke-linejoin="round"
+				/>
+				<text x="250" y="30" text-anchor="middle" font-size="20" fill='#333'>6 kΩ</text>
+				<text x="415" y="160" text-anchor="start" font-size="20" fill='#333'>20 kΩ</text>
+				<text x="250" y="283" text-anchor="middle" font-size="20" fill='#333'>5 kΩ</text>
+				<text x="250" y="225" text-anchor="middle" font-size="20" fill='#333'>20 mA</text>
+				<g transform="translate(290 200) rotate(180)">
+					<line x1="5" y1="0" x2="75" y2="0" style="stroke:#333;stroke-width:2" />
+					<polygon points="0,0 12,5 12,-5" style="fill:#333;" />
+				</g>
+			</svg>
+			<strong>Example:</strong> Calculate the power dissipated by each resistor.
+			<details>
+				<summary>solution</summary>
+				$$I = 0.02\, \mathrm{A}$$ $$P=(0.02)^2 (6000)$$ $$P=2.4 \, \mathrm{W}$$
+				<br> $$P=(0.02)^2 (20000)$$ $$P=8.0\, \mathrm{W}$$
+				<br> $$P=(0.02)^2 (5000)$$ $$P=2.0\, \mathrm{W}$$
+
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="300" class='center'>
+					<path d="M 100 50 h 110
+					l10 10 l10 -20 l10 20 l10 -20 l10 20 l10 -20 l10 20 l 10 -10 h 110
+					v 60 l10 10 l-20 10 l20 10 l-20 10 l20 10 l-20 10 l20 10 l-10 10 v60
+					h -110 l-10 10 l-10 -20 l-10 20 l-10 -20 l-10 20 l-10 -20 l-10 20 l-10 -10
+					h -110 v-87 m-40 0 h 80 m-20 -15 h-40 m20 0 v -100" fill='none' stroke="#333" stroke-width="4" stroke-linejoin="round"
+					/>
+					<text x="250" y="30" text-anchor="middle" font-size="20" fill='#333'>2.4 W</text>
+					<text x="415" y="160" text-anchor="start" font-size="20" fill='#333'>8.0 W</text>
+					<text x="250" y="283" text-anchor="middle" font-size="20" fill='#333'>2.0 W</text>
+					<text x="250" y="225" text-anchor="middle" font-size="20" fill='#333'>20 mA</text>
+					<g transform="translate(290 200) rotate(180)">
+						<line x1="5" y1="0" x2="75" y2="0" style="stroke:#333;stroke-width:2" />
+						<polygon points="0,0 12,5 12,-5" style="fill:#333;" />
+					</g>
+				</svg>
+			</details>
+		</div>
+		<div class='example'>
+			<div class="col-group">
+				<div>
+					<strong>Example:</strong> Find the power dissipated by the resistor.
+					<details>
+						<summary>solution</summary>
+						$$P=I^2R$$ $$P=(0.05)^2(300)$$ $$P=0.75\, \mathrm{W}$$
+					</details>
+					<br>Find the
+					<strong>heat</strong> dissipated by the resistor in 10 seconds.
+					<details>
+						<summary>solution</summary>
+						$$P=0.75\, \mathrm{W}$$
+						<br> $$P = \frac{E}{\Delta t}$$ $$E = P \Delta t$$ $$E = (0.75\, \mathrm{W})(10\, \mathrm{s})$$ $$E = 7.5\, \mathrm{J}$$
+					</details>
+				</div>
+				<div>
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="193" class='center'>
+						<path d="M 50 10 h 200
+					v 50 l10 10 l-20 10 l20 10 l-20 10 l20 10 l-20 10 l20 10 l-10 10 v50
+					h -200
+					v-80 m-40 0 h 80 m-20 -15 h-40 m20 0 v -87" fill='none' stroke="#333" stroke-width="4" stroke-linejoin="round" />
+						<text x="230" y="85" text-anchor="end" font-size="20" fill='#333'>P = ?</text>
+						<text x="230" y="125" text-anchor="end" font-size="20" fill='#333'>300 Ω </text>
+						<text x="150" y="172" text-anchor="middle" font-size="20" fill='#333'>0.05 A</text>
+						<g transform="translate(195 180) rotate(180)">
+							<line x1="5" y1="0" x2="80" y2="0" style="stroke:#333;stroke-width:2" />
+							<polygon points="0,0 12,5 12,-5" style="fill:#333;" />
+						</g>
+					</svg>
+				</div>
+			</div>
+		</div>
+
+		<div class='example'>
+			<div class="col-group">
+				<div>
+					<strong>Example:</strong> Find the power output of the battery.
+					<details>
+						<summary>solution</summary>
+						$$P=IV$$ $$P=(0.095)(9)$$ $$P=0.855\, \mathrm{W}$$
+					</details>
+				</div>
+				<div>
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="193" class='center'>
+						<path d="M 50 10 h 200
+					v 50 l10 10 l-20 10 l20 10 l-20 10 l20 10 l-20 10 l20 10 l-10 10 v50
+					h -200
+					v-80 m-40 0 h 80 m-20 -15 h-40 m20 0 v -87" fill='none' stroke="#333" stroke-width="4" stroke-linejoin="round" />
+						<text x="60" y="85" text-anchor="start" font-size="20" fill='#333'>9 V</text>
+						<text x="150" y="172" text-anchor="middle" font-size="20" fill='#333'>0.095 A</text>
+						<g transform="translate(195 180) rotate(180)">
+							<line x1="5" y1="0" x2="80" y2="0" style="stroke:#333;stroke-width:2" />
+							<polygon points="0,0 12,5 12,-5" style="fill:#333;" />
+						</g>
+					</svg>
+				</div>
+			</div>
+		</div>
+		<div class='example'>
+			<div class="col-group">
+				<div>
+					<strong>Example:</strong> Find the total energy converted to electrical energy over 5 minutes by the battery?
+					<details>
+						<summary>solution</summary>
+						$$P=IV$$ $$P=(0.024)(1.5)$$ $$P=0.036\, \mathrm{W}$$
+						<br> $$P = \frac{E}{\Delta t}$$ $$E = P\Delta t$$ $$E = (0.036 \, \mathrm{\frac{J}{s}})(5\, \mathrm{min})\left(\frac{60\,
+						\mathrm{s}}{1\, \mathrm{min}}\right)$$ $$E = (0.036 \frac{J}{s})(300s)$$ $$E = 10.8\, \mathrm{J}$$
+					</details>
+				</div>
+				<div>
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="170" class='center'>
+						<path d="M 50 10 h 200
+					v 25 l10 10 l-20 10 l20 10 l-20 10 l20 10 l-20 10 l20 10 l-10 10 v50
+					h -200
+					v-80 m-40 0 h 80 m-20 -15 h-40 m20 0 v -62" fill='none' stroke="#333" stroke-width="4" stroke-linejoin="round" />
+						<text x="60" y="60" text-anchor="start" font-size="20" fill='#333'>1.5 V</text>
+						<text x="150" y="147" text-anchor="middle" font-size="20" fill='#333'>0.024 A</text>
+						<g transform="translate(195 155) rotate(180)">
+							<line x1="5" y1="0" x2="80" y2="0" style="stroke:#333;stroke-width:2" />
+							<polygon points="0,0 12,5 12,-5" style="fill:#333;" />
+						</g>
+					</svg>
+				</div>
+			</div>
+		</div>
+		<h2 class='underlined'>Kilowatt Hour</h2>
+
+		<p>Power bills in America use a unit called kiloWatt hour. This is actually a unit of energy, not power. $$\text{(kilo)(watt)(hour)}$$
+			$$(1000) \left(\mathrm{\frac{J}{s}}\right)(3600\, \mathrm{s})$$ $$3,600,000\, \left(\mathrm{\frac{J}{s}}\right)(\mathrm{s})$$
+			$$1\, \mathrm{kWh} = 3,600,000\, \mathrm{J}$$</p>
+		<div class='example'>
+			<strong>Example:</strong> The average price in America for 1 kiloWatt hour is $0.12. How much would it cost to run an 800 Watt
+			microwave for 3 hours?
+			<details>
+				<summary>solution</summary>
+				$$800\, \mathrm{W} \left( \frac{\mathrm{k}}{1000} \right) = 0.8\, \mathrm{kW}$$ $$(0.8\, \mathrm{kW})(3\, \mathrm{h})\left(\frac{\$0.12}{\mathrm{kWh}}\right)
+				= \$0.28$$
+			</details>
+		</div>
+	</article>
+	<div class='back'>
+		<a href="../../../index.html">Back</a>
+	</div>
+	<script>
+		renderMathInElement(document.body);
+	</script>
+</body>
+
+</html>

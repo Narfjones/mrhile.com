@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	/>
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<title>mrhile.com</title>
+
+	<!-- slider stylesheet -->
+	<link
+		rel="stylesheet"
+		type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"
+	/>
+	
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css" />
+
+	<!-- fonts style -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Raleway:400,700|Roboto:400,700&display=swap"
+		rel="stylesheet"
+	/>
+	<!-- Custom styles for this template -->
+	<link href="../../../css/style.css" rel="stylesheet" />
+	<!-- responsive style -->
+	<link href="../../../css/responsive.css" rel="stylesheet" />
+
+	<link rel="stylesheet" type="text/css" href="../../../lib/katex/katex.min.css">
+	<script src="../../../lib/katex/katex.min.js"></script>
+	<script src="../../../lib/katex/contrib/auto-render.min.js"></script>
+	</head>
+<body>
+<div class="hero_area">
+<!-- header section strats -->
+<header class="header_section">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-11 offset-md-1 px-0">
+		<nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+			<a class="navbar-brand" href="index.html">
+			<span>
+				mrhile.com
+			</span>
+			</a>
+			<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+			>
+			<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div
+			class="collapse navbar-collapse"
+			id="navbarSupportedContent"
+			>
+			<div
+				class="d-flex ml-auto flex-column flex-lg-row align-items-center"
+			>
+				<ul class="navbar-nav ">
+				<li class="nav-item">
+					<a class="nav-link pl-0" href="../../../index.html"
+					>Home <span class="sr-only">(current)</span></a
+					>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="../../../notes.html"> Physics </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../blog.html"> Aviation </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> Simulations </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> Projects </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> About Me</a>
+				</li>
+				</ul>
+			</div>
+			</div>
+		</nav>
+		</div>
+	</div>
+	</div>
+</header>
+</div>
+   
+    <header id="myHeader">
+        <h1>
+            <a href=" ../../../index.html ">Universal Gravitation</a>
+        </h1>
+    </header>
+    <article>
+        <canvas id='grav0' height='250px' width='600px' style="position: absolute;top: 0px; left: 0px; padding: 0; margin:0; border-radius: 0px; box-shadow: none; z-index: 1;">
+        </canvas>
+        <div style="position: absolute;top: 0px; left: 0px; z-index: 1; color: #fff;">
+            <input id='num' type="number" step="1" min='1' max='999' value='10'> particles
+        </div>
+        <p class='underlined'>Early Theories of Gravity</p>
+        <p>
+            Physics often contradicts our feelings for how it should work. The history of gravity tells the story of humanity realizing
+            we aren't the center of the universe.
+        </p>
+        <p>
+            The Greek philosopher
+            <a href="https://en.wikipedia.org/wiki/Aristotelian_physics">Aristotle</a> (384–322 BC) believed that the natural place for the element of earth and water was down. The natural
+            place for the elements of air and fire was up. He also believed that heavier objects fell faster than light objects.
+        </p>
+        <p>
+            Like many early philosophers, Aristotle organized the sky into a geocentric model. Moving planetary spheres surrounded a
+            stationary and spherical Earth.
+            <a href="https://en.wikipedia.org/wiki/Almagest#Ptolemy's_planetary_model">
+                <img src="..\..\..\media\Ptolemaicsystem-small.png" width="600" title="Ptolemaic geocentric planetary spheres model">
+            </a>
+
+            <p>The geocentric models showed flaws. Planets would inexplicably change in speed and direction. To correct these
+                flaws several small circles called epicycles were added to the path of the planets. As telescopes and data
+                collection methods improved, the number of epicycles grew.
+            </p>
+            <p>Around 1543, Polish astronomer,
+                <a href="https://en.wikipedia.org/wiki/Nicolaus_Copernicus">Nicolaus Copernicus</a> published a book on the heliocentric theory. The idea that the planets revolved around
+                the Sun, not the Earth. His heliocentric theory marks the beginning of the the scientific revolution.
+            </p>
+
+            <a href="https://en.wikipedia.org/wiki/Copernican_Revolution">
+                <img src="..\..\..\media\Copernican_heliocentrism_theory_diagram.svg" title="Copernican heliocentric model">
+            </a>
+            <p>
+                In 1609, German astronomer, Johannes Kepler published 3
+                <a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">laws of planetary motion</a> based on the heliocentric theory. In his model orbits moved in an ellipse, not
+                circles.
+            </p>
+            <p>
+                Italian natural philosopher,
+                <a href="https://en.wikipedia.org/wiki/Galileo_Galilei">Galileo Galilei</a>, discovered that falling objects all accelerate at the same rate as long as air resistance
+                isn't a significant factor.
+            </p>
+
+            <p>Galileo also championed Copernican heliocentrism. This blasphemous idea upset the Catholic church so much they
+                held a trail and found him guilty of heresy. They forced him to recant his findings, they banned his work,
+                and they sentenced him to house arrest from 1633 until his death in 1642.
+            </p>
+
+            <h2 class="underlined " id="universal-gravitation ">Universal Gravitation</h2>
+            <p></p>
+            <p>In 1687
+                <a href='http://www.bbc.co.uk/timelines/zwwgcdm'>Isaac Newton</a> published his book, Mathematical Principles of Natural Philosophy. The book contained his
+                laws of motion and his law of universal gravitation. His reasoning was based on geometric proofs and new
+                mathematical techniques which are now called calculus.
+            </p>
+            <p>Universal gravitation states that every particle in the universe is attracted to every other particle. Amazingly,
+                universal gravitation connects the earth and sky with one equation. The same force that makes apples fall
+                also makes stars, planets, and moons orbit each other!</p>
+
+            <div class='definition'>
+                <svg style="display: block; margin: auto " width="400 " height="200 " class='svgDiagram' version="1.1
+            " xmlns="http://www.w3.org/2000/svg ">
+                    <circle cx="100 " cy="100 " r="40 " fill='#fff' stroke-width="2 " stroke="#222 " />
+                    <circle cx="300 " cy="100 " r="60 " fill='#fff' stroke-width="2 " stroke="#222 " />
+
+                    <text x="100 " y="90 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+                    <text x="118 " y="93 " fill="black " text-anchor="middle " font-size="19 ">1</text>
+                    <text x="300 " y="90 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+                    <text x="318 " y="93 " fill="black " text-anchor="middle " font-size="19 ">2</text>
+
+                    <line x1="100 " y1="100 " x2="180 " y2="100 " style="stroke:#000;stroke-width:2 " />
+                    <polygon points="0,0 -8,5 -8,-5 " transform="translate(185 100) " style="fill:#000; " />
+
+                    <line x1="300 " y1="100 " x2="220 " y2="100 " style="stroke:#000;stroke-width:2 " />
+                    <polygon points="0,0 8,5 8,-5 " transform="translate(215 100) " style="fill:#000; " />
+
+                    <text x="200 " y="100 " fill="black " text-anchor="middle " alignment-baseline="central " font-size="25 ">F</text>
+
+                    <line x1="100 " y1="30 " x2="300 " y2="30 " style="stroke:#000;stroke-width:2 " />
+                    <line x1="100 " y1="25 " x2="100 " y2="35 " style="stroke:#000;stroke-width:2 " />
+                    <line x1="300 " y1="25 " x2="300 " y2="35 " style="stroke:#000;stroke-width:2 " />
+                    <text x="200 " y="25 " fill="black " text-anchor="middle " font-size="25 ">r</text>
+                </svg>
+
+                <h2>$$ F = \frac{GM_{1}M_{2}}{r^{2}} $$</h2>
+                <p>\(F\) = force of gravity [N, Newtons, kg m/s²]
+                    <em>vector</em>
+                    <br>\(G\) = 6.67408 × 10
+                    <sup>-11</sup> = universal gravitation constant [N m²/kg²]
+                    <br>\(M\) = mass [kg, kilograms]
+                    <br>\(r\) = distance between the center of each mass [m, meters]
+                    <br>
+                    <br>
+                    <svg style="display: block; margin: auto " width="500 " height="200 " class='svgDiagram' version="1.1
+            " xmlns="http://www.w3.org/2000/svg ">
+                        <circle cx="250 " cy="35 " r="5 " fill='#fff' stroke-width="2 " stroke="#222 " />
+                        <circle cx="250 " cy="1167 " r="1000 " fill='#fff' stroke-width="2 " stroke="#222 " />
+
+                        <text x="250 " y="22 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+                        <text x="268 " y="25 " fill="black " text-anchor="middle " font-size="19 ">1</text>
+                        <text x="250 " y="190 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+                        <text x="268 " y="193 " fill="black " text-anchor="middle " font-size="19 ">2</text>
+
+                        <line x1="250 " y1="35 " x2="250 " y2="100 " style="stroke:#000;stroke-width:2 " />
+                        <polygon points="0,0 -8,5 -8,-5 " transform="translate(250 104) rotate(90) " style="fill:#000; " />
+                        <text x="250 " y="116 " fill="black " text-anchor="middle " alignment-baseline="central
+            " font-size="25 ">F</text>
+
+                        <line x1="290 " y1="35 " x2="300 " y2="35 " style="stroke:#000;stroke-width:2 " />
+                        <line x1="295 " y1="35 " x2="295 " y2="300 " style="stroke:#000;stroke-width:2 " />
+                        <text x="310 " y="130 " fill="black " text-anchor="middle " font-size="25 ">r</text>
+                    </svg>
+            </div>
+            <p>In 1916 universal gravitation was improved on by Einstein's
+                <a href="../../relativity/general/index.html">general relativity</a>, but universal gravitation is still used for low mass and low speed situations, like
+                the Earth and its satellites.</p>
+            <!-- <div style="position: relative; width: 300px; height: 200px; " class='center'><a href="https://phet.colorado.edu/sims/html/gravity-force-lab/latest/gravity-force-lab_en.html
+            " style="text-decoration: none; ">
+		<img src="https://phet.colorado.edu/sims/html/gravity-force-lab/latest/gravity-force-lab-600.png " alt="Gravity Force
+            Lab " style="border: none; " width="300 " height="200 "/><div style="position: absolute; width: 200px; height: 80px;
+            left: 50px; top: 30px; "></div>
+		<table style="position: absolute; width: 200px; height: 80px; left: 50px; top: 30px; "><tr><td style="text-align: center;
+            color: #000; opacity: 0.9; background-color: #FFF; font-size: 24px; font-family: Arial,sans-serif; ">Click to Run</td></tr></table></a>
+	</div> -->
+            <p>Each mass feels an equal but opposite force as predicted by Newton's 3rd law. This means that the same force
+                of gravity you feel towards the Earth the Earth feels towards you. So why don't we notice the Earth accelerate
+                towards you?</p>
+
+            <p>Notice how small G is (6.674 x 10
+                <sup>-11</sup>). Out of the four fundamental forces gravity is by far the weakest. If gravity is so weak why do
+                we notice its effects so easily?</p>
+            <br>
+            <div class='center'>
+                <h3>Local Massive Objects Data Table</h3>
+                <table border>
+                    <tr align=center>
+                        <th align=left>name</th>
+                        <th>mass (kg)</th>
+                        <th>radius (km)</th>
+                        <th>density (g/cm
+                            <sup>3</sup>)</th>
+
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Sun</td>
+                        <td>2.00 × 10
+                            <sup>30</sup>
+                        </td>
+                        <td>695,700</td>
+                        <td>1.408</td>
+
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Mercury</td>
+                        <td>3.301 × 10
+                            <sup>23</sup>
+                        </td>
+                        <td>2,440</td>
+                        <td>5.427</td>
+
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Venus</td>
+                        <td>4.867 × 10
+                            <sup>24</sup>
+                        </td>
+                        <td>6,052</td>
+                        <td>5.243</td>
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Earth</td>
+                        <td>5.972 × 10
+                            <sup>24</sup>
+                        </td>
+                        <td>6,371</td>
+                        <td>5.515</td>
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Moon</td>
+                        <td>7.346 × 10
+                            <sup>22</sup>
+                        </td>
+                        <td>1,737</td>
+                        <td>3.344</td>
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Mars</td>
+                        <td>6.417 × 10
+                            <sup>23</sup>
+                        </td>
+                        <td>3,390</td>
+                        <td>3.933</td>
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Jupiter</td>
+                        <td>1.899 × 10
+                            <sup>27</sup>
+                        </td>
+                        <td>70,000</td>
+                        <td>1.326</td>
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Saturn</td>
+                        <td>5.685 × 10
+                            <sup>26</sup>
+                        </td>
+                        <td>58,232</td>
+                        <td>0.687</td>
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Uranus</td>
+                        <td>8.682 × 10
+                            <sup>25</sup>
+                        </td>
+                        <td>25,362</td>
+                        <td>1.270</td>
+                    </tr>
+                    <tr align=center>
+                        <td align=left>Neptune</td>
+                        <td>1.024 × 10
+                            <sup>26</sup>
+                        </td>
+                        <td>24,622</td>
+                        <td>1.638</td>
+                    </tr>
+                </table>
+                <a href="http://exoplanets.org/table ">exoplanets data table</a>
+            </div>
+            <div class='example'>
+                <b>Example:</b> Use the data table above to find the force of gravity between the Earth and the Moon. The distance
+                between them is 384,403 km.
+                <details>
+                    <summary>solution</summary>
+                    $$ F = \frac{GM_{1}M_{2}}{r^{2}} $$ $$ F = \frac{(6.674 \times 10^{-11})(5.972 \times 10^{24}) (7.346 \times 10^{22})}{(3.844
+                    \times 10^{8})^{2}}$$ $$ F = \frac{(6.674 \times 10^{-11})(5.972 \times 10^{24}) (7.346 \times 10^{22})}{14.78
+                    \times 10^{16}}$$ $$ F = \frac{6.674 \times 5.972 \times 7.346}{14.78} \times \frac{10^{-11}10^{24}10^{22}}{10^{16}}$$
+                    $$ F = 19.798 \times 10^{19} \, \mathrm{N}$$
+                </details>
+            </div>
+            <div class='example'>
+                <b>Example:</b> Find the force of gravity between the Earth and the Sun. The distance between them is 149.6
+                billion m.
+                <details>
+                    <summary>solution</summary>
+                    $$ F = \frac{GM_{1}M_{2}}{r^{2}} $$ $$ F = \frac{(6.674 \times 10^{-11})(5.972 \times 10^{24}) (2.00 \times 10^{30})}{(149.6
+                    \times 10^{9})^{2}}$$ $$ F = \frac{(6.674 \times 10^{-11})(5.972 \times 10^{24}) (2.00 \times 10^{30})}{22380
+                    \times 10^{18}}$$ $$ F = 3.561 \times 10^{22} \, \mathrm{N}$$
+                </details>
+            </div>
+            <div class='example'>
+                <b>Example:</b> Find the force of gravity between the Earth and a 100 kg person that is 10,000,000 m from the
+                center of the Earth.
+                <details>
+                    <summary>solution</summary>
+                    $$ F = \frac{GM_{1}M_{2}}{r^{2}} $$ $$ F = \frac{(6.674 \times 10^{-11})(5.972 \times 10^{24})(100)}{ 10,000,000^{2}}$$ $$
+                    F = \frac{(6.674 \times 10^{-11})(5.972 \times 10^{24})(100)}{ 10^{14}}$$ $$ F = 398.57 \, \mathrm{N}$$
+                </details>
+            </div>
+            <div class='example'>
+                <b>Example:</b> How massive must an object be in order to feel a force of 100 N at a distance of 10,000,000
+                m from the center of the Earth?
+                <details>
+                    <summary>solution</summary>
+                    $$ F = \frac{GM_{1}M_{2}}{r^{2}} $$ $$ M_{1} = \frac{Fr^{2}}{GM_{2}}$$ $$ M_{1} = \frac{(100)(10,000,000)^{2}}{(6.674 \times
+                    10^{-11})(5.972 \times 10^{24})}$$ $$ M_{1} = \frac{(100)(10^{14})}{(6.674 \times 10^{-11})(5.972 \times
+                    10^{24})}$$ $$ M_{1} = 25.01 \, \mathrm{kg}$$
+                </details>
+            </div>
+            <div class='example'>
+                <b>Example:</b> When it is closest to the Sun on its 75 year orbit,
+                <a href="https://en.wikipedia.org/wiki/Halley%27s_Comet ">Halley's Comet</a> feels a force of gravity from the Sun of 3.65×10
+                <sup>12</sup> N. Calculate its distance from the Sun using the comet's mass of 2.2×10
+                <sup>14</sup> kg.
+                <details>
+                    <summary>solution</summary>
+                    $$ F = \frac{GM_{1}M_{2}}{r^{2}} $$ $$ r^{2} = \frac{GM_{1}M_{2}}{F} $$ $$ r^{2} = \frac{(6.674 \times 10^{-11})(2.00 \times
+                    10^{30})(2.2 \times 10^{14})}{3.65 \times 10^{12}} $$ $$ \sqrt{r^{2}} = \sqrt{8.04 \times 10^{21}} $$
+                    $$ r = 8.97 \times 10^{10}\,\mathrm{m} $$
+                </details>
+            </div>
+
+            <h2 class="underlined ">Gravitational Acceleration</h2>
+            <p>It is useful to adapt the universal gravitation equation to predict acceleration. To find acceleration we just
+                need to divide an object's gravitational force by its mass.</p>
+
+            <details class='derive'>
+                <summary>derivation of universal gravitational acceleration</summary>
+                $$ F = mg $$ $$ \frac{F}{m} = g $$
+                <p>Newton's second law tells us we can replace F/M with acceleration.</p>
+                $$ F = \frac{GM_{1}M_{2}}{r^{2}} $$ $$ \frac{F}{M_{2}} = \frac{GM_{1}}{r^{2}} $$ $$ g = \frac{GM_{1}}{r^{2}} $$
+
+            </details>
+
+            <div class='definition'>
+                <svg style="display: block; margin: auto" width="400" height="200">
+                    <circle cx="100 " cy="100 " r="20 " fill='#fff' stroke-width="2 " stroke="#222 " />
+                    <circle cx="300 " cy="100 " r="50 " fill='#fff' stroke-width="2 " stroke="#222 " />
+
+                    <text x="300 " y="105 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+
+
+                    <line x1="100 " y1="100 " x2="180 " y2="100 " style="stroke:#000;stroke-width:2 " />
+                    <polygon points="0,0 -8,5 -8,-5 " transform="translate(185 100) " style="fill:#000; " />
+
+                    <text x="200 " y="100 " fill="black " text-anchor="middle " alignment-baseline="central " font-size="25 ">g</text>
+
+                    <line x1="100 " y1="30 " x2="300 " y2="30 " style="stroke:#000;stroke-width:2 " />
+                    <line x1="100 " y1="25 " x2="100 " y2="35 " style="stroke:#000;stroke-width:2 " />
+                    <line x1="300 " y1="25 " x2="300 " y2="35 " style="stroke:#000;stroke-width:2 " />
+                    <text x="200 " y="25 " fill="black " text-anchor="middle " font-size="25 ">r</text>
+                </svg>
+
+                <h2>$$ g = \frac{GM}{r^{2}} $$</h2>
+                <p>\(g\) = acceleration of gravity [m/s²]
+                    <em>vector</em>
+                    <br>\(G = \small 6.674 \times 10^{-11}\) = universal gravitation constant [m³/kg/s²]
+                    <br>\(M\) = mass of the body pulling [kg, kilograms]
+                    <br>(not the body experiencing the acceleration)
+                    <br>\(r\) = distance between the center of each mass [m, meters]
+                    <svg style="display: block; margin: auto " width="500 " height="200 " class='svgDiagram' version="1.1
+            " xmlns="http://www.w3.org/2000/svg ">
+                        <circle cx="250 " cy="35 " r="5 " fill='#fff' stroke-width="2 " stroke="#222 " />
+                        <circle cx="250 " cy="1167 " r="1000 " fill='#fff' stroke-width="2 " stroke="#222 " />
+
+                        <text x="250 " y="193 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+
+                        <line x1="250 " y1="35 " x2="250 " y2="100 " style="stroke:#000;stroke-width:2 " />
+                        <polygon points="0,0 -8,5 -8,-5 " transform="translate(250 104) rotate(90) " style="fill:#000; " />
+                        <text x="250 " y="116 " fill="black " text-anchor="middle " alignment-baseline="central
+            " font-size="25 ">a</text>
+
+                        <line x1="290 " y1="35 " x2="300 " y2="35 " style="stroke:#000;stroke-width:2 " />
+                        <line x1="295 " y1="35 " x2="295 " y2="300 " style="stroke:#000;stroke-width:2 " />
+                        <text x="310 " y="130 " fill="black " text-anchor="middle " font-size="25 ">r</text>
+                    </svg>
+            </div>
+            <p>The acceleration vector is pointed towards the center of the mass producing the acceleration.</p>
+            <p>The mass of the body being accelerated isn't used in this equation. Use the mass of the body producing the acceleration.
+                To find the acceleration of objects on Earth use Earth's mass.</p>
+            <p>
+                The simulation below shows a vector
+                <strong>field</strong>. Each vector shows the gravitational acceleration potentially felt at that location. These
+                diagrams are helpful for predicting how a particle will accelerate.
+    </article>
+    <canvas class='center' id='grav1' height='200' width='600' onclick="grav1(this)"> </canvas>
+    <article>
+        Click the mouse to push the masses around. Number of particles =
+        <input id='num1' type="number" step="1" min='1' max='200' value='6'>
+        </p>
+
+        <div class='example'>
+            <b>Example:</b> Find the acceleration of gravity for an object on the surface of Earth.
+            <br>Is it really 9.8 m/s²?
+            <details>
+                <summary>solution</summary>
+                $$ r = 6,371,000 \, \mathrm{m} $$ $$ g = \frac{GM}{r^{2}} $$ $$ g = \frac{(6.674\times 10^{-11})(5.972\times 10^{24})}{(6.371\times10^{6})^{2}}
+                $$ $$ g = \frac{(6.674\times 10^{-11})(5.972\times 10^{24})}{40.590\times10^{12}} $$ $$ g = \frac{(6.674)(5.972)}{40.590}
+                \times 10^{-11+24-12}$$ $$ g=0.98195 \times 10^{1}$$ $$ g=9.8195 \, \mathrm{\frac{m}{s^{2}}}$$
+            </details>
+        </div>
+        <div class='example'>
+            <b>Example:</b> Find how far away from the Earth you need to be to only accelerate at half of 9.8 m/s².
+            <details>
+                <summary>solution</summary>
+                $$ g = \frac{GM}{r^{2}} $$ $$ r^{2} = \frac{GM}{g} $$ $$ r^{2} = \frac{(6.674\times 10^{-11})(5.972\times 10^{24})}{9.8 \times
+                0.5} $$ $$ r = 9,160,226 \,\mathrm{m} = 9,160 \,\mathrm{km} $$ $$\text{distance above Earth's surface}$$
+                $$ 9,160\, \mathrm{km} - 6,371\,\mathrm{km} = 2789 \,\mathrm{km}$$
+            </details>
+        </div>
+        <div class='example'>
+            <b>Example:</b> Mars has two very small moons,
+            <a href='https://en.wikipedia.org/wiki/Phobos_(moon)'>Phobos</a> and
+            <a href='https://en.wikipedia.org/wiki/Deimos_(moon)'>Deimos</a>. Phobos has a surface gravity of 0.0057 m/s² and a surface radius of 11,266 m. Calculate the mass
+            of Phobos? (Does your answer agree with wikipedia?)
+            <details>
+                <summary>solution</summary>
+                $$ g = \frac{GM}{r^{2}} $$ $$ M = \frac{gr^2}{G}$$ $$ M = \frac{(0.0057)(11266)^2}{6.674\times 10^{-11}}$$ $$M = 1.08 \times
+                10^{16}\,\mathrm{kg}$$
+                <p></p>
+            </details>
+        </div>
+
+        <h2 class="underlined "> Inverse-Square Law</h2>
+        <p>All particles are attracted to each other, but the attraction is divided by the distance squared (1/r²). Physical
+            laws that diminish at
+            <a href='https://en.wikipedia.org/wiki/Inverse-square_law'>1/r²</a> are common in nature because of how signals spread out in 3 dimensions. Two of the four
+            <a href='https://en.wikipedia.org/wiki/Fundamental_interaction'>fundamental forces</a> follow an inverse square law.</p>
+
+        <p>If you threw darts in random directions, the chance of hitting your target would obey this rule. Notice how the density
+            of lines decreases with distance.</p>
+        <a href="https://en.wikipedia.org/wiki/Inverse-square_law#/media/File:Inverse_square_law.svg">
+            <svg width="478.81232" height="319.20819" id="svg2">
+
+                <g inkscape:label="Rays 1 " id="layer8 " inkscape:groupmode="layer ">
+                    <path inkscape:connector-curvature="0 " id="path3258 " d="m 152.23214,106.46932 100.00592,12.45236
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3260 " d="m 152.23214,106.46932 71.80436,19.21606
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3262 " d="m 152.23214,106.46932 72.33872,23.87619
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3264 " d="m 152.23214,106.46932 73.05639,29.05515
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3266 " d="m 152.23214,106.46932 73.88253,35.63119
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3268 " d="m 152.23214,106.46932 74.6083,43.74594
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3270 " d="m 152.23214,106.46932 75.47558,52.01127
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3272 " d="m 152.23214,106.46932 76.11089,61.55835
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3274 " d="m 152.23214,106.46932 81.43484,15.86071
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                </g>
+                <g sodipodi:insensitive="true " inkscape:label="Squares 1 " id="layer5 " inkscape:groupmode="layer ">
+                    <path sodipodi:nodetypes="ccccc " d="m 228.94499,181.28614 c 12.30695,-3.1537 23.84415,-6.73277 35.81629,-11.06211
+            -0.61127,-17.68877 -1.65291,-35.292 -3.17118,-53.16349 -12.62869,2.88004 -25.22844,4.89484 -37.82819,7.02221 2.83156,18.97897
+            4.48536,38.03043 5.18308,57.20339 z " style="fill:#ffffdc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;display:inline "
+                        id="path3189 " inkscape:connector-curvature="0 " transform="translate(-91.923882,-63.42284) " />
+
+                </g>
+                <g inkscape:label="Rays 2 " id="layer9 " inkscape:groupmode="layer ">
+                    <path inkscape:connector-curvature="0 " id="path3314 " d="m 258.68892,119.72491 107.49311,13.38463
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3330 " d="m 232.50919,127.95282 77.05641,20.6216
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3338 " d="m 258.08561,141.40742 52.99426,17.49133
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3346 " d="m 240.00658,141.37796 72.43326,28.80734
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3354 " d="M 244.86368,151.14256 313.42603,184.208
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3362 " d="m 258.28122,168.65029 56.16775,32.93348
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3370 " d="M 247.60921,172.19497 314.844,218.5274
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3378 " d="m 232.10076,171.0669 82.55568,66.77089
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3322 " d="m 247.08974,124.94432 84.99004,16.55314
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path transform="translate(-81.120386,-184.8187) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4074 " style="fill:url(#radialGradient4076);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-99.072895,-184.88587) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4078 " style="fill:url(#radialGradient4080);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-94.267237,-175.2925) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4082 " style="fill:url(#radialGradient4084);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-91.984781,-201.40264) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4086 " style="fill:url(#radialGradient4088);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-91.498929,-154.20339) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4090 " style="fill:url(#radialGradient4092);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-106.93471,-155.0517) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4094 " style="fill:url(#radialGradient4096);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-106.4324,-198.3759) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0 1
+            1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4098 " style="fill:url(#radialGradient4100);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-80.952965,-157.49844) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4102 " style="fill:url(#radialGradient4104);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-80.407639,-206.69107) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4106 " style="fill:url(#radialGradient4108);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                </g>
+                <g sodipodi:insensitive="true " inkscape:label="Squares 2 " id="layer6 " inkscape:groupmode="layer ">
+                    <path inkscape:connector-curvature="0 " id="path4631 " d="m 286.34993,65.50492 c 4.81978,33.41864 6.03898,67.66244
+            4.1611,102.47499 -21.54791,14.8872 -44.86058,23.52136 -68.40616,31.93237 1.83143,-39.39159 1.13521,-78.89462 -4.68887,-117.93148
+            23.14346,-3.9076 45.79048,-7.02351 68.93393,-16.47588 z " style="fill:#ffffdc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;display:inline "
+                    />
+                    <path inkscape:connector-curvature="0 " id="path4629 " d="m 255.27313,75.03479 c 3.1395,37.58962 4.2896,73.89748
+            3.12945,110.62717 " style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;display:inline "
+                    />
+                    <path inkscape:connector-curvature="0 " id="path3177 " d="m 222.7298,138.9679 c 23.75472,-6.08723 45.58588,-13.44018
+            67.97554,-24.98765 " style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;display:inline "
+                    />
+
+                </g>
+                <g inkscape:label="Rays 3 " id="layer10 " inkscape:groupmode="layer ">
+                    <path inkscape:connector-curvature="0 " id="path3316 " d="M 375.75581,134.30163 478.9329,147.14885
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3332 " d="m 322.56181,152.05243 78.32405,20.96084
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3340 " d="m 366.54758,177.20648 36.10918,11.91823
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3348 " d="m 336.94788,179.93235 67.34608,26.78412
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3356 " d="m 345.97155,199.90366 59.41505,28.65399
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3364 " d="m 371.27812,234.90506 34.41189,20.17712
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3372 " d="m 352.36557,244.38403 52.66229,36.29031
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3380 " d="m 322.97005,244.56182 80.41629,65.04055
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3324 " d="m 342.87957,143.60089 92.5535,18.02624
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path transform="translate(-16.005192,-81.603035) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4054 " style="fill:url(#radialGradient4072);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(32.026468,-91.418408) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4110 " style="fill:url(#radialGradient4112);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(13.107128,-81.883234) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4114 " style="fill:url(#radialGradient4116);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(27.466548,-148.98223) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4118 " style="fill:url(#radialGradient4120);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-2.193353,-146.26251) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4122 " style="fill:url(#radialGradient4124);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(-16.400481,-174.1658) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4126 " style="fill:url(#radialGradient4128);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(3.851794,-182.77095) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0 1
+            1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4130 " style="fill:url(#radialGradient4132);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(36.442808,-192.06255) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4134 " style="fill:url(#radialGradient4136);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                    <path transform="translate(6.837646,-126.38315) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0 1
+            1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4138 " style="fill:url(#radialGradient4140);fill-opacity:1;stroke:none;display:inline;stroke-linecap:round "
+                        sodipodi:type="arc " />
+                </g>
+                <g sodipodi:insensitive="true " inkscape:label="Squares 3 " id="layer7 " inkscape:groupmode="layer ">
+                    <path inkscape:connector-curvature="0 " sodipodi:nodetypes="ccccc " id="rect2383 " d="m 308.22841,104.81207
+            c 30.47619,-5.145674 60.95237,-9.632772 91.42856,-27.857144 5.53833,39.223584 9.08944,80.434374 0,134.285724 -26.57819,36.95421
+            -59.78734,52.35778 -91.42856,72.85714 5.89506,-60.29782 8.79683,-120.32352 0,-179.28572 z " style="fill:#ffffdc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0 "
+                    />
+                    <path inkscape:connector-curvature="0 " sodipodi:nodetypes="cc " id="path3160 " d="m 346.08554,97.866054
+            c 4.59321,54.995146 4.92816,109.138646 0,162.229516 " style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1 "
+                    />
+                    <path inkscape:connector-curvature="0 " sodipodi:nodetypes="cc " id="path3162 " d="m 377.15698,88.390936
+            c 6.89804,47.828614 6.43193,97.235264 0,147.920294 " style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1 "
+                    />
+                    <path inkscape:connector-curvature="0 " sodipodi:nodetypes="cc " id="path3164 " d="m 312.99118,222.39561
+            c 32.13035,-11.03753 63.96344,-23.14522 91.4188,-51.01271 " style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1 "
+                    />
+                    <path inkscape:connector-curvature="0 " sodipodi:nodetypes="cc " id="path3166 " d="m 312.73864,161.97774
+            c 31.80272,-8.14955 62.95826,-18.88784 91.92388,-38.3858 " style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1 "
+                    />
+
+                </g>
+                <g style="display:inline " inkscape:label="Rays 4 " id="layer11 " inkscape:groupmode="layer
+            " sodipodi:insensitive="true ">
+                    <path inkscape:connector-curvature="0 " id="path3312 " d="m 487.21884,148.18058 53.25986,6.63171
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mendm);display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3328 " d="m 428.27663,180.3435 50.687,13.5647
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mendx);display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3336 " d="m 478.17378,214.04992 56.5142,18.65313
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mendr);display:inline "
+                        transform="translate(-91.923882,-63.42284) " sodipodi:nodetypes="cc " />
+                    <path sodipodi:nodetypes="cc " inkscape:connector-curvature="0 " id="path3344 " d="m 434.16633,218.59697
+            55.06825,21.90111 " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mendf);display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path sodipodi:nodetypes="cc " inkscape:connector-curvature="0 " id="path3352 " d="m 444.55546,247.44754
+            48.86704,23.56703 " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2MendS);display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3360 " d="m 472.18721,294.07224 33.11578,19.41715
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mende);display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3368 " d="m 445.8264,308.78918 34.22139,23.58244
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mendeh);display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3376 " d="m 413.87991,318.08955 38.25283,30.93881
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2MendX);display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path inkscape:connector-curvature="0 " id="path3320 " d="m 446.71284,163.82405 72.1732,14.05685
+            " style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2MendD);display:inline "
+                        transform="translate(-91.923882,-63.42284) " />
+                    <path transform="translate(105.10771,-78.964126) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4142 " style="fill:url(#radialGradient4802);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                    <path transform="translate(107.49708,-162.58555) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4146 " style="fill:url(#radialGradient4148);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                    <path transform="translate(89.058268,-146.01212) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4150 " style="fill:url(#radialGradient4152);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                    <path transform="translate(148.09778,-178.31823) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4154 " style="fill:url(#radialGradient4156);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                    <path transform="translate(138.90553,-112.35511) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4158 " style="fill:url(#radialGradient4160);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                    <path transform="translate(95.218973,-107.44069) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4162 " style="fill:url(#radialGradient4800);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                    <path transform="translate(132.89755,-32.351405) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0
+            1 1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4166 " style="fill:url(#radialGradient4168);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                    <path transform="translate(106.46898,-17.52998) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0 1
+            1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4170 " style="fill:url(#radialGradient4172);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                    <path transform="translate(74.593968,-8.154974) " d="m 250.4031,262.89789 a 3.0816715,4.4642859 0 1
+            1 -6.16335,0 3.0816715,4.4642859 0 1 1 6.16335,0 z " sodipodi:ry="4.4642859 " sodipodi:rx="3.0816715 " sodipodi:cy="262.89789 "
+                        sodipodi:cx="247.32143
+            " id="path4174 " style="fill:url(#radialGradient4176);fill-opacity:1;stroke:none;display:inline
+            " sodipodi:type="arc " />
+                </g>
+                <g sodipodi:insensitive="true " inkscape:label="Casing 2 " id="layer13 " inkscape:groupmode="layer ">
+                    <path sodipodi:nodetypes="cc " id="path3211 " d="M 399.75788,347.42417 151.31867,105.9471 " style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        inkscape:connector-curvature="0 " transform="translate(-91.923882,-63.42284) " />
+                    <path sodipodi:nodetypes="cc " id="path3215 " d="m 151.46652,106.10624 248.86434,62.12867 " style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        inkscape:connector-curvature="0 " transform="translate(-91.923882,-63.42284) " />
+                    <path sodipodi:nodetypes="cc " id="path3213 " d="m 151.40457,106.11075 340.02466,33.97961 " style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline "
+                        inkscape:connector-curvature="0 " transform="translate(-91.923882,-63.42284) " />
+                </g>
+                <g sodipodi:insensitive="true " inkscape:label="Labels " id="layer14 " inkscape:groupmode="layer ">
+                    <text id="text3245 " y="193.07648 " x="222.85713 " style="font-size:16px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream
+            Vera Sans " xml:space="preserve " transform="translate(-91.923882,-63.42284) ">
+                        <tspan y="193.07648 " x="222.85713 " id="tspan3247 " sodipodi:role="line ">r</tspan>
+                    </text>
+                    <text id="text3249 " y="279.69977 " x="300.98438 " style="font-size:16px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream
+            Vera Sans " xml:space="preserve " transform="translate(-91.923882,-63.42284) ">
+                        <tspan y="279.69977 " x="300.98438 " id="tspan3251 " sodipodi:role="line ">2r</tspan>
+                    </text>
+                    <text id="text3253 " y="361.12836 " x="390.27008 " style="font-size:16px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream
+            Vera Sans " xml:space="preserve " transform="translate(-91.923882,-63.42284) ">
+                        <tspan y="361.12836 " x="390.27008 " id="tspan3255 " sodipodi:role="line ">3r</tspan>
+                    </text>
+                </g>
+            </svg>
+        </a>
+        <p>As you can see in the graph below, a 1/r
+            <sup>2</sup> function has some interesting results at r=0 and f=0.</p>
+        <div id='f-v-r'></div>
+        <p>What distance between masses produces a force of zero?</p>
+
+        <p>What happens to the force of gravity as the distance between masses approaches zero?</p>
+
+        <p>What else, besides gravity, might follow an inverse square law?</p>
+
+
+        <div class='example'>
+            <b>Example:</b> If you triple the distance between two massive objects, what happens to their force of gravity?
+            What about ten times the radius?
+            <details>
+                <summary>solution</summary>
+                <p>This is easier to understand with some made up numbers. Set the masses and G to equal 1 since they aren't
+                    changing.
+                </p>
+                <div class="col-group ">
+                    <div class='center'>
+                        $$\text{triple}$$ $$r = 3$$ $$ F = \frac{1}{r^2}$$ $$ F = \frac{1}{3^2}$$ $$ F = \frac{1}{9}$$
+
+                    </div>
+                    <div class='center'>
+                        $$\text{ten times}$$ $$r = 10$$ $$ F = \frac{1}{r^2}$$ $$ F = \frac{1}{10^2}$$ $$ F = \frac{1}{100}$$
+                    </div>
+                </div>
+                <p>As the distance between two masses increases, the force of gravity decreases.</p>
+            </details>
+        </div>
+
+
+        <a id='gpe'></a>
+        <p class='underlined'> Gravitational Potential Energy</p>
+        <p>Our old gravitational potential energy equation (U=mgh) can be made more accurate if we replace g = 9.8 with a calculated
+            gravitational acceleration. This version of gravitational potential energy now works beyond Earth's surface.</p>
+
+        <details class='derive'>
+            <summary>derivation of universal gravitational potential energy</summary>
+            $$U_{g} = mgh \quad g = \color{blue}{\frac{GM}{r^{2}}} $$ $$U_{g} = m{\color{blue}{\frac{GM}{r^{2}}}}h $$ $$U_{g} = \frac{GM_{1}M_{2}}{r^{2}}r
+            $$ $$U_{g} = \frac{GM_{1}M_{2}}{r} $$
+            <br>When distance is very big the energy goes to zero, so it makes sense to choose the zero of this gravitational
+            potential energy at an infinite distance away. This means that as we bring a mass closer to another mass we have
+            negative potential energy. $$U_{g} = -\frac{GM_{1}M_{2}}{r} $$
+
+        </details>
+
+        <div class='definition'>
+            <svg class='center' style="display: block; margin: auto " width="600 " height="240 " viewbox="-100 -40 500
+            240 " class='svgDiagram' version="1.1 " xmlns="http://www.w3.org/2000/svg ">
+                <circle cx="0 " cy="100 " r="98 " fill='#fff' stroke-width="2 " stroke="#222 " />
+                <circle cx="300 " cy="100 " r="30 " fill='#fff' stroke-width="2 " stroke="#222 " />
+                <text x="0 " y="105 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+                <text x="18 " y="108 " fill="black " text-anchor="middle " font-size="19 ">1</text>
+                <text x="298 " y="108 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+                <text x="316 " y="111 " fill="black " text-anchor="middle " font-size="19 ">2</text>
+                <g transform='translate(0,-10)'>
+                    <line x1="0 " y1="0 " x2="300 " y2="0 " style="stroke:#000;stroke-width:2 " />
+                    <line x1="0 " y1="-5 " x2="0 " y2="5 " style="stroke:#000;stroke-width:2 " />
+                    <line x1="300 " y1="-5 " x2="300 " y2="5 " style="stroke:#000;stroke-width:2 " />
+                    <text x="150 " y="-5 " fill="black " text-anchor="middle " font-size="25 ">r</text>
+                </g>
+            </svg>
+            <h1>$$U_{g} = -\frac{GM_{1}M_{2}}{r} $$</h1>
+            <p>\(U_g\) = gravitational potential energy [J, Joules]
+                <br>\(G\) = 6.67408 × 10
+                <sup>-11</sup> = universal gravitation constant [N(m/kg)²]
+                <br>\(M\) = mass [kg, kilograms]
+                <br>\(r\) = distance between the center of each mass [m, meters]
+                <svg style="display: block; margin: auto " width="500 " height="200 " class='svgDiagram' version="1.1
+            " xmlns="http://www.w3.org/2000/svg ">
+                    <circle cx="250 " cy="35 " r="5 " fill='#fff' stroke-width="2 " stroke="#222 " />
+                    <circle cx="250 " cy="1167 " r="1000 " fill='#fff' stroke-width="2 " stroke="#222 " />
+
+                    <text x="250 " y="70 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+                    <text x="268 " y="73 " fill="black " text-anchor="middle " font-size="19 ">1</text>
+                    <text x="250 " y="192 " fill="black " text-anchor="middle " font-size="25 ">M</text>
+                    <text x="268 " y="195 " fill="black " text-anchor="middle " font-size="19 ">2</text>
+
+                    <line x1="290 " y1="35 " x2="300 " y2="35 " style="stroke:#000;stroke-width:2 " />
+                    <line x1="295 " y1="35 " x2="295 " y2="300 " style="stroke:#000;stroke-width:2 " />
+                    <text x="310 " y="130 " fill="black " text-anchor="middle " font-size="25 ">r</text>
+                </svg>
+        </div>
+        <p>What is the gravitational potential energy when two masses are at zero distance away?</p>
+        <p>What is the gravitational potential energy when two masses are at an infinite distance away?</p>
+        <p>Energy is a scalar, not a vector. This means that when we calculate gravitational potential energy it has no direction.
+            You can see the potential energy in the simulation below as a scalar field. Think of the reddish regions as being
+            deeper into the
+            <a href='https://xkcd.com/681/'>gravity well</a>.
+        </p>
+        <canvas class='center' id='grav2' height='400' width='600' onclick="grav2(this)"> </canvas>
+        <p> Poke around with your mouse. Number of particles =
+            <input id='num2' type="number" step="1" min='1' max='100' value='6'>
+        </p>
+
+        <div class='example'>
+            <strong>Example:</strong> How much gravitational potential energy exists between two 100,000 kg masses at a distance
+            of 2 meters?
+            <details>
+                <summary>solution</summary>
+                $$U_{g} = -\frac{GM_{1}M_{2}}{r}$$ $$U_{g} = -\frac{(6.674 \times 10^{-11}) (100,000)(100,000)} {2} $$ $$U_{g} = -0.33\,\mathrm{J}$$
+                <p>The energy is negative because it would take positive work to separate the masses.</p>
+            </details>
+        </div>
+
+        <div class='example'>
+            <strong>Example:</strong> Two 100,000 kg masses are 2 meters apart. How much work would it take to bring them to 10 m
+            apart?
+            </strong>
+            <details>
+                <summary>solution</summary>
+                $$U_{i} = -\frac{GM_{1}M_{2}}{r}$$ $$U_{i} = -\frac{(6.674 \times 10^{-11})(100,000)(100,000)}{2}$$ $$U_{i} = -0.33\,\mathrm{J}$$
+                <br> $$U_{f} = -\frac{(6.674 \times 10^{-11})(100,000)(100,000)}{10}$$ $$U_{f} = -0.068\,\mathrm{J}$$
+                <br> $$E_i = E_f$$ $$U_{i} + W = U_{f} $$ $$-0.33 + W = -0.068$$ $$W = 0.262 \, \mathrm{J}$$
+            </details>
+        </div>
+
+
+        <div class='example'>
+            <strong>Example:</strong> A 2000 kg space ship starts at rest 20,000 km from the surface of Earth. How much kinetic energy
+            will the ship have after it falls down to 10,000km from the surface of Earth?
+            <details>
+                <summary>hint</summary>
+                <br> Use conservation of energy. Set the initial kinetic and gravitational potential equal to the final kinetic
+                and gravitational potential.
+                <br>
+                <br>
+            </details>
+            <details>
+                <summary>solution</summary>
+                $$E_{i} = E_{f}$$ $$U_{gi} = U_{gf} + K$$ $$ K = U_{gi} - U_{gf}$$ $$K = -\frac{GM_{1}M_{2}}{r} +\frac{GM_{1}M_{2}}{r}$$
+                $$K = -\frac{(6.674\times 10^{-11})(5.972\times 10^{24})(2000)}{6,371,000 + 20,000,000}$$ $$+ \frac{(6.674\times
+                10^{-11})(5.972\times 10^{24})(2000)}{6,371,000 + 10,000,000}$$ $$K = -3.02 \times 10^{10}+4.86 \times 10^{10}
+                $$ $$K = 1.85 \times 10^{10} \, \mathrm{J}$$
+            </details>
+        </div>
+        <div class='example'>
+            <strong>Example:</strong> Find the minimum escape velocity for a 100kg person on Earth.
+            <details>
+                <summary>hint</summary>
+                <br> Use conservation of energy to find the energy needed to bring both the kinetic and potential energy to zero.
+                <br>
+                <br>
+            </details>
+            <details>
+                <summary>solution</summary>
+                $$E_{i} = E_{f}$$ $$U_{gi} + K = U_{gf} + K$$ $$U_{gi} + K = 0$$ $$-U_{gi} = K$$ $$\frac{GM_{1}M_{2}}{r} = (1/2)M_{2}v^2$$
+                $$\frac{GM_{1}}{r} = (1/2)v^2$$ $$\sqrt{\frac{2GM_{1}}{r}} = v$$ $$\sqrt{\frac{2(6.674\times 10^{-11}) (5.972
+                \times 10 ^{24})}{6,371,000}} = v$$ $$11,183 \, \mathrm{\tfrac{m}{s}} =v $$
+            </details>
+        </div>
+    </article>
+    <div class='back'>
+        <a href="../../../index.html ">Back</a>
+    </div>
+    <script>
+        renderMathInElement(document.body);
+    </script>
+    <script src='../../../lib/randomColor.min.js'></script>
+    <script src='../../../lib/gravityClass.js'></script>
+    <script src="grav0.js "></script>
+    <script src="grav1.js "></script>
+    <script src="grav2.js "></script>
+    <script src="https://d3js.org/d3.v3.min.js "></script>
+    <script src='../../../lib/function-plot.js'></script>
+    <script src='plot.js'></script>
+</body>
+
+</html>

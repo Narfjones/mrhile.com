@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	/>
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<title>mrhile.com</title>
+
+	<!-- slider stylesheet -->
+	<link
+		rel="stylesheet"
+		type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"
+	/>
+	
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css" />
+
+	<!-- fonts style -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Raleway:400,700|Roboto:400,700&display=swap"
+		rel="stylesheet"
+	/>
+	<!-- Custom styles for this template -->
+	<link href="../../../css/style.css" rel="stylesheet" />
+	<!-- responsive style -->
+	<link href="../../../css/responsive.css" rel="stylesheet" />
+
+	<link rel="stylesheet" type="text/css" href="../../../lib/katex/katex.min.css">
+	<script src="../../../lib/katex/katex.min.js"></script>
+	<script src="../../../lib/katex/contrib/auto-render.min.js"></script>
+    <script src="../../../lib/matter.min.js"></script>
+	</head>
+<body>
+<div class="hero_area">
+<!-- header section strats -->
+<header class="header_section">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-11 offset-md-1 px-0">
+		<nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+			<a class="navbar-brand" href="index.html">
+			<span>
+				mrhile.com
+			</span>
+			</a>
+			<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+			>
+			<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div
+			class="collapse navbar-collapse"
+			id="navbarSupportedContent">
+			<div
+				class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+				<ul class="navbar-nav ">
+				<li class="nav-item">
+					<a class="nav-link pl-0" href="../../../index.html"
+					>Home <span class="sr-only">(current)</span></a
+					>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="../../../notes.html"> Physics </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../blog.html"> Aviation </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> Simulations </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> Projects </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../../../about.html"> About Me</a>
+				</li>
+				</ul>
+			</div>
+			</div>
+		</nav>
+		</div>
+	</div>
+    </div>
+</header>
+</div>
+	<article>
+		<h2 class="underlined">
+			Motion
+		</h2>
+		<p>
+			It is important to know where things are in both space and time. Physics looks not only at position, but how position changes
+			as time changes.
+		</p>
+		<h1 class='underlined'>Position</h1>
+		<p>In physics we use the symbol x for position. That means you shouldn't use x for an unknown unless you are solving for position.
+			We generally use meters(m) as our units.</p>
+		<p>To represent a distance we subtract the final position from the initial position. We use the Δ symbol to show change.</p>
+		<div class='definition'>
+			<h1>$$ \Delta x = x_{f}-x_{i}$$</h1>
+			<p>\(\Delta x\) = change in position, distance, displacement, length [m, meters]</p>
+			<p>\(x_i\) = initial (starting) position [m, meters]</p>
+			<p>\(x_f\) = final (ending) position [m, meters]</p>
+		</div>
+		<canvas class='center' id="canvas1" width='600' height='150'> </canvas>
+		<br>
+		<br>
+		<br>
+		<h1 class='underlined'>Time</h1>
+		<p> We keep track of time in the same way as position. We use t for time and generally use seconds(s) as our units.</p>
+		<div class='definition'>
+			<h1>$$\Delta t = t_{f}-t_{i}$$</h1>
+			<p>\(\Delta t\) = change in time, time period [s, seconds]</p>
+			<p>\(t_i\) = initial (starting) time [s, seconds]</p>
+			<p>\(t_f\) = final (ending) time [s, seconds]</p>
+		</div>
+		<canvas class='center' id="canvas2" width='600' height='150'> </canvas>
+		<br>
+		<br>
+		<br>
+		<h1 class='underlined'>Velocity</h1>
+		<p>Velocity is a measure of how much position changes (Δx) over a period of time (Δt).</p>
+		<div class='definition'>
+			<h1>$$v = \frac{\Delta x}{\Delta t}$$</h1>
+			<p>\(\Delta x\) = distance [m, meters]</p>
+			<p>\(\Delta t\) = time period [s, seconds]</p>
+			<p>\(v\) = average velocity [m/s, meters per second]</p>
+		</div>
+		<canvas class='center' id="canvas3" width='600' height='150'> </canvas>
+		<div class='example'>
+			<strong>Example:</strong> A car is traveling at 20 m/s for 80 seconds. How far does the car travel?
+			<details>
+				<summary>solution</summary>
+				$$ v = \frac{\Delta x}{\Delta t} $$ $$ v \Delta t= \Delta x$$ $$ (20 \mathrm{\tfrac{m}{s}}) (80\, \mathrm{s}) = \Delta x
+				$$ $$ 1600\, \mathrm{m} = \Delta x $$
+				<canvas class='center' id="canvas5" width='600' height='150'> </canvas>
+			</details>
+		</div>
+		<div class='example'>
+			<strong>Example:</strong> Someone tells you they can run a 10 km race in about an hour. What velocity is that in m/s? Is that
+			fast? (1 m/s is walking speed)
+			<details>
+				<summary>solution</summary>
+				$$10 \, \mathrm{km} = 10(1,000) \mathrm{m} = 10,000 \, \mathrm{m}$$ $$1\, \mathrm{h} \left(\frac{60\, \mathrm{min}}{1\, \mathrm{h}}\right)\left(\frac{60\,
+				\mathrm{s}}{1\, \mathrm{min}}\right) = 3,600 \,\mathrm{s}$$ $$v = \frac{\Delta x}{\Delta t}$$ $$v = \frac{10,000\, \mathrm{m}}{3,600\,
+				\mathrm{s}}$$ $$v = 2.7\, \mathrm{\tfrac{m}{s}}$$
+			</details>
+		</div>
+		<div class='example'>
+			<strong>Example:</strong> Google maps says Las Vegas is 4 hours away from Los Angeles. Google says it is 270 miles away. How fast
+			does google think I will drive? Answer this one in miles/hour.
+			<details>
+				<summary>solution</summary>
+				$$v = \frac{\Delta x}{\Delta t}$$ $$v = \frac{270\, \mathrm{miles} }{4\, \mathrm{hour}}$$ $$v = 67.5\, \mathrm{\tfrac{miles}{hour}
+				}$$
+				<p>The speed limit for most of that trip is 70 mph. Google is assuming that everyone is under the speed limit.</p>
+			</details>
+		</div>
+		<div class='example'>
+			<strong>Example:</strong> If I walk at a speed of 1.2 m/s how long will it take for me to walk 2 km?
+			<details>
+				<summary>solution</summary>
+				$$2 \, \mathrm{km} = 2(1000) \mathrm{m} = 2,000 \, \mathrm{m}$$ $$v = \frac{\Delta x}{\Delta t}$$ $$\Delta t = \frac{\Delta
+				x}{v}$$ $$\Delta t = \frac{2,000\, \mathrm{m}}{1.2\, \mathrm{\tfrac{m}{s}}}$$ $$\Delta t = \frac{2,000}{1.2}\, \mathrm{s}$$
+				$$\Delta t = 1,666.\overline{6} \, \mathrm{s}$$
+			</details>
+		</div>
+		<h1 class='underlined'>Acceleration</h1>
+		<p>Acceleration is a measure of how much velocity changes (Δv) over a period of time (Δt).</p>
+		<div class='definition'>
+			<h1>$$a = \frac{\Delta v}{\Delta t}$$</h1>
+			<p>\(\Delta v\) = change in velocity [m/s] = \(v_f-v_i\)</p>
+			<p>\(\Delta t\) = time period, change in time [s, seconds]</p>
+			<p>\(a\) = acceleration [m/s²]</p>
+		</div>
+		<canvas class='center' id="canvas4" width='600' height='150'> </canvas>
+		<div class='example'>
+			<strong>Example:</strong> A basketball falls off a table and hits the floor in 0.45 s. The ball has a velocity of 4.43 m/s right
+			before it hits the ground. What is the acceleration of the basketball as it falls?
+			<details>
+				<summary>solution</summary>
+				$$a = \frac{\Delta v}{\Delta t}$$ $$a = \frac{4.43\, \mathrm{\tfrac{m}{s}}} {0.45\, \mathrm{s}}$$ $$a = 9.84\, \mathrm{\tfrac{m}{s^{2}}
+				}$$
+
+			</details>
+		</div>
+		<div class='example'>
+			<strong>Example:</strong> A car can go from 0 to 60 miles per hour in 5.9 s. What is the acceleration in m/s²? (1 mile = 1609
+			meters)
+			<details>
+				<summary>solution</summary>
+				<!-- $$ 60\left(\frac{miles}{hour}\right)\left(\frac{1609 m}{1 mile}\right)\left(\frac{1 hour}{3600s}\right) = 26.8\small\frac{m}{s} $$ -->
+				$$ 60\left( \mathrm{ \frac{\color{red}{mile}}{\color{blue}{hour}}} \right)\left(\frac{1609\,\mathrm{ m}}{1 \,\color{red}{\mathrm{mile}
+				}}\right)\left(\frac{1\, \color{blue}{ \mathrm{hour} }}{3600\, \mathrm{s} }\right) = 26.8 \mathrm{\tfrac{m}{s}} $$ $$a
+				= \frac{\Delta v}{\Delta t}$$ $$a = \frac{26.8\,\mathrm{ \tfrac{m}{s}}} {5.9\, \mathrm{s}}$$ $$a = 4.5\, \mathrm{ \tfrac{m}{s^{2}}
+				}$$
+				<canvas class='center' id="canvas0" width='600' height='150'> </canvas>
+			</details>
+		</div>
+
+		<div class='example'>
+			<strong>Example:</strong> I start a velocity of 1 m/s. I speed up to 3 m/s over 10 seconds. What is my acceleration?
+			<details>
+				<summary>solution</summary>
+				$$\Delta v = v_{f}-v_{i}$$ $$\Delta v = 3 \,\mathrm{ \tfrac{m}{s}} -1\, \mathrm{ \tfrac{m}{s} }$$ $$\Delta v = 2\, \mathrm{\tfrac{m}{s}}$$
+				<br>$$a = \frac{\Delta v}{\Delta t}$$ $$a = \frac{2\, \mathrm{\tfrac{m}{s}} }{10\, \mathrm{s} }$$ $$a = 0.2\,\mathrm{ \tfrac{m}{s^{2}}}$$
+			</details>
+		</div>
+		<div class='example'>
+			<div id='graph1'></div>
+			<div id='graph2'></div>
+			<strong>Example:</strong> These graphs show velocity vs. time. What do their slopes represent?
+			<details>
+				<summary>solution</summary>
+				<p>acceleration</p>
+				<p>acceleration is defined as the change in velocity every second. This is the same as the slope of the graphs.</p>
+			</details>
+		</div>
+	</article>
+	<div class='back'>
+		<a href="../../../index.html">Back</a>
+	</div>
+	<script src='../../../lib/randomColor.min.js'></script>
+	<script src="motion.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src='../../../lib/function-plot.js'></script>
+	<script src='plot.js'></script>
+
+	<script>
+		renderMathInElement(document.body);
+	</script>
+</body>
+
+</html>
