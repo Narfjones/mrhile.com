@@ -443,7 +443,7 @@ a:focus {
 
 .about_section .box .img-box {
   width: 75%;
-  border: 1px dashed #000000;
+  border: 1px solid #000000;
 }
 
 .about_section .box .img-box img {
