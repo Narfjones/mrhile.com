@@ -217,6 +217,9 @@ a:focus {
 
 /*end header section*/
 .slider_section {
+  background-image: url(../images/hero-bg.jpg);
+  background-size: cover;
+  height:auto;
   position: relative;
 }
 

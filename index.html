@@ -26,6 +26,9 @@
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
+    <!-- curriculum css -->
+    <link rel="stylesheet" type="text/css" />
+
     <!-- fonts style -->
     <link
       href="https://fonts.googleapis.com/css?family=Raleway:400,700|Roboto:400,700&display=swap"
@@ -37,7 +40,7 @@
     <link href="css/responsive.css" rel="stylesheet" />
   </head>
 
-  <body>
+  <body onload="loadPage('main.html')">
     <div class="hero_area">
       <!-- header section strats -->
       <header class="header_section">
@@ -70,25 +73,20 @@
                     class="d-flex ml-auto flex-column flex-lg-row align-items-center"
                   >
                     <ul class="navbar-nav  ">
-                      <li class="nav-item active">
-                        <a class="nav-link pl-0" href="index.html"
-                          >Home <span class="sr-only">(current)</span></a
-                        >
+                      <li class="nav-item" id="home_button">
+                        <a  class="nav-link" href="javascript:loadPage('main.html');">Home</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="notes.html"> Physics </a>
+                      <li class="nav-item" id="physics_button">
+                        <a  class="nav-link" href="javascript:loadPage('notes-new.html');">Physics</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="blog.html"> Aviation </a>
+                      <li class="nav-item" id="aviation_button">
+                        <a  class="nav-link" href="javascript:loadPage('curriculum.html');">Curriculum</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="about.html"> Simulations </a>
+                      <li class="nav-item" id="personal_button">
+                        <a  class="nav-link" href="javascript:loadPage('blog');">Personal Projects</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="about.html"> Projects </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="about.html"> About Me</a>
+                      <li class="nav-item" id="about_button">
+                        <a  class="nav-link" href="javascript:loadPage('about');">About Me</a>
                       </li>
                     </ul>
                   </div>
@@ -98,305 +96,31 @@
           </div>
         </div>
       </header>
-      <!-- end header section -->
-
-      <!-- slider section -->
-      <div class="slider_section">
-        <div
-          id="carouselExampleControls"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-lg-6 offset-lg-1">
-                    <div class="detail-box">
-                      <div class="heading_box">
-                        <h2>Robert Hile</h2>
-                        <h1>
-                          Physics & Aviation
-                        </h1>
-                      </div>
-                      <div>
-                      <a></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-5 px-0">
-                    <div class="img-box">
-                      <img src="images/my-project.png" alt="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- end slider section -->
     </div>
-    <!-- end hero area -->
 
-    <!-- design section -->
 
-    <!--<section class="design_section layout_padding-top"> -->
-    <div class="row" style="padding-top:20px">  
-      <div class="card" style="width:18em; margin:auto;">
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src="images/physics-card.jpg" class="img-fluid"/>
-          <a href="#!">
-            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-          </a>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title" style="text-align:center;">Physics</h5>
-          <p class="card-text" style="text-align:center;">This class uses mathematics and investigation to disassemble nature to learn how it works. This is the study of the world that you live in.</p>
-          <a href="/notes.html" class="btn btn-primary">Read more</a>
-        </div>
-      </div>
-
-      <div class="card" style="width:18em; margin:auto;">
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src="images/applied-science-card.jpg" class="img-fluid"/>
-          <a href="#!">
-            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-          </a>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title" style="text-align:center;">Applied Science</h5>
-          <p class="card-text" style="text-align:center;">In this class we will be using physics to study critical thinking and prolem solving techniques. We will study things from Newton's Laws of motion to Space Travel, Light and Sound, and more.</p>
-          <a href="#!" class="btn btn-primary">Read more</a>
-        </div>
-      </div>
-
-      <div class="card" style="width:18em; margin:auto;">
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src="images/aviation-card.png" class="img-fluid"/>
-          <a href="#!">
-            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-          </a>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title" style="text-align:center;">Aviation</h5>
-          <p class="card-text" style="text-align:center;">This class covers the Pilot Course provided by the AOPA organization. It's all you need to learn to fly by graduation.</p>
-          <a href="#!" class="btn btn-primary">Read more</a>
-        </div>
-      </div>
+    <div id="content">
     </div>
-    <!--</section>-->
 
-    <!-- end design section   -->
-    <div>
-      <hr class="section_hr" />
-    </div>
-    <!-- about section -->
-
-    <section class="about_section layout_padding-bottom">
-      <div class="container">
-        <div class="heading_container">
-          <h2>
-            About
-          </h2>
-        </div>
-        <div class="box layout_padding2-top layout_padding-bottom">
-          <div class="detail-box">
-            <p>
-              I have a bachelor's degree in Advanced Physics, a master's degree in Education, almost a decade in the classroom, 
-              and more than fifteen years of experience in the computer science industry. 
-              I believe this makes me uniquely qualified 
-              to teach these subjects. Our world is fascinating and I have made it my lifes 
-              work to help others open their eyes and experience the amazing things that nature has to offer.
-            </p>
-          </div>
-          <div class="img-box">
-            <img src="images/about-img.jpg" alt="" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- end about section -->
-
-    <!-- project section -->
-
-    <section class="project_section layout_padding-bottom">
-      <div class="container">
-        <div class="heading_container">
-          <h2>
-            Resources
-          </h2>
-        </div>
-        <div class="project_container layout_padding2-top">
-          <div class="box">
-            <img src="images/p-2.png" alt="" />
-            <h5>Online Textbooks</h5>
-          </div>
-          <div class="box">
-            <img src="images/p-2.jpg" alt="" />
-            <h5>Curriculum Materials</h5>
-          </div>
-          <div class="box">
-            <img src="images/p-3.jpg" alt="" />
-            <h5>Online Lab Simulations</h5>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- end project section -->
-
-    <!-- expand section -->
-
-    <section class="expand_section">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="img-box">
-              <img src="images/expand-img.jpg" alt="" />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="detail-box">
-              <h2>
-                Private Tutoring
-              </h2>
-              <p>
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-                The point of using LoremIt is a long established fact that a
-                reader will be distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- end expand section -->
-    <div>
-      <hr class="section_hr" />
-    </div>
-    <!-- blog section -->
-    <section class="blog_section layout_padding-bottom">
-      <div class="container">
-        <div class="heading_container">
-          <h2>
-            See Our Blog
-          </h2>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/b-1.jpg" alt="" />
-              </div>
-              <div class="detail-box">
-                <h4>
-                  Readable content of a page
-                </h4>
-                <p>
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/b-2.jpg" alt="" />
-              </div>
-              <div class="detail-box">
-                <h4>
-                  Readable content of a page
-                </h4>
-                <p>
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/b-3.jpg" alt="" />
-              </div>
-              <div class="detail-box">
-                <h4>
-                  Readable content of a page
-                </h4>
-                <p>
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- end blog section -->
-
-    
-
-    <!-- info section -->
-    <section class="info_section layout_padding-top layout_padding2-bottom">
-      <div class="container">
-        <div class="social_container">
-          <h2>
-            Follow Us
-          </h2>
-          <div class="social_box">
-            <a href="">
-              <img src="images/fb.png" alt="" />
-            </a>
-            <a href="">
-              <img src="images/twitter.png" alt="" />
-            </a>
-            <a href="">
-              <img src="images/linkedin.png" alt="" />
-            </a>
-            <a href="">
-              <img src="images/youtube.png" alt="" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- end info_section -->
-
-    <!-- footer section -->
-    <section class="container-fluid footer_section">
-      <div class="container">
-        <p>
-          &copy; 2020 All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a>
-        </p>
-      </div>
-    </section>
-    <!-- footer section -->
-
-    <script  src="js/jquery-3.4.1.min.js"></script>
-    <script  src="js/bootstrap.js"></script>
-
-    <script>
-      function openNav() {
-        document.getElementById("myNav").style.width = "100%";
-      }
-
-      function closeNav() {
-        document.getElementById("myNav").style.width = "0%";
-      }
-    </script>
   </body>
+
+  <script  src="js/jquery-3.4.1.min.js"></script>
+  <script  src="js/bootstrap.js"></script>
+
+  <script>
+    /**
+    * @param {String} url - address for the HTML to fetch
+    * @return {String} the resulting HTML string fragment
+    */
+  async function fetchHtmlAsText(url) {
+      return await (await fetch(url)).text();
+  }
+  
+  async function loadPage(page) {
+    const contentDiv = document.getElementById("content");
+    contentDiv.innerHTML = await fetchHtmlAsText(page);
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+  
+  </script>
 </html>

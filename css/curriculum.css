@@ -1,0 +1,40 @@
+/* Grid with auto placement ______________________________________*/
+.curriculum_listing {
+    list-style: none;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .curriculum_listing li {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* front page grid ________________________________________________*/
+  .curriculum-listing-style {
+    overflow: hidden;
+    padding: 0.5em 0 0 0.5em;
+    max-width: 1300px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .curriculum-listing-style li {
+    padding: 0 0.5em 0.5em 0;
+  }
+  
+  .curriculum-listing-style a {
+    color: #555;
+  }
+  
+  .curriculum-listing-style a:hover {
+    color: #2793c7;
+  }
+  
+  .curriculum-listing-style h2 {
+    border-bottom: 1px solid #aaa;
+    font-weight: 400;
+    margin-bottom: 0.1em;
+  }
+  
