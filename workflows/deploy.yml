@@ -3,7 +3,7 @@ name: Deploy to FTP
 on:
   push:
     branches:
-      - copilot/remove-repository-files  # Only runs when you push to the main branch
+      - master  # Only runs when you push to the main branch
   workflow_dispatch: # This adds the manual "Run workflow" button
     inputs:
       reason:
