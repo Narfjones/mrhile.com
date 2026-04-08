@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter French Reader</title>
+    <style>
+        :root {
+            --bg-app: #f3f4f6;
+            --bg-panel: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --accent: #4f46e5; /* Indigo */
+            --accent-hover: #4338ca;
+            --highlight: #fde68a;
+            --border: #e5e7eb;
+            --font-read: 'Georgia', 'Times New Roman', serif;
+            --font-ui: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-ui);
+            background-color: var(--bg-app);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-panel);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        h1 { margin: 0; font-size: 1.25rem; color: var(--accent); }
+        .stats { font-size: 0.9rem; color: var(--text-secondary); }
+
+        /* Main Layout */
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden; /* Prevents full page scroll */
+        }
+
+        /* Sidebar: Lesson List */
+        .sidebar-left {
+            width: 250px;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .lesson-btn {
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+            font-family: var(--font-ui);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .lesson-btn:hover { background-color: #f9fafb; }
+        .lesson-btn.active {
+            background-color: #e0e7ff;
+            color: var(--accent);
+            font-weight: bold;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Center: Reader */
+        .reader-area {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .paper {
+            background-color: #fff;
+            padding: 50px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            min-height: 60vh;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .story-text {
+            font-family: var(--font-read);
+            font-size: 1.35rem;
+            line-height: 1.8;
+            color: #333;
+            white-space: pre-wrap; /* Preserves paragraphs */
+        }
+
+        .chapter-title {
+            font-family: var(--font-ui);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        /* Sidebar: Vocabulary */
+        .sidebar-right {
+            width: 300px;
+            background-color: var(--bg-panel);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .vocab-card {
+            background-color: #f3f4f6;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--accent);
+            position: relative;
+            cursor: pointer; /* Indicates clickable */
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #eef2ff;
+        }
+
+        .vocab-fr { font-weight: bold; display: block; margin-bottom: 4px; color: var(--text-primary); }
+        .vocab-en { font-size: 0.9rem; color: var(--text-secondary); font-style: italic; }
+        
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            border: none;
+            background: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .delete-btn:hover { color: #ef4444; background-color: rgba(239, 68, 68, 0.1); }
+
+        /* Floating Popup */
+        #selection-popup {
+            display: none;
+            position: absolute; /* Changed via JS to fixed if needed */
+            background: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 100;
+            width: 280px;
+        }
+        
+        /* Overlay for modal mode (when editing from sidebar) */
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.2);
+            z-index: 90;
+        }
+
+        #selection-word { font-weight: bold; margin-bottom: 8px; display: block; color: var(--accent); font-size: 1.1em; }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+        }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container { flex-direction: column; overflow-y: auto; }
+            .sidebar-left, .sidebar-right { width: 100%; height: auto; max-height: 200px; border: none; border-bottom: 1px solid var(--border); }
+            .reader-area { padding: 20px; }
+            .paper { padding: 20px; box-shadow: none; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>⚡ Harry Potter: Le Survivant</h1>
+    <div class="stats">
+        <span id="word-count">0</span> words learned
+    </div>
+</header>
+
+<div class="container">
+    <!-- Lesson List -->
+    <nav class="sidebar-left" id="lesson-list">
+        <!-- Javascript will populate this -->
+    </nav>
+
+    <!-- Reading Area -->
+    <main class="reader-area">
+        <div class="paper">
+            <div id="chapter-header" class="chapter-title">Select a Lesson</div>
+            <div style="font-size: 0.9em; color: #666; margin-bottom: 15px;">
+                💡 Tip: Highlight text to define it. Click a word on the right to edit.
+            </div>
+            <div id="story-content" class="story-text">Loading...</div>
+        </div>
+    </main>
+
+    <!-- Vocabulary List -->
+    <aside class="sidebar-right">
+        <h3 style="margin-top:0; color:var(--text-secondary);">Vocabulary Bank</h3>
+        <div id="vocab-container">
+            <!-- Javascript will populate this -->
+        </div>
+        <button onclick="clearData()" style="margin-top:20px; color:#ef4444; background:none; border:none; cursor:pointer; font-size:0.8rem; text-decoration:underline;">Reset Progress</button>
+    </aside>
+</div>
+
+<!-- Modal Overlay -->
+<div id="modal-overlay" onclick="closePopup()"></div>
+
+<!-- Popup for translation -->
+<div id="selection-popup">
+    <span id="selection-word"></span>
+    <input type="text" id="translation-input" placeholder="Enter translation..." autocomplete="off">
+    <button class="btn-primary" onclick="saveVocab()">Save</button>
+</div>
+
+<script>
+    // --- 1. THE DATA (20 Lessons) ---
+    const lessons = [
+        {
+            id: 0,
+            title: "1. The Normal Family",
+            text: "Mr et Mrs Dursley, qui habitaient au 4, Privet Drive, avaient toujours affirmé avec la plus grande fierté qu'ils étaient parfaitement normaux, merci pour eux. Jamais quiconque n'aurait imaginé qu'ils puissent se trouver impliqués dans quoi que ce soit d'étrange ou de mystérieux, car ils n'avaient pas de temps à perdre avec des sornettes."
+        },
+        {
+            id: 1,
+            title: "2. Mr. and Mrs. Dursley",
+            text: "Mr Dursley dirigeait la Grunnings, une entreprise qui fabriquait des perceuses. C'était un homme grand et massif, qui n'avait pratiquement pas de cou, mais possédait en revanche une moustache de belle taille. Mrs Dursley, quant à elle, était mince et blonde et disposait d'un cou deux fois plus long que la moyenne, ce qui lui était fort utile pour espionner ses voisins en regardant par-dessus les clôtures de jardins."
+        },
+        {
+            id: 2,
+            title: "3. Dudley & The Secret",
+            text: "Les Dursley avaient un petit garçon prénommé Dudley et c'était à leurs yeux le plus bel enfant du monde. Les Dursley avaient tout ce qu'ils voulaient. Mais ils avaient aussi un secret, et leur plus grande crainte était que quelqu'un ne le découvre. Ils ne croyaient pas qu'ils pourraient supporter que l'on entende parler des Potter."
+        },
+        {
+            id: 3,
+            title: "4. The Sister",
+            text: "Mrs Potter était la sœur de Mrs Dursley, mais toutes deux ne s'étaient plus revues depuis plusieurs années. En fait, Mrs Dursley faisait semblant de ne pas avoir de sœur, car celle-ci et son bon à rien de mari étaient aussi éloignés que possible de tout ce qui faisait un Dursley."
+        },
+        {
+            id: 4,
+            title: "5. The Fear",
+            text: "Les Dursley frémissaient à la pensée de ce que diraient les voisins si les Potter arrivaient dans la rue. Les Dursley savaient que les Potter avaient eux aussi un petit garçon, mais ils ne l'avaient jamais vu. Son existence constituait une raison supplémentaire de tenir les Potter à distance : il n'était pas question que le petit Dudley se mette à fréquenter un enfant comme celui-là."
+        },
+        {
+            id: 5,
+            title: "6. Strange Cloaks",
+            text: "Mr Dursley était coincé dans les embouteillages habituels du matin. Il remarqua soudain qu'il y avait beaucoup de gens vêtus bizarrement dans les rues. Des gens avec des capes. Mr Dursley ne supportait pas les gens qui s'habillaient de façon excentrique. Il supposa que c'était une nouvelle mode stupide."
+        },
+        {
+            id: 6,
+            title: "7. The Whispers",
+            text: "Mais alors qu'il passait devant un groupe, il entendit un murmure qui le glaça : 'Les Potter, c'est ça... c'est ce que j'ai entendu dire...'. Mr Dursley se figea. La peur l'envahit. Il eut envie de faire demi-tour, mais il se ravisa."
+        },
+        {
+            id: 7,
+            title: "8. The Cat Map",
+            text: "En arrivant au coin de la rue, il vit le premier signe que quelque chose d'étrange se préparait : un chat tigré qui lisait une carte routière. Mr Dursley cligna des yeux et regarda à nouveau. Le chat était là, mais il n'y avait pas de carte. 'J'ai dû rêver', pensa-t-il."
+        },
+        {
+            id: 8,
+            title: "9. Work Distractions",
+            text: "Tout l'après-midi, il eut du mal à se concentrer sur ses perceuses. Il se sentait nerveux. Chaque fois qu'il regardait par la fenêtre de son bureau, il voyait d'autres hiboux voler rapidement en plein jour, ce qui était tout à fait anormal."
+        },
+        {
+            id: 9,
+            title: "10. The Collision",
+            text: "Il quitta le bureau à cinq heures, plus inquiet que jamais. Il était si préoccupé qu'il heurta quelqu'un devant la porte. 'Désolé', grogna-t-il, alors que le petit vieil homme trébuchait et manquait de tomber."
+        },
+        {
+            id: 10,
+            title: "11. The Muggle",
+            text: "L'homme ne semblait pas fâché. Il sourit et dit d'une voix perçante qui fit tourner les têtes : 'Ne vous excusez pas, mon cher monsieur ! Car Vous-Savez-Qui est parti ! Même les Moldus comme vous devraient célébrer ce jour heureux !'"
+        },
+        {
+            id: 11,
+            title: "12. The Wall",
+            text: "Mr Dursley rentra chez lui, très secoué. Le chat tigré était toujours là. Il était assis sur le mur du jardin. Il attendait certainement quelque chose ou quelqu'un. Mr Dursley essaya de le chasser, mais le chat ne bougea pas et le fixa sévèrement."
+        },
+        {
+            id: 12,
+            title: "13. Evening News",
+            text: "Le soir, les nouvelles à la télévision étaient étranges. 'Les ornithologues rapportent que les hiboux se sont comportés d'une manière très inhabituelle. Bien qu'ils chassent normalement la nuit, ils ont été vus volant dans tous les sens depuis le lever du soleil !'"
+        },
+        {
+            id: 13,
+            title: "14. Shooting Stars",
+            text: "Et la météo n'était pas normale non plus. Le présentateur météo a dit : 'Des averses d'étoiles filantes ont été vues dans le Kent, le Yorkshire et l'Écosse. Peut-être que les gens ont commencé à célébrer la nuit du feu de joie en avance ?'"
+        },
+        {
+            id: 14,
+            title: "15. Asking Petunia",
+            text: "Mr Dursley, assis dans son fauteuil, se figea. Des étoiles filantes ? Des hiboux ? Il devait demander. 'Petunia, chérie... tu n'as pas eu de nouvelles de ta sœur récemment ?' Comme prévu, elle fut choquée et en colère. Ils ne parlaient jamais d'elle."
+        },
+        {
+            id: 15,
+            title: "16. Nightfall",
+            text: "La nuit tomba sur Privet Drive. Les Dursley allèrent se coucher. Mr Dursley s'endormit d'un sommeil agité. Mais dehors, un homme apparut au coin de la rue si soudainement et silencieusement qu'on aurait dit qu'il avait surgi du sol."
+        },
+        {
+            id: 16,
+            title: "17. Dumbledore",
+            text: "Il était grand, mince et très vieux. Il avait des cheveux et une barbe argentés assez longs pour être coincés dans sa ceinture. Il portait une longue robe et une cape violette. Il s'appelait Albus Dumbledore."
+        },
+        {
+            id: 17,
+            title: "18. The Put-Outer",
+            text: "Il chercha dans sa poche et en sortit un éteignoir (un briquet en argent). Il l'actionna douze fois, et douze réverbères s'éteignirent, plongeant la rue dans l'obscurité totale. Seuls les yeux du chat brillaient encore."
+        },
+        {
+            id: 18,
+            title: "19. The Transformation",
+            text: "Il regarda le chat et sourit. 'Je me doutais bien que je vous trouverais ici, Professeur McGonagall', dit-il. Le chat disparut soudainement et une femme à l'air sévère, portant des lunettes carrées, apparut à sa place."
+        },
+        {
+            id: 19,
+            title: "20. The Boy Who Lived",
+            text: "'Est-ce vrai ?' demanda-t-elle d'une voix tremblante. 'Voldemort a vraiment disparu ? Et le garçon ?' 'Oui', dit Dumbledore. 'Hagrid amène Harry. Il vivra ici avec sa tante et son oncle. C'est le seul endroit où il sera en sécurité.'"
+        }
+    ];
+
+    // --- 2. STATE MANAGEMENT ---
+    let state = {
+        currentLessonId: 0,
+        vocab: []
+    };
+    
+    // Tracks if we are editing an existing word (index) or adding new (null)
+    let editingIndex = null;
+
+    // --- 3. INITIALIZATION ---
+    window.onload = function() {
+        loadState();
+        renderLessonList();
+        loadLesson(state.currentLessonId);
+        renderVocab();
+    };
+
+    // --- 4. CORE FUNCTIONS ---
+
+    function loadState() {
+        const saved = localStorage.getItem('hp_reader_data');
+        if (saved) {
+            state = JSON.parse(saved);
+        }
+    }
+
+    function saveState() {
+        localStorage.setItem('hp_reader_data', JSON.stringify(state));
+        updateStats();
+    }
+
+    function renderLessonList() {
+        const listContainer = document.getElementById('lesson-list');
+        listContainer.innerHTML = '';
+        lessons.forEach(lesson => {
+            const btn = document.createElement('button');
+            btn.className = `lesson-btn ${lesson.id === state.currentLessonId ? 'active' : ''}`;
+            btn.innerText = lesson.title;
+            btn.onclick = () => loadLesson(lesson.id);
+            listContainer.appendChild(btn);
+        });
+    }
+
+    function loadLesson(id) {
+        state.currentLessonId = id;
+        saveState();
+        renderLessonList();
+        const lesson = lessons.find(l => l.id === id);
+        document.getElementById('chapter-header').innerText = lesson.title;
+        document.getElementById('story-content').innerText = lesson.text;
+    }
+
+    function renderVocab() {
+        const container = document.getElementById('vocab-container');
+        container.innerHTML = '';
+        
+        // Show newest first
+        state.vocab.slice().reverse().forEach((item, index) => {
+            // Need to calculate original index because we reversed
+            const originalIndex = state.vocab.length - 1 - index;
+            
+            const card = document.createElement('div');
+            card.className = 'vocab-card';
+            
+            // Add click handler for editing
+            card.onclick = () => openEditMode(originalIndex);
+
+            card.innerHTML = `
+                <span class="vocab-fr">${item.word}</span>
+                <span class="vocab-en">${item.translation}</span>
+                <button class="delete-btn" onclick="event.stopPropagation(); deleteVocab(${originalIndex})">&times;</button>
+            `;
+            container.appendChild(card);
+        });
+        updateStats();
+    }
+
+    function deleteVocab(index) {
+        if(confirm("Delete this word?")) {
+            state.vocab.splice(index, 1);
+            saveState();
+            renderVocab();
+            closePopup(); // In case edit mode was open
+        }
+    }
+
+    function updateStats() {
+        document.getElementById('word-count').innerText = state.vocab.length;
+    }
+
+    function clearData() {
+        if(confirm("Reset all progress and vocabulary?")) {
+            localStorage.removeItem('hp_reader_data');
+            state = { currentLessonId: 0, vocab: [] };
+            location.reload();
+        }
+    }
+
+    // --- 5. INTERACTION LOGIC (Popup & Editing) ---
+    
+    const popup = document.getElementById('selection-popup');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const wordDisplay = document.getElementById('selection-word');
+    const input = document.getElementById('translation-input');
+    
+    let currentSelection = '';
+
+    // A. HANDLING TEXT SELECTION (ADD MODE)
+    document.getElementById('story-content').addEventListener('mouseup', function(e) {
+        const selection = window.getSelection();
+        const text = selection.toString().trim();
+
+        if (text.length > 0) {
+            editingIndex = null; // We are adding new
+            currentSelection = text;
+            wordDisplay.innerText = text;
+            
+            // Position Popup near mouse
+            const x = Math.min(e.pageX, window.innerWidth - 290); 
+            const y = e.pageY + 10;
+            
+            popup.style.position = 'absolute';
+            popup.style.left = `${x}px`;
+            popup.style.top = `${y}px`;
+            popup.style.display = 'block';
+            modalOverlay.style.display = 'none'; // No overlay for quick text selection
+            
+            input.value = '';
+            input.focus();
+        }
+    });
+
+    // B. HANDLING CARD CLICK (EDIT MODE)
+    function openEditMode(index) {
+        editingIndex = index;
+        const item = state.vocab[index];
+        currentSelection = item.word;
+        
+        wordDisplay.innerText = item.word + " (Editing)";
+        input.value = item.translation;
+        
+        // Center popup for editing
+        popup.style.position = 'fixed';
+        popup.style.left = '50%';
+        popup.style.top = '30%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.display = 'block';
+        modalOverlay.style.display = 'block'; // Show overlay
+        
+        input.focus();
+    }
+
+    // C. COMMON SAVE LOGIC
+    function saveVocab() {
+        const translation = input.value;
+        
+        if (!translation || !currentSelection) return;
+
+        if (editingIndex !== null) {
+            // Update Existing
+            state.vocab[editingIndex].translation = translation;
+        } else {
+            // Add New
+            state.vocab.push({
+                word: currentSelection,
+                translation: translation
+            });
+        }
+
+        saveState();
+        renderVocab();
+        closePopup();
+        window.getSelection().removeAllRanges();
+    }
+
+    function closePopup() {
+        popup.style.display = 'none';
+        modalOverlay.style.display = 'none';
+        popup.style.transform = 'none'; // Reset transform from fixed centering
+        editingIndex = null;
+    }
+
+    // Allow pressing 'Enter' to save
+    input.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            saveVocab();
+        }
+    });
+
+    // Close popup if clicking outside
+    document.addEventListener('mousedown', function(e) {
+        if (modalOverlay.style.display === 'none') {
+            if (!popup.contains(e.target) && !document.getElementById('story-content').contains(e.target)) {
+                closePopup();
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

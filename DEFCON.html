@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEFCON: The Strategic Logic of 1962</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 
+    Chosen Palette: "Declassified Intelligence"
+    - Background: #F9FAFB (Paper White/Gray)
+    - Primary Text: #1F2937 (Ink Black)
+    - Accent Blue: #2563EB (US Strategic Interest)
+    - Accent Red: #DC2626 (Soviet Threat/Danger)
+    - Accent Amber: #D97706 (Caution/Diplomacy)
+    - Neutral: #6B7280 (Secondary Info)
+    -->
+
+    <!-- 
+    Application Structure Plan:
+    1. The Briefing (Introduction): Sets the stage using the "Honors Vocabulary Primer" but interactively. Users match terms to understand the "rules of the game."
+    2. The War Room (Scenario Analysis): The core simulation. Users act as JFK using the "Payoff Matrix." They select options (Do Nothing, Strike, Blockade).
+       - Interaction: Buttons to select strategy.
+       - Visualization: Dynamic charts update to show "Game Theory Outcomes" (Bar Chart) and "Nuclear Risk Probability" (Donut Gauge). 
+       - Rationale: Allows students to SEE the mathematical disparity between "Winning" and "Surviving."
+    3. The Deconstruction (Analysis): Explains the "Blockade" decision using the "Golden Bridge" concept versus pure logic.
+    4. The Assessment (Synthesis): Interactive toggle between Pro-Stability and Anti-Stability arguments regarding MAD.
+    -->
+
+    <!-- 
+    Visualization & Content Choices:
+    1. Vocabulary Primer -> Goal: Organize -> Interactive Grid Cards -> Click to reveal definitions -> HTML/JS (No SVG).
+    2. Scenario Payoffs -> Goal: Compare -> Interactive Grouped Bar Chart (Chart.js) -> Updates based on user selection to show US vs USSR Utility -> Chart.js (No SVG).
+    3. Risk Gauge -> Goal: Inform -> Doughnut Chart (Chart.js) -> Visualizes "Game Over" probability -> Chart.js (No SVG).
+    4. MAD Stability -> Goal: Change/Relationships -> Line Chart (Chart.js) -> Theoretical curve of Stability vs Arsenal Size -> Chart.js (No SVG).
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Typewriter aesthetic for cold war feel */
+            background-color: #F3F4F6;
+        }
+        .sans-font {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        /* Chart Container Styling - Strict Adherence to Requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Default height */
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        /* Custom Card Styling */
+        .intel-card {
+            background-color: #FFFFFF;
+            border: 1px solid #D1D5DB;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            transition: all 0.2s;
+        }
+        .intel-card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .active-tab {
+            background-color: #1F2937;
+            color: #FFFFFF;
+        }
+        .inactive-tab {
+            background-color: #E5E7EB;
+            color: #374151;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-gray-900 text-white p-6 border-b-4 border-red-700">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-widest uppercase">Operation: Cold Logic</h1>
+            <p class="mt-2 text-gray-400 font-mono text-sm md:text-base">Top Secret Clearance // Honors History Section 4</p>
+            <p class="mt-1 text-xs text-red-500 uppercase font-bold">Subject: Game Theory & The Cuban Missile Crisis</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+
+        <!-- Section 1: Vocabulary Primer -->
+        <section id="briefing" class="mb-12">
+            <div class="mb-6 border-l-4 border-blue-600 pl-4">
+                <h2 class="text-2xl font-bold uppercase sans-font text-gray-900">Phase 1: The Vocabulary Primer</h2>
+                <p class="mt-2 text-gray-700 sans-font max-w-3xl">
+                    Before entering the War Room, you must understand the strategic language of the era. In 1962, mathematics and military strategy merged. 
+                    Below are the core concepts of Game Theory mapped to their Cold War historical equivalents. 
+                    <span class="font-bold">Click each card to reveal its definition and historical context.</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="vocab-grid">
+                <!-- Cards generated by JS -->
+            </div>
+        </section>
+
+        <!-- Section 2: The Scenario Analysis (The War Room) -->
+        <section id="war-room" class="mb-12">
+            <div class="mb-6 border-l-4 border-red-600 pl-4">
+                <h2 class="text-2xl font-bold uppercase sans-font text-gray-900">Phase 2: The Missiles of October</h2>
+                <p class="mt-2 text-gray-700 sans-font max-w-3xl">
+                    It is October 1962. Soviet missiles have been discovered in Cuba. You are the President. 
+                    Strategic Game Theory dictates your next move. Analyzing the "Payoff Matrix," select a course of action below 
+                    to see the projected Game Theory outcomes and global risk levels.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Controls -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="intel-card p-4">
+                        <h3 class="font-bold text-lg mb-3 border-b border-gray-300 pb-2 sans-font">Strategic Options</h3>
+                        <div class="space-y-2">
+                            <button onclick="updateScenario(0)" class="scenario-btn w-full text-left p-3 border rounded hover:bg-gray-100 transition-colors font-mono text-sm active-tab" id="btn-0">
+                                OPTION A: Do Nothing
+                            </button>
+                            <button onclick="updateScenario(1)" class="scenario-btn w-full text-left p-3 border rounded hover:bg-gray-100 transition-colors font-mono text-sm inactive-tab" id="btn-1">
+                                OPTION B: Surgical Air Strike
+                            </button>
+                            <button onclick="updateScenario(2)" class="scenario-btn w-full text-left p-3 border rounded hover:bg-gray-100 transition-colors font-mono text-sm inactive-tab" id="btn-2">
+                                OPTION C: Naval Blockade
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="intel-card p-4 bg-yellow-50 border-yellow-200">
+                        <h3 class="font-bold text-sm text-yellow-800 uppercase mb-2 sans-font">Intelligence Report</h3>
+                        <p id="scenario-desc" class="text-sm text-gray-800 font-mono">
+                            Select an option to view the projected outcome...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Visualizations -->
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Payoff Bar Chart -->
+                    <div class="flex flex-col">
+                        <h4 class="text-center font-bold text-sm text-gray-600 mb-2 uppercase sans-font">Projected Strategic Utility</h4>
+                        <div class="intel-card p-2 flex-grow">
+                            <div class="chart-container">
+                                <canvas id="payoffChart"></canvas>
+                            </div>
+                        </div>
+                        <p class="text-xs text-center text-gray-500 mt-2 italic">Positive score = Strategic Gain. Negative = Loss/Destruction.</p>
+                    </div>
+
+                    <!-- Risk Gauge -->
+                    <div class="flex flex-col">
+                        <h4 class="text-center font-bold text-sm text-gray-600 mb-2 uppercase sans-font">Global Escalation Risk</h4>
+                        <div class="intel-card p-2 flex-grow flex items-center justify-center">
+                            <div class="chart-container" style="height: 250px;">
+                                <canvas id="riskChart"></canvas>
+                            </div>
+                        </div>
+                        <div id="risk-text" class="text-center font-bold text-red-700 mt-2 uppercase font-mono">
+                            --
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Analysis & Synthesis -->
+        <section id="analysis" class="mb-12">
+            <div class="mb-6 border-l-4 border-amber-500 pl-4">
+                <h2 class="text-2xl font-bold uppercase sans-font text-gray-900">Phase 3: Analysis & Synthesis</h2>
+                <p class="mt-2 text-gray-700 sans-font max-w-3xl">
+                    Why act against "pure logic"? In the Prisoner's Dilemma, striking first is rational. 
+                    However, in the Cold War, the existence of Mutually Assured Destruction (MAD) altered the calculus.
+                    Explore the concept of MAD as a stabilizer below.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- MAD Stability Chart -->
+                <div class="intel-card p-6">
+                    <h3 class="font-bold text-lg mb-4 sans-font">The Logic of M.A.D.</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        This theoretical model demonstrates why stockpiling weapons (Nash Equilibrium) paradoxically reduced the likelihood of direct conflict, creating the "Long Peace."
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="madChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Thesis Builder -->
+                <div class="intel-card p-6">
+                    <h3 class="font-bold text-lg mb-4 sans-font">Thesis Evaluation: Was MAD Stable?</h3>
+                    <p class="text-sm text-gray-600 mb-6">
+                        Historians debate whether MAD was a stabilizing force or a catalyst for global violence via proxy wars. 
+                        Toggle the perspective below to analyze the opposing viewpoints for your thesis statement.
+                    </p>
+
+                    <div class="flex space-x-2 mb-4">
+                        <button onclick="toggleThesis('pro')" id="btn-pro" class="px-4 py-2 text-sm font-bold border rounded bg-gray-800 text-white hover:bg-gray-700 w-1/2">
+                            Argue: PRO-STABILITY
+                        </button>
+                        <button onclick="toggleThesis('anti')" id="btn-anti" class="px-4 py-2 text-sm font-bold border rounded bg-white text-gray-800 hover:bg-gray-100 w-1/2">
+                            Argue: ANTI-STABILITY
+                        </button>
+                    </div>
+
+                    <div id="thesis-content" class="bg-gray-100 p-4 rounded border-l-4 border-gray-800 min-h-[120px]">
+                        <!-- Content injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white text-center p-8 mt-8">
+        <p class="font-mono text-sm text-gray-500">CLASSIFIED MATERIAL // FOR EDUCATIONAL USE ONLY</p>
+        <p class="text-xs text-gray-600 mt-2">Based on "The Cold War Calculus" Honors US History Module</p>
+    </footer>
+
+    <script>
+        // --- DATA & CONFIGURATION ---
+
+        // 1. Vocabulary Data
+        const vocabData = [
+            {
+                term: "The Defection Strategy",
+                historical: "First Strike Capability",
+                def: "The ability to launch a nuclear attack that destroys the enemy's ability to retaliate."
+            },
+            {
+                term: "The Retaliation Threat",
+                historical: "Second Strike Capability",
+                def: "The ability to survive a nuclear attack and launch a devastating counter-attack. Basis of stability."
+            },
+            {
+                term: "Nash Equilibrium",
+                historical: "Mutually Assured Destruction (MAD)",
+                def: "A situation where neither side can initiate a conflict without guaranteeing their own destruction."
+            },
+            {
+                term: "Escalation Ladder",
+                historical: "Brinkmanship",
+                def: "Pushing dangerous events to the verge of disaster to force the opponent to back down."
+            },
+            {
+                term: "Coordination Problem",
+                historical: "The Security Dilemma",
+                def: "Steps taken to increase one's security decrease the enemy's security, forcing a response."
+            }
+        ];
+
+        // 2. Scenario Data (The Cuban Missile Crisis Matrix)
+        const scenarioData = [
+            {
+                id: 0,
+                title: "Option A: Do Nothing",
+                desc: "You accept the presence of missiles. The US looks weak. Soviet strategic advantage increases dramatically.",
+                usScore: -5,
+                sovietScore: 5,
+                risk: 20, // Low immediate risk, high strategic loss
+                riskLabel: "Strategic Failure",
+                color: "#6B7280"
+            },
+            {
+                id: 1,
+                title: "Option B: Air Strike / Invasion",
+                desc: "You destroy the missile sites. Immediate military success (+5). However, Soviets likely retaliate in Berlin or Turkey (-10). High probability of Nuclear War.",
+                usScore: -10, // Net score after retaliation
+                sovietScore: -10, // MAD
+                risk: 95, // Critical
+                riskLabel: "CRITICAL: Nuclear War Likely",
+                color: "#DC2626"
+            },
+            {
+                id: 2,
+                title: "Option C: Naval Blockade",
+                desc: "You stop Soviet ships. This forces Khrushchev to make the next choice. It creates a 'Golden Bridge' for him to retreat without total humiliation.",
+                usScore: 3, // Balanced win
+                sovietScore: -2, // Loss, but survivable
+                risk: 60, // High, but manageable
+                riskLabel: "High Tension / Calculated Risk",
+                color: "#D97706"
+            }
+        ];
+
+        // 3. Thesis Data
+        const thesisData = {
+            pro: {
+                title: "Stability Through Fear",
+                text: "\"Because both sides possessed Second Strike Capability, the logic of game theory forced rational actors to avoid direct conflict. The fear of total annihilation made MAD a stabilizing force, preventing World War III.\""
+            },
+            anti: {
+                title: "The Proxy War Dilemma",
+                text: "\"While MAD prevented direct nuclear war, it created a Security Dilemma that fueled proxy wars in Vietnam and Korea. It simply shifted the destruction to third-party nations rather than creating true peace.\""
+            }
+        };
+
+        // --- INITIALIZATION ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initVocab();
+            initCharts();
+            updateScenario(0); // Default to option A
+            toggleThesis('pro');
+        });
+
+        // --- VOCABULARY LOGIC ---
+
+        function initVocab() {
+            const grid = document.getElementById('vocab-grid');
+            vocabData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'intel-card p-6 cursor-pointer flex flex-col justify-center items-center text-center h-40 relative group';
+                card.onclick = () => toggleCard(card, index);
+                
+                card.innerHTML = `
+                    <div class="front absolute inset-0 flex flex-col justify-center items-center p-4 bg-white transition-opacity duration-300">
+                        <h3 class="font-bold text-lg text-blue-800">${item.term}</h3>
+                        <p class="text-xs uppercase text-gray-500 mt-2 font-mono tracking-wide">Click to Decrypt</p>
+                    </div>
+                    <div class="back absolute inset-0 flex flex-col justify-center items-center p-4 bg-gray-800 text-white opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <h4 class="font-bold text-amber-400 text-sm mb-1">${item.historical}</h4>
+                        <p class="text-xs">${item.def}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleCard(card, index) {
+            const front = card.querySelector('.front');
+            const back = card.querySelector('.back');
+            
+            if (front.style.opacity === '0') {
+                front.style.opacity = '1';
+                back.style.opacity = '0';
+            } else {
+                front.style.opacity = '0';
+                back.style.opacity = '1';
+            }
+        }
+
+        // --- CHART LOGIC ---
+
+        let payoffChart, riskChart, madChart;
+
+        function initCharts() {
+            // 1. Payoff Chart (Bar)
+            const ctxPayoff = document.getElementById('payoffChart').getContext('2d');
+            payoffChart = new Chart(ctxPayoff, {
+                type: 'bar',
+                data: {
+                    labels: ['US Utility', 'Soviet Utility'],
+                    datasets: [{
+                        label: 'Strategic Score',
+                        data: [0, 0],
+                        backgroundColor: ['#2563EB', '#DC2626']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: (tooltipItems) => {
+                                    // Label wrapping requirement
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) return label.join(' ');
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: -15,
+                            max: 15,
+                            grid: { color: '#E5E7EB' },
+                            title: { display: true, text: 'Utility Score' }
+                        }
+                    }
+                }
+            });
+
+            // 2. Risk Chart (Doughnut Gauge)
+            const ctxRisk = document.getElementById('riskChart').getContext('2d');
+            riskChart = new Chart(ctxRisk, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Risk', 'Safety'],
+                    datasets: [{
+                        data: [0, 100],
+                        backgroundColor: ['#DC2626', '#E5E7EB'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    rotation: -90,
+                    circumference: 180,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+
+            // 3. MAD Stability Chart (Line - Static Concept)
+            const ctxMad = document.getElementById('madChart').getContext('2d');
+            madChart = new Chart(ctxMad, {
+                type: 'line',
+                data: {
+                    labels: ['Low Arsenal', 'Medium Arsenal', 'High Arsenal (MAD)'],
+                    datasets: [
+                        {
+                            label: 'Likelihood of Direct Conflict',
+                            data: [80, 50, 10],
+                            borderColor: '#2563EB',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                title: (tooltipItems) => {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) return label.join(' ');
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: 'Probability of War (%)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        function updateScenario(id) {
+            const data = scenarioData[id];
+
+            // Update UI Buttons
+            document.querySelectorAll('.scenario-btn').forEach((btn, idx) => {
+                if(idx === id) {
+                    btn.classList.remove('inactive-tab');
+                    btn.classList.add('active-tab');
+                } else {
+                    btn.classList.add('inactive-tab');
+                    btn.classList.remove('active-tab');
+                }
+            });
+
+            // Update Text
+            document.getElementById('scenario-desc').textContent = data.desc;
+
+            // Update Payoff Chart
+            payoffChart.data.datasets[0].data = [data.usScore, data.sovietScore];
+            payoffChart.update();
+
+            // Update Risk Chart
+            riskChart.data.datasets[0].data = [data.risk, 100 - data.risk];
+            riskChart.update();
+
+            // Update Risk Label
+            const riskLabel = document.getElementById('risk-text');
+            riskLabel.textContent = data.riskLabel;
+            riskLabel.style.color = data.color;
+        }
+
+        function toggleThesis(type) {
+            const content = document.getElementById('thesis-content');
+            const data = thesisData[type];
+            const btnPro = document.getElementById('btn-pro');
+            const btnAnti = document.getElementById('btn-anti');
+
+            content.innerHTML = `
+                <h4 class="font-bold text-gray-900 mb-2">${data.title}</h4>
+                <p class="font-mono text-sm text-gray-700 italic">${data.text}</p>
+            `;
+
+            if (type === 'pro') {
+                btnPro.classList.replace('bg-white', 'bg-gray-800');
+                btnPro.classList.replace('text-gray-800', 'text-white');
+                btnAnti.classList.replace('bg-gray-800', 'bg-white');
+                btnAnti.classList.replace('text-white', 'text-gray-800');
+            } else {
+                btnAnti.classList.replace('bg-white', 'bg-gray-800');
+                btnAnti.classList.replace('text-gray-800', 'text-white');
+                btnPro.classList.replace('bg-gray-800', 'bg-white');
+                btnPro.classList.replace('text-white', 'text-gray-800');
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QG: Opération C1 - Phase Fondation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 
+    Chosen Palette: "Tactical Clarity"
+    - Background: #F8FAFC (Slate 50)
+    - Primary: #0F172A (Slate 900 - Strong Text)
+    - Accent Blue: #3B82F6 (Focus/Active)
+    - Accent Green: #10B981 (Completion/Success)
+    - Accent Purple: #8B5CF6 (Science/Intel)
+    - Neutral: #64748B (Slate 500)
+    -->
+
+    <!-- 
+    Application Structure Plan:
+    1. The Mission Brief (Header): High-level summary of Phase 1 goals (B1 Solidification).
+    2. The Daily Protocol (Interactive Task List): The core of the app. 
+       - Users select a module (Vocab, Input, Grammar, AI, Science).
+       - Interaction: Clicking a module updates the "Tactical View" and starts a focus timer.
+    3. Tactical View (Detail Panel): Displays the specific instructions for the selected module.
+       - **NEW FEATURE:** The Vocabulary Module now loads an interactive Flashcard Interface (20 words/day).
+       - Includes a functional countdown timer to enforce the "3-4 hours" discipline.
+    4. Situation Report (Analytics): Visualizes the time split (Donut) and simulated weekly progress (Bar) to keep motivation high.
+    -->
+
+    <!-- 
+    Visualization & Content Choices:
+    1. Time Allocation -> Goal: Inform -> Doughnut Chart (Chart.js) -> Visualizes the breakdown of the 3.5h daily commitment -> Chart.js (No SVG).
+    2. Weekly Momentum -> Goal: Change -> Bar Chart (Chart.js) -> Shows simulated consistency/streaks -> Chart.js (No SVG).
+    3. Task Progress -> Goal: Inform -> HTML/CSS Progress Bar -> Updates via JS when tasks are checked off -> Standard HTML (No SVG).
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            background-color: #F8FAFC;
+            color: #0F172A;
+        }
+        
+        /* Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+
+        .module-card {
+            transition: all 0.2s ease-in-out;
+            border-left: 4px solid transparent;
+        }
+        .module-card:hover {
+            transform: translateX(4px);
+            background-color: #F1F5F9;
+        }
+        .module-card.active {
+            background-color: #EFF6FF;
+            border-left-color: #3B82F6;
+        }
+        .btn-primary {
+            background-color: #0F172A;
+            color: white;
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #334155;
+        }
+        
+        /* Flashcard Styling */
+        .flashcard {
+            perspective: 1000px;
+            height: 200px;
+            cursor: pointer;
+        }
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            border: 1px solid #E2E8F0;
+            padding: 1.5rem;
+        }
+        .flashcard-front {
+            background-color: #FFFFFF;
+            color: #0F172A;
+        }
+        .flashcard-back {
+            background-color: #EFF6FF;
+            color: #1E293B;
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-tight uppercase text-slate-800">Opération C1 <span class="text-blue-600 text-sm font-mono align-middle ml-2">PHASE 1: FOUNDATION</span></h1>
+                <p class="text-xs text-slate-500 font-mono mt-1">Current Status: A2 -> Target: Solidify B1</p>
+            </div>
+            <div class="text-right hidden md:block">
+                <div class="text-sm font-bold text-slate-700">Daily Target</div>
+                <div class="font-mono text-xs text-slate-500">3h 45m Total Engagement</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        
+        <!-- Introduction -->
+        <section class="mb-8">
+            <p class="text-slate-600 max-w-3xl text-sm md:text-base leading-relaxed">
+                Welcome to the Foundation Phase. Your mission for Weeks 1-8 is to stop translating in your head and master the logic of Past/Future tenses. 
+                This dashboard breaks your daily <strong>"War Time"</strong> effort into tactical modules. Select a module below to begin.
+            </p>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- LEFT COL: The Daily Protocol (Menu) -->
+            <div class="lg:col-span-4 space-y-4">
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-4">
+                    <h2 class="text-sm font-bold uppercase text-slate-400 mb-4 tracking-wider">Daily Protocol</h2>
+                    
+                    <div class="space-y-2" id="module-list">
+                        <!-- Generated by JS -->
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-500 uppercase">Mission Completion</span>
+                            <span class="text-xs font-mono font-bold text-blue-600" id="progress-text">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2.5">
+                            <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%" id="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Science Hack Callout -->
+                <div class="bg-purple-50 rounded-lg border border-purple-100 p-4">
+                    <h3 class="text-purple-800 font-bold text-sm mb-1">🧪 The Science Hack</h3>
+                    <p class="text-xs text-purple-600 mb-2">Contextual learning accelerator active.</p>
+                    <div class="text-xs font-mono bg-white p-2 rounded border border-purple-100 text-slate-600">
+                        Target: "C'est Pas Sorcier"<br>
+                        Host: Jamy<br>
+                        Method: Physical Models
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIDDLE COL: Tactical View (Active Task) -->
+            <div class="lg:col-span-5">
+                <div class="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden h-full flex flex-col">
+                    <!-- Active Header -->
+                    <div class="bg-slate-900 text-white p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="inline-block px-2 py-1 bg-blue-600 text-white text-[10px] font-bold uppercase rounded mb-2 tracking-wider" id="active-tag">LOGISTICS</span>
+                                <h2 class="text-2xl font-bold" id="active-title">Select a Module</h2>
+                            </div>
+                            <div class="text-4xl font-mono font-light tracking-tighter opacity-90" id="timer-display">00:00</div>
+                        </div>
+                    </div>
+
+                    <!-- Active Body -->
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div id="module-content-area">
+                            <p class="text-slate-600 mb-6 leading-relaxed" id="active-desc">
+                                Review the mission parameters on the left to begin your daily regimen.
+                            </p>
+                            
+                            <div class="bg-slate-50 rounded border border-slate-100 p-4 mb-6" id="steps-container">
+                                <h4 class="text-xs font-bold uppercase text-slate-400 mb-2">Directives</h4>
+                                <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside" id="active-steps">
+                                    <li>Select a task.</li>
+                                    <li>Start the timer.</li>
+                                    <li>Execute without distraction.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <button id="btn-timer" onclick="toggleTimer()" class="btn-primary py-3 px-4 rounded font-bold text-sm shadow-lg hover:shadow-xl disabled:opacity-50" disabled>
+                                START TIMER
+                            </button>
+                            <button id="btn-complete" onclick="completeTask()" class="bg-white border border-slate-300 text-slate-600 py-3 px-4 rounded font-bold text-sm hover:bg-slate-50 disabled:opacity-50" disabled>
+                                MARK COMPLETE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COL: Situation Report (Analytics) -->
+            <div class="lg:col-span-3 space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-4">
+                    <h3 class="text-xs font-bold uppercase text-slate-400 mb-4 text-center">Time Allocation Strategy</h3>
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-400 mt-2 italic">Total: ~225 Minutes</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-4">
+                    <h3 class="text-xs font-bold uppercase text-slate-400 mb-4 text-center">Momentum (Weekly)</h3>
+                    <div class="chart-container" style="height: 150px;">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // --- DATA CONFIGURATION ---
+        
+        // Vocabulary Bank (20 Words for Day 1 - B1/C1 Focus)
+        const vocabDeck = [
+            { fr: "L'aboutissement (m)", en: "Outcome / Result", ex: "C'est l'aboutissement de deux ans de travail." },
+            { fr: "Cependant", en: "However", ex: "Il est riche, cependant il n'est pas heureux." },
+            { fr: "En revanche", en: "On the other hand", ex: "Je n'aime pas le thé, en revanche j'adore le café." },
+            { fr: "Désormais", en: "From now on", ex: "Désormais, nous travaillerons ensemble." },
+            { fr: "Le boulot", en: "Job / Work (Slang)", ex: "J'ai beaucoup de boulot ce soir." },
+            { fr: "Se débrouiller", en: "To manage / To get by", ex: "Il se débrouille bien en anglais." },
+            { fr: "Avoir hâte de", en: "To look forward to", ex: "J'ai hâte de te voir." },
+            { fr: "Être au courant", en: "To be informed / aware", ex: "Tu es au courant de la nouvelle ?" },
+            { fr: "Ça marche", en: "That works / Okay", ex: "On se voit à 20h ? Ça marche." },
+            { fr: "Le truc", en: "The thing (Slang)", ex: "C'est quoi ce truc ?" },
+            { fr: "À peine", en: "Barely / Hardly", ex: "Il a à peine 18 ans." },
+            { fr: "Faire semblant", en: "To pretend", ex: "Il fait semblant de dormir." },
+            { fr: "Au cas où", en: "Just in case", ex: "Prends un parapluie au cas où." },
+            { fr: "Valoir le coup", en: "To be worth it", ex: "Ça vaut le coup d'essayer." },
+            { fr: "S'en vouloir", en: "To blame oneself", ex: "Je m'en veux d'avoir oublié." },
+            { fr: "Néanmoins", en: "Nevertheless", ex: "C'est difficile, néanmoins il faut continuer." },
+            { fr: "Pourtant", en: "Yet / However", ex: "Il a étudié, pourtant il a échoué." },
+            { fr: "Lorsque", en: "When (Formal)", ex: "Lorsque je suis arrivé, il était parti." },
+            { fr: "Tandis que", en: "Whereas / While", ex: "J'aime le bleu tandis qu'il préfère le rouge." },
+            { fr: "Ailleurs", en: "Elsewhere", ex: "Je voudrais être ailleurs." }
+        ];
+
+        const modules = [
+            {
+                id: 'vocab',
+                title: 'Vocabulary Logistics',
+                tag: 'FOUNDATION',
+                duration: 30, // minutes
+                desc: 'Expand tactical vocabulary using the Integrated Flashcard System below. Review all 20 words to complete the mission.',
+                steps: [], // Replaced by Flashcard UI
+                completed: false,
+                hasFlashcards: true
+            },
+            {
+                id: 'input',
+                title: 'Massive Input',
+                tag: 'IMMERSION',
+                duration: 60, // minutes
+                desc: 'Listen to "InnerFrench". Hugo speaks slowly but uses real vocabulary. Do not use English subtitles.',
+                steps: [
+                    'Select an episode you haven\'t heard.',
+                    'Listen actively (no multitasking).',
+                    'Use French subtitles ONLY if desperate.',
+                    'Note down 3 recurring words to add to Anki later.'
+                ],
+                completed: false
+            },
+            {
+                id: 'grammar',
+                title: 'Grammar Drills',
+                tag: 'MECHANICS',
+                duration: 30, // minutes
+                desc: 'Focus entirely on the mechanics of Past and Future tenses. Stop translating in your head.',
+                steps: [
+                    'Topic: Passé Composé vs. Imparfait.',
+                    'Topic: Futur Simple.',
+                    'Do 15 minutes of written exercises.',
+                    'Do 15 minutes of conjugation drills.'
+                ],
+                completed: false
+            },
+            {
+                id: 'output',
+                title: 'AI Field Simulation',
+                tag: 'OUTPUT',
+                duration: 15, // minutes
+                desc: 'Use the "Level 2: The Explorer" prompt. Roleplay a survival scenario (ordering food, buying tickets).',
+                steps: [
+                    'Paste the "Explorer" prompt into AI.',
+                    'Roleplay: Ordering at a busy café.',
+                    'Focus on politeness (Je voudrais...).',
+                    'Log your errors in a notebook.'
+                ],
+                completed: false
+            },
+            {
+                id: 'science',
+                title: 'R&D: C\'est Pas Sorcier',
+                tag: 'SCIENCE HACK',
+                duration: 20, // minutes (approx 1 ep)
+                desc: 'Watch one episode of "C\'est Pas Sorcier". Use the physical models to understand context.',
+                steps: [
+                    'Choose a topic (Physics/Bio).',
+                    'Watch Jamy explain the model.',
+                    'Pay attention to technical nouns.',
+                    'Enjoy the 90s truck aesthetic.'
+                ],
+                completed: false
+            }
+        ];
+
+        let activeModuleIndex = null;
+        let timerInterval = null;
+        let timeLeft = 0;
+        let isTimerRunning = false;
+        
+        // Flashcard State
+        let currentCardIndex = 0;
+        let cardsReviewed = 0;
+
+        // --- INITIALIZATION ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderModuleList();
+            initCharts();
+        });
+
+        // --- CORE LOGIC ---
+
+        function renderModuleList() {
+            const list = document.getElementById('module-list');
+            list.innerHTML = '';
+
+            modules.forEach((mod, index) => {
+                const item = document.createElement('div');
+                item.className = `module-card p-3 rounded cursor-pointer flex justify-between items-center ${activeModuleIndex === index ? 'active' : ''}`;
+                item.onclick = () => selectModule(index);
+
+                const statusIcon = mod.completed ? '✅' : '⬜';
+                
+                item.innerHTML = `
+                    <div>
+                        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">${mod.tag}</div>
+                        <div class="font-bold text-slate-800">${mod.title}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs font-mono text-slate-400">${mod.duration}m</div>
+                        <div class="text-lg mt-1">${statusIcon}</div>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+            
+            updateProgressBar();
+        }
+
+        function selectModule(index) {
+            activeModuleIndex = index;
+            const mod = modules[index];
+            
+            // Update List UI
+            renderModuleList();
+
+            // Update Active View
+            document.getElementById('active-tag').textContent = mod.tag;
+            document.getElementById('active-title').textContent = mod.title;
+            document.getElementById('active-desc').textContent = mod.desc;
+            
+            const contentArea = document.getElementById('module-content-area');
+            
+            // Logic: Flashcards vs Standard Steps
+            if (mod.hasFlashcards) {
+                // Render Flashcard UI
+                currentCardIndex = 0;
+                cardsReviewed = 0;
+                contentArea.innerHTML = `
+                    <p class="text-slate-600 mb-4 leading-relaxed" id="active-desc">${mod.desc}</p>
+                    <div class="bg-slate-50 rounded border border-slate-100 p-6 flex flex-col items-center justify-center min-h-[300px]">
+                        <div class="w-full flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-slate-400">DECK PROGRESS</span>
+                            <span class="text-xs font-bold text-blue-600" id="card-counter">1 / ${vocabDeck.length}</span>
+                        </div>
+                        
+                        <div class="flashcard w-full max-w-sm mb-6" onclick="this.classList.toggle('flipped')">
+                            <div class="flashcard-inner">
+                                <div class="flashcard-front">
+                                    <h3 class="text-2xl font-bold mb-2" id="card-front">...</h3>
+                                    <p class="text-xs text-slate-400 uppercase mt-4">(Click to Reveal)</p>
+                                </div>
+                                <div class="flashcard-back">
+                                    <h3 class="text-xl font-bold mb-2" id="card-back">...</h3>
+                                    <p class="text-sm text-slate-500 italic text-center px-4" id="card-ex">...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 w-full max-w-sm">
+                            <button onclick="nextCard(false)" class="py-2 px-4 bg-red-100 text-red-700 font-bold rounded hover:bg-red-200 transition">Review Again</button>
+                            <button onclick="nextCard(true)" class="py-2 px-4 bg-green-100 text-green-700 font-bold rounded hover:bg-green-200 transition">Got It</button>
+                        </div>
+                    </div>
+                `;
+                loadCard(0);
+            } else {
+                // Render Standard Steps
+                contentArea.innerHTML = `
+                    <p class="text-slate-600 mb-6 leading-relaxed" id="active-desc">${mod.desc}</p>
+                    <div class="bg-slate-50 rounded border border-slate-100 p-4 mb-6">
+                        <h4 class="text-xs font-bold uppercase text-slate-400 mb-2">Directives</h4>
+                        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+                            ${mod.steps.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Reset/Set Timer
+            stopTimer();
+            timeLeft = mod.duration * 60;
+            updateTimerDisplay();
+            
+            // Enable Buttons
+            const timerBtn = document.getElementById('btn-timer');
+            const completeBtn = document.getElementById('btn-complete');
+            
+            timerBtn.disabled = false;
+            timerBtn.textContent = 'START TIMER';
+            timerBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+            timerBtn.classList.add('bg-slate-900');
+            
+            completeBtn.disabled = false;
+            completeBtn.textContent = mod.completed ? 'COMPLETED' : 'MARK COMPLETE';
+        }
+        
+        // --- FLASHCARD LOGIC ---
+        
+        function loadCard(idx) {
+            if (idx >= vocabDeck.length) {
+                // Deck Complete
+                document.getElementById('module-content-area').innerHTML = `
+                     <div class="bg-green-50 rounded border border-green-100 p-8 flex flex-col items-center justify-center min-h-[300px] text-center">
+                        <div class="text-4xl mb-4">🎉</div>
+                        <h3 class="text-xl font-bold text-green-800 mb-2">Deck Complete!</h3>
+                        <p class="text-green-600 mb-6">You have reviewed all 20 words for today.</p>
+                        <button onclick="completeTask()" class="bg-green-600 text-white font-bold py-2 px-6 rounded hover:bg-green-700">Mark Module Complete</button>
+                    </div>
+                `;
+                // Auto complete logic can go here if desired
+                return;
+            }
+            
+            const card = vocabDeck[idx];
+            document.getElementById('card-front').textContent = card.fr;
+            document.getElementById('card-back').textContent = card.en;
+            document.getElementById('card-ex').textContent = `"${card.ex}"`;
+            document.getElementById('card-counter').textContent = `${idx + 1} / ${vocabDeck.length}`;
+            
+            // Reset flip state logic if needed (requires DOM query for specific element state reset)
+            const flashcardEl = document.querySelector('.flashcard');
+            if(flashcardEl) flashcardEl.classList.remove('flipped');
+        }
+
+        function nextCard(success) {
+            // In a real app, 'success' false would requeue the card. 
+            // Here we just move forward for the "20 words/day" simulation.
+            currentCardIndex++;
+            loadCard(currentCardIndex);
+        }
+
+        // --- TIMER LOGIC ---
+
+        function toggleTimer() {
+            if (isTimerRunning) {
+                stopTimer();
+            } else {
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            if (timeLeft <= 0) return;
+            
+            isTimerRunning = true;
+            const btn = document.getElementById('btn-timer');
+            btn.textContent = 'PAUSE TIMER';
+            btn.classList.remove('bg-slate-900');
+            btn.classList.add('bg-red-600', 'hover:bg-red-700'); // Turn red for active state
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    stopTimer();
+                    alert("Module Duration Complete. Well done.");
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            isTimerRunning = false;
+            clearInterval(timerInterval);
+            const btn = document.getElementById('btn-timer');
+            if(btn) {
+                btn.textContent = 'RESUME TIMER';
+                btn.classList.add('bg-slate-900');
+                btn.classList.remove('bg-red-600', 'hover:bg-red-700');
+            }
+        }
+
+        function updateTimerDisplay() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            document.getElementById('timer-display').textContent = 
+                `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function completeTask() {
+            if (activeModuleIndex === null) return;
+            
+            // Set to true
+            modules[activeModuleIndex].completed = true; 
+            renderModuleList();
+            
+            // Update button text immediately
+            const btn = document.getElementById('btn-complete');
+            if(btn) btn.textContent = 'COMPLETED';
+        }
+
+        function updateProgressBar() {
+            const completedCount = modules.filter(m => m.completed).length;
+            const percent = Math.round((completedCount / modules.length) * 100);
+            
+            document.getElementById('progress-text').textContent = `${percent}%`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+        }
+
+        // --- CHARTS ---
+
+        function initCharts() {
+            // Allocation Chart (Donut)
+            const ctxAlloc = document.getElementById('allocationChart');
+            new Chart(ctxAlloc, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Vocab (30m)', 'Input (60m)', 'Grammar (30m)', 'AI Output (15m)', 'Science (20m)'],
+                    datasets: [{
+                        data: [30, 60, 30, 15, 20],
+                        backgroundColor: ['#94A3B8', '#3B82F6', '#0F172A', '#F59E0B', '#8B5CF6'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                             callbacks: {
+                                title: (tooltipItems) => {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) return label.join(' ');
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Progress Chart (Bar)
+            const ctxProg = document.getElementById('progressChart');
+            new Chart(ctxProg, {
+                type: 'bar',
+                data: {
+                    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+                    datasets: [{
+                        label: 'Completion %',
+                        data: [80, 100, 60, 100, 90, 0, 0], // Simulated data
+                        backgroundColor: '#CBD5E1',
+                        hoverBackgroundColor: '#3B82F6',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, display: false },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                             callbacks: {
+                                title: (tooltipItems) => {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) return label.join(' ');
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

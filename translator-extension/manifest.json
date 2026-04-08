@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Quick FR-EN Translator",
+  "version": "1.0",
+  "description": "Double click French text to translate it to English.",
+  "permissions": [],
+  "host_permissions": [
+    "https://api.mymemory.translated.net/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
