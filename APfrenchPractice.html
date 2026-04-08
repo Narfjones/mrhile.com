@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP French - Conversation Simulée & Réflexion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .timer-critical { color: #ef4444; animation: pulse 1s infinite; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-4 flex justify-center items-start pt-10">
+
+    <div id="app" class="max-w-6xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 mb-10">
+        <!-- Header -->
+        <div class="bg-indigo-800 p-6 text-white text-center">
+            <h1 class="text-2xl font-bold tracking-wide">AP® French Language and Culture</h1>
+            <p id="headerSubtitle" class="opacity-90 italic mt-1">Task 3: Conversation Simulée</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="p-8">
+            <!-- Progress Bar -->
+            <div id="progressContainer" class="w-full bg-slate-200 h-2 rounded-full mb-8 overflow-hidden">
+                <div id="progressBar" class="bg-indigo-500 h-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+
+            <!-- Setup View -->
+            <div id="setupView">
+                <div class="flex flex-col md:flex-row gap-6 mb-8">
+                    <div class="flex-1 bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-lg">
+                        <h3 class="font-bold text-indigo-900 mb-3 text-lg">Contexte de la conversation :</h3>
+                        <p id="contextText" class="text-indigo-800 leading-relaxed">Vous parlez avec un(e) camarade de classe. L'administration de votre lycée a accepté votre proposition d'organiser un festival de théâtre. Vous discutez de l'organisation de cet événement.</p>
+                    </div>
+                    <div class="flex-1 bg-slate-100 p-6 rounded-lg border border-slate-200">
+                        <h3 class="font-bold text-slate-800 mb-3 text-lg">Format de l'examen :</h3>
+                        <ul class="text-slate-700 space-y-2 text-sm">
+                            <li>⏱️ <strong>Durée :</strong> 5 échanges, 20 secondes par réponse.</li>
+                            <li>🗣️ <strong>Action :</strong> Parlez à voix haute dès le signal. Le navigateur transcrira vos réponses.</li>
+                            <li>📝 <strong>Évaluation :</strong> Après l'enregistrement, vous ferez une réflexion écrite à envoyer à votre professeur.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <button id="startBtn" onclick="startPractice()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition transform active:scale-95 shadow-lg flex items-center justify-center gap-2 text-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                    Autoriser le micro & Démarrer
+                </button>
+            </div>
+
+            <!-- Practice View -->
+            <div id="practiceView" class="hidden">
+                <div class="text-center mb-8">
+                    <span id="exchangeLabel" class="text-sm font-bold uppercase tracking-widest text-indigo-500 bg-indigo-50 py-1 px-3 rounded-full">Échange 1 / 5</span>
+                    <div id="statusIndicator" class="mt-4 text-sm font-bold text-slate-500 uppercase flex items-center justify-center gap-2">
+                        <span id="statusText">Écoute du camarade...</span>
+                    </div>
+                    <div id="timer" class="text-8xl font-black my-6 text-slate-200 tracking-tighter transition-colors">20</div>
+                </div>
+
+                <div class="relative bg-slate-50 p-8 rounded-2xl border border-slate-200 min-h-[160px] mb-8 shadow-inner">
+                    <p id="promptText" class="text-2xl text-slate-800 leading-relaxed font-medium blur-md transition-all duration-500 select-none text-center"></p>
+                    
+                    <div id="transcriptContainer" class="mt-8 p-4 bg-white border-2 border-indigo-100 rounded-xl shadow-sm hidden">
+                        <p class="text-xs text-indigo-600 uppercase font-bold mb-2 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                            Transcription en direct (Votre réponse) :
+                        </p>
+                        <p id="liveTranscript" class="text-slate-700 italic font-medium text-lg min-h-[1.5rem]">...</p>
+                    </div>
+                </div>
+
+                <button id="nextBtn" onclick="nextExchange()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 rounded-xl transition disabled:opacity-50 text-lg shadow-md" disabled>
+                    Passer à l'échange suivant
+                </button>
+            </div>
+
+            <!-- Results & Reflection View -->
+            <div id="resultsView" class="hidden">
+                <div class="text-center mb-10 border-b border-slate-200 pb-8">
+                    <h2 class="text-3xl font-black text-slate-800">Transcriptions & Réflexion</h2>
+                    <p class="text-slate-600 mt-3 text-lg">Analysez vos réponses selon la grille AP, rédigez votre réflexion, puis envoyez le tout à votre professeur.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Transcripts Area -->
+                    <div class="lg:col-span-7 space-y-6" id="finalResponses">
+                        <!-- Populated via JS -->
+                    </div>
+
+                    <!-- Reflection & Email Sidebar -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="bg-indigo-50 border border-indigo-100 p-6 rounded-2xl sticky top-6 shadow-sm">
+                            <h3 class="font-bold text-indigo-900 mb-4 uppercase tracking-wide text-sm border-b border-indigo-200 pb-2">Grille AP & Envoi</h3>
+                            
+                            <!-- Rubric Reference -->
+                            <div class="mb-6 text-sm text-slate-700 bg-white p-4 rounded-xl border border-indigo-100 shadow-inner h-48 overflow-y-auto">
+                                <p class="font-bold mb-2 text-indigo-800">Critères d'évaluation AP :</p>
+                                <ul class="space-y-3">
+                                    <li><strong class="text-green-600">5 - Fort:</strong> Maintient l'échange de manière très appropriée, élaboration fréquente, vocabulaire varié, très compréhensible.</li>
+                                    <li><strong class="text-blue-600">4 - Bon:</strong> Généralement appropriée, un peu d'élaboration, compréhensible malgré quelques erreurs. Vocabulaire approprié.</li>
+                                    <li><strong class="text-yellow-600">3 - Passable:</strong> Assez appropriée mais basique, compréhensible mais les erreurs forcent l'interprétation.</li>
+                                    <li><strong class="text-orange-600">2 - Faible:</strong> Minimalement appropriée, partiellement compréhensible, erreurs causent confusion, vocabulaire limité.</li>
+                                    <li><strong class="text-red-600">1 - Médiocre:</strong> Inappropriée au contexte ou à peine compréhensible, vocabulaire très pauvre.</li>
+                                </ul>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Votre Prénom et Nom :</label>
+                                    <input type="text" id="studentName" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" placeholder="Ex: Marie Dupont">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Email du Professeur :</label>
+                                    <input type="email" id="teacherEmail" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" placeholder="prof@ecole.edu">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Votre Réflexion (Points forts & aspects à améliorer) :</label>
+                                    <textarea id="selfReflection" rows="5" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition resize-y" placeholder="En lisant mes transcriptions et la grille AP, je remarque que..."></textarea>
+                                </div>
+                                <button onclick="sendEmail()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition shadow-md flex justify-center items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                    </svg>
+                                    Envoyer au professeur
+                                </button>
+                                <div class="flex gap-4">
+                                    <button onclick="retryCurrentConversation()" class="w-1/2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 rounded-xl transition text-sm">
+                                        Réessayer
+                                    </button>
+                                    <button onclick="loadNextConversationSet()" class="w-1/2 bg-green-100 hover:bg-green-200 text-green-700 font-bold py-3 rounded-xl transition text-sm flex items-center justify-center gap-1 border border-green-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                                        Nouveau Sujet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Multiple Conversation Sets
+        const conversationSets = [
+            {
+                title: "AP 2025: Festival de théâtre",
+                context: "Vous parlez avec un(e) camarade de classe. L'administration de votre lycée a accepté votre proposition d'organiser un festival de théâtre. Vous discutez de l'organisation de cet événement.",
+                prompts: [
+                    "Salut ! Tiens, je viens de recevoir une bonne nouvelle ! L'administration a accepté notre proposition d'organiser un festival de théâtre cette année. Qu'est-ce qu'on pourrait faire pour attirer le plus d'élèves possible au festival ?",
+                    "Le festival pourrait être en octobre ou en mai. Je pense que mai serait mieux parce qu'on pourrait peut-être faire du théâtre en plein air, dans le parc. Qu'est-ce que tu recommandes ?",
+                    "Tout à fait d'accord. On devrait commencer à préparer une liste des tâches à faire et demander des volontaires pour nous aider. Premièrement, on a besoin d'aide pour la publicité, mais quoi d'autre ?",
+                    "Parfait, c'est noté ! Et puis, euh, n'oublions pas que le festival, c'est pour collecter de l'argent pour le nouveau centre des arts du lycée. Peut-être qu'on pourrait vendre les billets à quinze dollars la place. Qu'est-ce que tu en penses ?",
+                    "Ah, je vois, merci beaucoup ! Je vais organiser une réunion avec d'autres élèves. À ton avis où est-ce qu'on pourrait se réunir, et à quelle heure ?"
+                ]
+            },
+            {
+                title: "Thème: L'écologie au lycée",
+                context: "Vous parlez avec votre ami(e) Thomas. Il veut créer un club écologique au lycée et vous demande votre aide pour l'organiser.",
+                prompts: [
+                    "Salut ! Je suis tellement content que tu sois là. Je veux créer un club écologique au lycée pour réduire nos déchets. Qu'est-ce que tu penses de cette idée ?",
+                    "Super ! Pour commencer, je pensais qu'on pourrait organiser une journée de nettoyage ou installer des poubelles de recyclage. Laquelle de ces deux idées préfères-tu et pourquoi ?",
+                    "Très bien. Il va falloir qu'on en parle au directeur. Quels arguments est-ce qu'on pourrait utiliser pour le convaincre de nous soutenir ?",
+                    "Bonne idée. On aura aussi besoin de volontaires. Comment est-ce qu'on pourrait faire la promotion du club auprès des autres élèves ?",
+                    "Parfait. On se voit demain à la bibliothèque pour préparer notre présentation ? À quelle heure est-ce que tu es libre ?"
+                ]
+            },
+            {
+                title: "Thème: La vie universitaire",
+                context: "Vous parlez avec votre amie Sophie des préparatifs pour l'université l'année prochaine. Vous discutez du logement et de la vie étudiante.",
+                prompts: [
+                    "Coucou ! Je commence à vraiment stresser pour l'université l'année prochaine. Tu as déjà commencé à regarder les différentes options de logement ?",
+                    "Moi, j'hésite entre louer un petit appartement seul ou aller en résidence universitaire. Qu'est-ce qui te semble être la meilleure option pour la première année ?",
+                    "C'est vrai, je n'y avais pas pensé. Et pour les repas, tu as l'intention de cuisiner toi-même ou de prendre un abonnement à la cantine de l'université ?",
+                    "D'accord. D'ailleurs, j'ai vu qu'il y a plein de clubs sur le campus. Est-ce qu'il y a des activités extrascolaires qui t'intéressent particulièrement ?",
+                    "Génial. On pourrait aller à la journée portes ouvertes ensemble le mois prochain pour voir ça de plus près. Quel week-end t'arrangerait le plus ?"
+                ]
+            }
+        ];
+
+        let activeSetIndex = 0;
+        let prompts = conversationSets[activeSetIndex].prompts;
+
+        let currentIdx = 0;
+        let timeLeft = 20;
+        let timerInterval;
+        let allResponses = [];
+        let recognition;
+        let currentTranscript = "";
+
+        // Initialize Speech Recognition
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'fr-FR';
+            recognition.continuous = true;
+            recognition.interimResults = true;
+
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        currentTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                document.getElementById('liveTranscript').innerText = currentTranscript + interimTranscript;
+            };
+        }
+
+        function getFrenchVoice() {
+            return new Promise((resolve) => {
+                let voices = window.speechSynthesis.getVoices();
+                
+                const selectBestVoice = () => {
+                    const premiumNames = ['Amelie', 'Thomas', 'Marie', 'Hortense', 'Google français', 'Pauline'];
+                    let bestVoice = null;
+                    
+                    for (let name of premiumNames) {
+                        bestVoice = voices.find(v => (v.lang.includes('fr') || v.lang.includes('FR')) && v.name.includes(name));
+                        if (bestVoice) break;
+                    }
+                    
+                    if (!bestVoice) {
+                        bestVoice = voices.find(v => v.lang === 'fr-FR') || voices.find(v => v.lang.startsWith('fr'));
+                    }
+                    
+                    resolve(bestVoice || voices[0]);
+                };
+
+                if (voices.length > 0) {
+                    selectBestVoice();
+                } else {
+                    window.speechSynthesis.onvoiceschanged = () => {
+                        voices = window.speechSynthesis.getVoices();
+                        selectBestVoice();
+                    };
+                }
+            });
+        }
+
+        async function speak(text, callback) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = await getFrenchVoice();
+            utterance.lang = 'fr-FR';
+            utterance.rate = 0.85; 
+            utterance.onend = callback;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        async function startPractice() {
+            try {
+                // Request mic access right when they click "Start"
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                stream.getTracks().forEach(track => track.stop()); // Immediately stop it, we just needed the permission
+            } catch (err) {
+                console.error("Microphone access denied:", err);
+                alert("Vous devez autoriser l'accès au microphone pour utiliser cette application.");
+                return; // Stop the process if they deny the mic
+            }
+
+            document.getElementById('setupView').classList.add('hidden');
+            document.getElementById('practiceView').classList.remove('hidden');
+            loadExchange();
+        }
+
+        function loadExchange() {
+            const promptEl = document.getElementById('promptText');
+            const statusText = document.getElementById('statusText');
+            const timerEl = document.getElementById('timer');
+            const transcriptBox = document.getElementById('transcriptContainer');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            // UI Reset
+            promptEl.innerText = prompts[currentIdx];
+            promptEl.classList.add('blur-md');
+            statusText.innerHTML = "🗣️ Écoute de l'enregistrement...";
+            timerEl.innerText = "20";
+            timerEl.classList.remove('text-indigo-600', 'timer-critical');
+            timerEl.classList.add('text-slate-200');
+            transcriptBox.classList.add('hidden');
+            currentTranscript = "";
+            document.getElementById('liveTranscript').innerText = "...";
+            nextBtn.disabled = true;
+
+            // Update Progress
+            document.getElementById('exchangeLabel').innerText = `Échange ${currentIdx + 1} / 5`;
+            document.getElementById('progressBar').style.width = `${((currentIdx) / 5) * 100}%`;
+
+            speak(prompts[currentIdx], () => {
+                startRespondingPhase();
+            });
+        }
+
+        function startRespondingPhase() {
+            const timerEl = document.getElementById('timer');
+            const statusText = document.getElementById('statusText');
+            const promptEl = document.getElementById('promptText');
+            const transcriptBox = document.getElementById('transcriptContainer');
+
+            promptEl.classList.remove('blur-md');
+            statusText.innerHTML = "<span class='text-red-500'>🎙️ ENREGISTREMENT... Parlez maintenant !</span>";
+            timerEl.classList.remove('text-slate-200');
+            timerEl.classList.add('text-indigo-600');
+            transcriptBox.classList.remove('hidden');
+            
+            if (recognition) {
+                try { recognition.start(); } catch(e) { console.log(e); }
+            }
+
+            timeLeft = 20;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = timeLeft;
+                
+                if (timeLeft <= 5) timerEl.classList.add('timer-critical');
+                
+                if (timeLeft <= 0) {
+                    stopRespondingPhase();
+                }
+            }, 1000);
+        }
+
+        function stopRespondingPhase() {
+            clearInterval(timerInterval);
+            if (recognition) {
+                try { recognition.stop(); } catch(e) {}
+            }
+            document.getElementById('statusText').innerText = "⏱️ Temps écoulé.";
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextExchange() {
+            allResponses.push({ prompt: prompts[currentIdx], answer: currentTranscript });
+
+            if (currentIdx < prompts.length - 1) {
+                currentIdx++;
+                loadExchange();
+            } else {
+                document.getElementById('progressBar').style.width = `100%`;
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('practiceView').classList.add('hidden');
+            document.getElementById('progressContainer').classList.add('hidden');
+            document.getElementById('resultsView').classList.remove('hidden');
+            
+            const container = document.getElementById('finalResponses');
+            container.innerHTML = allResponses.map((r, i) => `
+                <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="bg-slate-800 text-white w-7 h-7 flex items-center justify-center rounded-full font-bold text-sm">${i+1}</span>
+                        <h4 class="font-bold text-slate-800">Question AP</h4>
+                    </div>
+                    
+                    <p class="text-slate-600 italic mb-4 border-l-4 border-slate-300 pl-4 py-1 text-sm">"${r.prompt}"</p>
+                    
+                    <div class="bg-indigo-50 p-4 rounded-xl">
+                        <span class="block text-xs font-bold text-indigo-800 uppercase mb-2">Transcription de votre réponse :</span>
+                        <p class="text-slate-900 font-medium ${!r.answer ? 'text-red-500 italic' : ''}">
+                            ${r.answer || '[Aucune voix détectée pendant l\'enregistrement.]'}
+                        </p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function sendEmail() {
+            const studentName = document.getElementById('studentName').value.trim() || 'Étudiant non nommé';
+            const teacherEmail = document.getElementById('teacherEmail').value.trim();
+            const reflection = document.getElementById('selfReflection').value.trim();
+
+            if (!teacherEmail) {
+                alert("Veuillez entrer l'adresse email de votre professeur.");
+                return;
+            }
+            
+            if (!reflection) {
+                const proceed = confirm("Vous n'avez pas rédigé de réflexion. Voulez-vous quand même envoyer l'email ?");
+                if(!proceed) return;
+            }
+
+            // Construct Email Body
+            let body = `Bonjour,\n\nVoici ma pratique pour la Conversation Simulée AP (${conversationSets[activeSetIndex].title}).\n\n`;
+            body += `NOM DE L'ÉTUDIANT : ${studentName}\n\n`;
+            
+            body += `====================================\n`;
+            body += `RÉFLEXION PERSONNELLE (Grille AP)\n`;
+            body += `====================================\n`;
+            body += `${reflection || '[Aucune réflexion fournie]'}\n\n\n`;
+
+            body += `====================================\n`;
+            body += `TRANSCRIPTIONS DES RÉPONSES\n`;
+            body += `====================================\n\n`;
+            
+            allResponses.forEach((r, i) => {
+                body += `--- Échange ${i+1} ---\n`;
+                body += `Prompt AP: "${r.prompt}"\n`;
+                body += `Ma réponse transcrite: ${r.answer || '[Aucune voix détectée]'}\n\n`;
+            });
+
+            // Summary of rubric for teacher context
+            body += `====================================\n`;
+            body += `Rappel des Critères (1-5) :\n`;
+            body += `5: Approprié, élaboré, varié\n`;
+            body += `4: Bon, compréhensible, approprié\n`;
+            body += `3: Passable, basique, force parfois l'interprétation\n`;
+            body += `2: Faible, peu compréhensible\n`;
+            body += `1: Médiocre, inapproprié\n`;
+
+            const subject = encodeURIComponent(`Pratique AP French Conversation - ${studentName}`);
+            const encodedBody = encodeURIComponent(body);
+            
+            // Open default mail client
+            window.location.href = `mailto:${teacherEmail}?subject=${subject}&body=${encodedBody}`;
+        }
+
+        // --- NEW: Reset and Set Switching Logic ---
+
+        function loadNextConversationSet() {
+            activeSetIndex = (activeSetIndex + 1) % conversationSets.length;
+            resetUIForNewSet();
+        }
+
+        function retryCurrentConversation() {
+            resetUIForNewSet();
+        }
+
+        function resetUIForNewSet() {
+            prompts = conversationSets[activeSetIndex].prompts;
+            document.getElementById('headerSubtitle').innerText = "Task 3: Conversation - " + conversationSets[activeSetIndex].title;
+            document.getElementById('contextText').innerText = conversationSets[activeSetIndex].context;
+            
+            // Reset state variables
+            currentIdx = 0;
+            allResponses = [];
+            currentTranscript = "";
+            document.getElementById('selfReflection').value = ""; 
+            
+            // Revert UI to Setup View
+            document.getElementById('resultsView').classList.add('hidden');
+            document.getElementById('progressContainer').classList.remove('hidden');
+            document.getElementById('progressBar').style.width = `0%`;
+            document.getElementById('setupView').classList.remove('hidden');
+            
+            // Reset Audio test requirement
+            const startBtn = document.getElementById('startBtn');
+            startBtn.disabled = true;
+            startBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            const micStatus = document.getElementById('micStatus');
+            micStatus.innerHTML = '<span class="w-3 h-3 rounded-full bg-slate-400"></span> En attente du test...';
+            micStatus.classList.remove('text-green-600', 'text-red-600');
+            micStatus.classList.add('text-slate-500');
+        }
+
+        // Initialize UI with the first set on load
+        document.getElementById('headerSubtitle').innerText = "Task 3: Conversation - " + conversationSets[activeSetIndex].title;
+        document.getElementById('contextText').innerText = conversationSets[activeSetIndex].context;
+
+    </script>
+</body>
+</html>
