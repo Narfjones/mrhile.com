@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -435,4 +436,443 @@
     </script>
 
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics II: Electromagnetism & Optics</title>
+    
+    <!-- KaTeX for beautiful math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsEw0920o8oG5yD0tQ9eRWeeFpykP+0p2uFkQjpBvS5eH+wL2xU8c1fQ2S" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-HJOq3o/w2mB8kZl1aDxaG86H50bX//PZg3Bv0f/O/Hj18ZikZ1JgB4Bq4pOSk8nN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbOxyj0O18TbgG1sIfY5wXIf1w" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50; /* Dark slate */
+            --text-muted: #596a7a;
+            --border-color: #e1e8ed;
+            --accent-1: #2980b9; /* Professional Blue */
+            --accent-2: #c0392b; /* Academic Red */
+            --accent-3: #8e44ad; /* Purple */
+            --accent-4: #d35400; /* Burnt Orange */
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+        }
+        .header {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .header h1 {
+            color: var(--text-main);
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            letter-spacing: -0.02em;
+        }
+        .header p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .header strong {
+            color: var(--text-main);
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 2rem;
+            padding: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+        }
+        .unit-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .unit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .unit-1 { border-top: 4px solid var(--accent-1); }
+        .unit-2 { border-top: 4px solid var(--accent-2); }
+        .unit-3 { border-top: 4px solid var(--accent-3); }
+        .unit-4 { border-top: 4px solid var(--accent-4); }
+        
+        .unit-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .unit-header h2 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-main);
+            font-size: 1.4rem;
+        }
+        .focus-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        th {
+            text-align: left;
+            padding: 0.5rem;
+            color: #7f8c8d;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--border-color);
+        }
+        td {
+            padding: 0.85rem 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .week-col {
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+        .badges {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        .link-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #ffffff;
+            transition: opacity 0.2s;
+        }
+        .link-badge:hover {
+            opacity: 0.8;
+            color: #ffffff;
+        }
+        .hp-link { background-color: #6f42c1; }
+        .phet-link { background-color: #fd7e14; }
+        .os-link { background-color: #198754; }
+
+        .equation {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            margin-top: 0.5rem;
+            color: var(--text-main);
+            overflow-x: auto;
+        }
+        .equation strong {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Physics II: Electromagnetism & Optics</h1>
+        <p>Interactive Curriculum mapped to <strong>HyperPhysics (HP)</strong>, <strong>PhET Simulations (PhET)</strong>, and <strong>OpenStax (Text)</strong>.</p>
+    </div>
+
+    <div class="grid-container">
+        <!-- UNIT 1 -->
+        <div class="unit-card unit-1">
+            <div class="unit-header">
+                <h2>Unit 1: Electrostatics (Weeks 1-4)</h2>
+                <p class="focus-text">Focus: The physics of stationary charges and the fields they create.</p>
+            </div>
+            <table>
+                <tr>
+                    <th style="width: 8%;">Wk</th>
+                    <th style="width: 35%;">Topics</th>
+                    <th style="width: 32%;">Lab Focus</th>
+                    <th style="width: 25%;">Links</th>
+                </tr>
+                <tr>
+                    <td class="week-col">1</td>
+                    <td>Coulomb's Law, Charge Properties</td>
+                    <td>Electrostatic Interaction (Pith balls)</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/5-introduction" target="_blank" class="link-badge os-link">Text: Ch 5</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/elefor.html" target="_blank" class="link-badge hp-link">HP: Coulomb's Law</a>
+                            <a href="https://phet.colorado.edu/en/simulations/coulombs-law" target="_blank" class="link-badge phet-link">PhET: Coulomb</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">2</td>
+                    <td>Electric Fields (Point, Line, Ring)</td>
+                    <td>Electric Field Mapping</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/5-introduction" target="_blank" class="link-badge os-link">Text: Ch 5</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/elefie.html" target="_blank" class="link-badge hp-link">HP: E-Fields</a>
+                            <a href="https://phet.colorado.edu/en/simulations/charges-and-fields" target="_blank" class="link-badge phet-link">PhET: Charges & Fields</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">3</td>
+                    <td>Gauss's Law, Electric Flux</td>
+                    <td>Simulation Lab: Gaussian Surfaces</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/6-introduction" target="_blank" class="link-badge os-link">Text: Ch 6</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/gaulaw.html" target="_blank" class="link-badge hp-link">HP: Gauss's Law</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">4</td>
+                    <td>Electric Potential (Voltage), Work</td>
+                    <td>Oscilloscope Basics</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/7-introduction" target="_blank" class="link-badge os-link">Text: Ch 7</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/elepot.html" target="_blank" class="link-badge hp-link">HP: Potential</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="equation"><strong>Coulomb's Law</strong> \( F = k\frac{|q_1 q_2|}{r^2} \)</div>
+            <div class="equation"><strong>Gauss's Law</strong> \( \Phi_E = \frac{Q_{\text{encl}}}{\epsilon_0} \)</div>
+        </div>
+
+        <!-- UNIT 2 -->
+        <div class="unit-card unit-2">
+            <div class="unit-header">
+                <h2>Unit 2: Circuits & Capacitance (Weeks 5-7)</h2>
+                <p class="focus-text">Focus: Energy storage and the movement of charge through wires.</p>
+            </div>
+            <table>
+                <tr>
+                    <th style="width: 8%;">Wk</th>
+                    <th style="width: 35%;">Topics</th>
+                    <th style="width: 32%;">Lab Focus</th>
+                    <th style="width: 25%;">Links</th>
+                </tr>
+                <tr>
+                    <td class="week-col">5</td>
+                    <td>Capacitance, Dielectrics, Energy Density</td>
+                    <td>Capacitor Discharge (RC Time Constant)</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/8-introduction" target="_blank" class="link-badge os-link">Text: Ch 8</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/capac.html" target="_blank" class="link-badge hp-link">HP: Capacitance</a>
+                            <a href="https://phet.colorado.edu/en/simulations/capacitor-lab-basics" target="_blank" class="link-badge phet-link">PhET: Capacitor Lab</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">6</td>
+                    <td>Ohm's Law, Drift Velocity, Power</td>
+                    <td>DC Circuit Analysis (Breadboarding)</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/9-introduction" target="_blank" class="link-badge os-link">Text: Ch 9</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/ohmlaw.html" target="_blank" class="link-badge hp-link">HP: Ohm's Law</a>
+                            <a href="https://phet.colorado.edu/en/simulations/circuit-construction-kit-dc" target="_blank" class="link-badge phet-link">PhET: DC Circuits</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">7</td>
+                    <td>Kirchhoff's Rules, Complex RC Circuits</td>
+                    <td>Wheatstone Bridge Measurements</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/10-introduction" target="_blank" class="link-badge os-link">Text: Ch 10</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/dccirc.html" target="_blank" class="link-badge hp-link">HP: Kirchhoff's Rules</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="equation"><strong>Ohm's Law</strong> \( V = IR \)</div>
+        </div>
+
+        <!-- UNIT 3 -->
+        <div class="unit-card unit-3">
+            <div class="unit-header">
+                <h2>Unit 3: Magnetism & Induction (Weeks 8-11)</h2>
+                <p class="focus-text">Focus: Moving charges and the unification of Electricity and Magnetism.</p>
+            </div>
+            <table>
+                <tr>
+                    <th style="width: 8%;">Wk</th>
+                    <th style="width: 35%;">Topics</th>
+                    <th style="width: 32%;">Lab Focus</th>
+                    <th style="width: 25%;">Links</th>
+                </tr>
+                <tr>
+                    <td class="week-col">8</td>
+                    <td>Magnetic Fields (B), Lorentz Force</td>
+                    <td>Charge-to-Mass Ratio (e/m) of Electron</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/11-introduction" target="_blank" class="link-badge os-link">Text: Ch 11</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/magnetic/magfor.html" target="_blank" class="link-badge hp-link">HP: Magnetic Force</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">9</td>
+                    <td>Biot-Savart Law, Ampere's Law</td>
+                    <td>Magnetic Field inside a Solenoid</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/12-introduction" target="_blank" class="link-badge os-link">Text: Ch 12</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/magnetic/amplaw.html" target="_blank" class="link-badge hp-link">HP: Ampere's Law</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">10</td>
+                    <td>Faraday's Law, Lenz's Law</td>
+                    <td>Electromagnetic Generators</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/13-introduction" target="_blank" class="link-badge os-link">Text: Ch 13</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/farlaw.html" target="_blank" class="link-badge hp-link">HP: Faraday's Law</a>
+                            <a href="https://phet.colorado.edu/en/simulations/faradays-law" target="_blank" class="link-badge phet-link">PhET: Faraday</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">11</td>
+                    <td>Inductance (L), AC Circuits, RLC Resonance</td>
+                    <td>RLC Circuit Resonance</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/14-introduction" target="_blank" class="link-badge os-link">Text: Ch 14</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/accirc.html" target="_blank" class="link-badge hp-link">HP: AC Circuits</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="equation"><strong>Faraday's Law</strong> \( \mathcal{E} = -N\frac{\Delta\Phi_B}{\Delta t} \)</div>
+        </div>
+
+        <!-- UNIT 4 -->
+        <div class="unit-card unit-4">
+            <div class="unit-header">
+                <h2>Unit 4: Waves & Optics (Weeks 12-15)</h2>
+                <p class="focus-text">Focus: Light as an Electromagnetic Wave.</p>
+            </div>
+            <table>
+                <tr>
+                    <th style="width: 8%;">Wk</th>
+                    <th style="width: 35%;">Topics</th>
+                    <th style="width: 32%;">Lab Focus</th>
+                    <th style="width: 25%;">Links</th>
+                </tr>
+                <tr>
+                    <td class="week-col">12</td>
+                    <td>Maxwell's Equations, EM Waves, Speed of Light</td>
+                    <td>Measuring the Speed of Light (c)</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-2/pages/16-introduction" target="_blank" class="link-badge os-link">Text: Ch 16</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/maxeq.html" target="_blank" class="link-badge hp-link">HP: Maxwell's Eq.</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">13</td>
+                    <td>Geometric Optics: Snell's Law, Lenses, Mirrors</td>
+                    <td>Ray Tracing and Focal Lengths</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-3/pages/1-introduction" target="_blank" class="link-badge os-link">Text: Vol3 Ch1</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/geoopt/lenses.html" target="_blank" class="link-badge hp-link">HP: Lenses</a>
+                            <a href="https://phet.colorado.edu/en/simulations/geometric-optics" target="_blank" class="link-badge phet-link">PhET: Optics</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">14</td>
+                    <td>Wave Optics: Double-Slit, Diffraction, Polarization</td>
+                    <td>Laser Diffraction via Slits/Hair</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-3/pages/3-introduction" target="_blank" class="link-badge os-link">Text: Vol3 Ch3</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/phyopt/slits.html" target="_blank" class="link-badge hp-link">HP: Young's Slits</a>
+                            <a href="https://phet.colorado.edu/en/simulations/wave-interference" target="_blank" class="link-badge phet-link">PhET: Waves</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="week-col">15</td>
+                    <td>Intro to Modern Physics / Review</td>
+                    <td>Final Exam Review / Lab Practicals</td>
+                    <td>
+                        <div class="badges">
+                            <a href="https://openstax.org/books/university-physics-volume-3/pages/6-introduction" target="_blank" class="link-badge os-link">Text: Vol3 Ch6</a>
+                            <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/mod1.html" target="_blank" class="link-badge hp-link">HP: Modern Physics</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="equation"><strong>Snell's Law</strong> \( n_1 \sin(\theta_1) = n_2 \sin(\theta_2) \)</div>
+            <div class="equation"><strong>Thin Lens Equation</strong> \( \frac{1}{f} = \frac{1}{d_o} + \frac{1}{d_i} \)</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ]
+            });
+        });
+    </script>
+
+</body>
+>>>>>>> c612a968054f2fa7eb4c0c0c6bdddb1e2c11b63b
 </html>

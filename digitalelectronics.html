@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -389,3 +390,396 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Digital Electronics Curriculum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #3D405B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+            aspect-ratio: 1/1;
+        }
+        .unit-card.highlight {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(129, 178, 154, 0.7);
+        }
+        .accordion-button svg {
+            transition: transform 0.3s ease;
+        }
+        .accordion-button[aria-expanded="true"] svg {
+            transform: rotate(90deg);
+        }
+        .tab-button[aria-selected="true"] {
+            border-color: #81B29A;
+            color: #3D405B;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-sm shadow-md py-4 px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-center space-x-8 md:space-x-12">
+            <a href="index.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Home</a>
+            <a href="physics.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Physics</a>
+            <a href="cs.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Computer Science</a>
+            <a href="digitalelectronics.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Digital Electronics</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#3D405B] mb-2">Digital Electronics Curriculum</h1>
+            <p class="text-lg text-gray-600">An interactive guide to the semester.</p>
+        </header>
+
+        <main>
+            
+
+            <section id="timeline">
+                 <h2 class="text-2xl font-bold text-center mb-2 text-[#3D405B]">Semester Timeline</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">
+                    Follow the semester's progression through our interactive timeline. Each unit below outlines the core topics and hands-on activities students will engage in. Click on any unit to expand its details.
+                </p>
+                <div class="space-y-4 max-w-4xl mx-auto">
+                    
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-1">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">1</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Intro to Digital Electronics & Safety</h3>
+                                    <span class="text-sm text-gray-500">5 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Analog vs. Digital signals</li>
+                                <li>Basic electrical concepts (voltage, current, resistance)</li>
+                                <li>Introduction to breadboards and basic components</li>
+                                <li>Lab Safety Procedures and tool use</li>
+                                <li>Understanding circuit diagrams</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Safety quiz and contract</li>
+                                <li>Identifying components and using a multimeter</li>
+                                <li>Building simple LED circuits on a breadboard</li>
+                           </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-2">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">2</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Number Systems & Basic Logic</h3>
+                                    <span class="text-sm text-gray-500">6 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                               <li>Binary, Decimal, and Hexadecimal numbers</li>
+                               <li>Simple binary addition</li>
+                               <li>Basic logic: AND, OR, NOT operations</li>
+                               <li>Understanding truth tables</li>
+                               
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                               <li>Converting between number systems</li>
+                               <li>Creating truth tables for simple logic</li>
+                               <li>Exploring basic Boolean expressions</li>
+                           </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-3">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">3</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Logic Gates in Action</h3>
+                                    <span class="text-sm text-gray-500">6 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Basic logic gates: AND, OR, NOT, XOR, NAND, NOR</li>
+                                <li>Using universal gates (NAND and NOR)</li>
+                                <li>Identifying Integrated Circuits (ICs)</li>
+                                <li>Introduction to circuit simulation tools</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Building and testing basic logic gates on a breadboard</li>
+                                <li>Creating simple circuits with logic gates</li>
+                                <li>Simulating logic circuits to see how they work</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-4">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">4</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Building Basic Logic Circuits</h3>
+                                    <span class="text-sm text-gray-500">10 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Designing circuits from truth tables</li>
+                                
+                                <li>Comparators and Adders</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Designing a circuit for a 7-segment display</li>
+                                <li>Building and testing simple adder circuits</li>
+                                <li>Creating small combinational circuits for specific tasks</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-5">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#E07A5F] mr-4">5</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Hands-On Soldering Skills</h3>
+                                    <span class="text-sm text-gray-500">7 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Safety procedures for soldering</li>
+                                <li>Tools for soldering and desoldering</li>
+                                <li>Proper techniques for making good solder joints</li>
+                                <li>Identifying and fixing common soldering mistakes</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Practice soldering on special boards and kits</li>
+                                <li>Soldering basic components (resistors, LEDs)</li>
+                                <li>Learning to desolder components</li>
+                                <li>Mini-Project: Solder a simple blinking LED circuit onto a board</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-7">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">6</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Microcontrollers & Creative Projects</h3>
+                                    <span class="text-sm text-gray-500">17 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Introduction to microcontrollers like Arduino</li>
+                                <li>Basic programming (variables, if/else, loops)</li>
+                                <li>Controlling lights (LEDs) and reading buttons</li>
+                                <li>Using sensors to get information from the world</li>
+                                <li>Making lights dim and motors spin with PWM</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Making an LED blink ("Hello World" of electronics)</li>
+                                <li>Creating projects that respond to buttons</li>
+                                <li>Building simple projects with sensors (e.g., light sensor)</li>
+                                <li>Controlling a small motor or dimming an LED</li>
+                                <li>Developing a simple interactive project (e.g., traffic light, alarm)</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-8">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">7</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Breadboarding Projects</h3>
+                                    <span class="text-sm text-gray-500">10 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Project 1: Simple Logic Game (5 Days)</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>**Objective:** Build a basic interactive game using logic gates, buttons, and LEDs.</li>
+                                <li>**Example:** A "Quiz Buzzer" where the first button pressed lights an LED, or a "Decision Maker" that randomly lights one of two LEDs.</li>
+                                <li>**Skills Reinforced:** Logic gate operation, breadboarding, basic input/output.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Project 2: Basic Sensor Interface (5 Days)</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>**Objective:** Connect a simple analog sensor to control a digital output.</li>
+                                <li>**Example:** A light-activated LED (using a photoresistor) or a simple temperature indicator (using a thermistor and LEDs).</li>
+                                <li>**Skills Reinforced:** Understanding analog input, simple circuit design, basic component integration.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-9">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                             <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#E07A5F] mr-4">FP</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Final Project: Design Challenge</h3>
+                                    <span class="text-sm text-gray-500">10 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                            <div class="mb-4 border-b border-gray-200">
+                                <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500" data-target="tab-week1" aria-selected="true">Week 1: Planning</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="tab-week2" aria-selected="false">Week 2: Building</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="tab-ideas" aria-selected="false">Project Ideas</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="tab-assessment" aria-selected="false">Assessment</button>
+                                </nav>
+                            </div>
+                            <div class="tab-content" id="tab-week1">
+                                <h4 class="font-semibold mb-2">Objectives:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Brainstorm and define project scope</li>
+                                    <li>Research components and circuit designs</li>
+                                    <li>Develop a detailed project proposal</li>
+                                    <li>Begin building a breadboard prototype</li>
+                                </ul>
+                            </div>
+                            <div class="tab-content hidden" id="tab-week2">
+                                <h4 class="font-semibold mb-2">Objectives:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Complete final construction (soldering/enclosure)</li>
+                                    <li>Thoroughly test and refine the project</li>
+                                    <li>Prepare and deliver project presentation</li>
+                                    <li>Submit all project documentation</li>
+                                </ul>
+                            </div>
+                             <div class="tab-content hidden" id="tab-ideas">
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
+                                    <li class="flex items-center"><span class="text-green-500 mr-2">&#10003;</span>Automated lighting system</li>
+                                    <li class="flex items-center"><span class="text-green-500 mr-2">&#10003;</span>Simon Says Game</li>
+                                    <li class="flex items-center"><span class="text-green-500 mr-2">&#10003;</span>Simple line-following robot</li>
+                                    <li class="flex items-center"><span class="text-green-500 mr-2">&#10003;</span>Reaction Time Tester</li>
+                                    <li class="flex items-center"><span class="text-green-500 mr-2">&#10003;</span>Digital timer/counter</li>
+                                </ul>
+                            </div>
+                             <div class="tab-content hidden" id="tab-assessment">
+                                <ul class="list-none text-gray-700 space-y-1">
+                                    <li><span class="font-semibold">Functionality:</span> 40%</li>
+                                    <li><span class="font-semibold">Design & Engineering:</span> 25%</li>
+                                    <li><span class="font-semibold">Creativity & Innovation:</span> 15%</li>
+                                    <li><span class="font-semibold">Presentation & Documentation:</span> 20%</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const curriculumData = {
+                labels: [
+                    'Unit 1: Intro', 
+                    'Unit 2: Num Systems', 
+                    'Unit 3: Logic Gates', 
+                    'Unit 4: Combinational', 
+                    'Unit 5: Soldering', 
+                    'Unit 6: Microcontrollers', 
+                    'Unit 7: Breadboarding Projects', 
+                    'Final Project'
+                ],
+                durations: [5, 6, 6, 10, 7, 17, 10, 10]
+            };
+
+            // Removed chart initialization as the dashboard section is removed.
+
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            const tabContainers = document.querySelectorAll('.unit-card .accordion-content');
+            tabContainers.forEach(container => {
+                const tabs = container.querySelectorAll('.tab-button');
+                const contents = container.querySelectorAll('.tab-content');
+                
+                if (tabs.length === 0) return;
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+                        tab.setAttribute('aria-selected', 'true');
+
+                        contents.forEach(c => c.classList.add('hidden'));
+                        const targetId = tab.getAttribute('data-target');
+                        const targetContent = container.querySelector(`#${targetId}`);
+                        if(targetContent) {
+                           targetContent.classList.remove('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+>>>>>>> c612a968054f2fa7eb4c0c0c6bdddb1e2c11b63b

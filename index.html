@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -85,3 +86,92 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals -->
+    <!-- Application Structure Plan: A clean, professional landing page. It features a central hero section with a welcoming message and a grid of clickable cards, each representing a subject taught by the teacher. This structure provides clear navigation to related content (Physics, Computer Science, Digital Electronics) and offers an intuitive entry point for students or parents. -->
+    <!-- Visualization & Content Choices: 1. Subject Navigation -> Goal: Provide clear access to different course materials -> Viz: Clickable Cards (HTML/CSS/Tailwind) -> Interaction: Click card to navigate to subject-specific page -> Justification: Visually appealing and intuitive for selecting a course. 2. Teacher Introduction -> Goal: Establish professional presence and welcome users -> Viz: Text Block (HTML/CSS/Tailwind) -> Interaction: None -> Justification: Provides context and a personal touch. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4; /* Light neutral background */
+            color: #3D405B; /* Dark blue-gray for text */
+        }
+        .subject-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-sm shadow-md py-4 px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-center space-x-8 md:space-x-12">
+            <a href="index.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Home</a>
+            <a href="physics.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Physics</a>
+            <a href="cs.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Computer Science</a>
+            <a href="digitalelectronics.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Digital Electronics</a>
+            <a href="calendar.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Calendar</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-12 md:py-20 max-w-5xl">
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#3D405B] mb-4">Welcome to My Classroom</h1>
+            <p class="text-xl text-gray-600">Mr. Hile - Science & Technology Educator</p>
+        </header>
+
+        <main class="mb-16">
+            <section class="text-center max-w-3xl mx-auto mb-16">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Hello and welcome to my dedicated online space for students and parents! Here, you'll find resources, updates, and information for all the courses I teach. My goal is to foster a dynamic learning environment where curiosity thrives and students are empowered to explore the fascinating worlds of physics, computer science, and digital electronics.
+                </p>
+            </section>
+
+            <section>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <a href="physics.html" class="subject-card block bg-white rounded-2xl shadow-md p-8 text-center hover:bg-gray-50 flex flex-col items-center justify-center">
+                        <span class="text-5xl mb-4" role="img" aria-label="Physics icon">&#128220;</span> 
+                        <h3 class="text-2xl font-semibold text-[#81B29A] mb-2">Physics</h3>
+                        <p class="text-gray-600">Delve into the fundamental laws governing the universe.</p>
+                    </a>
+
+                    <a href="cs.html" class="subject-card block bg-white rounded-2xl shadow-md p-8 text-center hover:bg-gray-50 flex flex-col items-center justify-center">
+                        <span class="text-5xl mb-4" role="img" aria-label="Computer Science icon">&#128187;</span> 
+                        <h3 class="text-2xl font-semibold text-[#E07A5F] mb-2">Computer Science</h3>
+                        <p class="text-gray-600">Unravel the logic and creativity behind computing.</p>
+                    </a>
+
+                    <a href="digitalelectronics.html" class="subject-card block bg-white rounded-2xl shadow-md p-8 text-center hover:bg-gray-50 flex flex-col items-center justify-center">
+                        <span class="text-5xl mb-4" role="img" aria-label="Digital Electronics icon">&#128269;</span> 
+                        <h3 class="text-2xl font-semibold text-[#4D908E] mb-2">Digital Electronics</h3>
+                        <p class="text-gray-600">Build and understand the circuits that power our digital world.</p>
+                    </a>
+
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 text-gray-500 text-sm">
+            <p>&copy; 2025 Robert Hile. All rights reserved.</p>
+            <p>Contact: <a href="mailto:robert_hile@wasdpa.org" class="text-[#4D908E] hover:underline">robert_hile@wasdpa.org</a></p>
+        </footer>
+    </div>
+
+</body>
+</html>
+>>>>>>> c612a968054f2fa7eb4c0c0c6bdddb1e2c11b63b

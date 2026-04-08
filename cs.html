@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -96,3 +97,103 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Access</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals -->
+    <!-- Application Structure Plan: A simple informational page with a clear header, an explanatory text block, and prominent links to external platforms. This structure prioritizes direct access to external resources, making it easy for users to find where the curriculum is hosted. -->
+    <!-- Visualization & Content Choices: 1. Explanatory Text -> Goal: Inform users about curriculum location -> Viz: Text Block (HTML/CSS/Tailwind) -> Interaction: None -> Justification: Provides necessary context. 2. External Links -> Goal: Direct users to relevant platforms -> Viz: Styled Buttons/Links (HTML/CSS/Tailwind) -> Interaction: Click to navigate -> Justification: Clear call to action for accessing external resources. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4; /* Light neutral background */
+            color: #3D405B; /* Dark blue-gray for text */
+        }
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            text-decoration: none;
+            color: #FFFFFF; /* White text for buttons */
+        }
+        .link-button:hover {
+            transform: translateY(-2px);
+        }
+        .codehs-button {
+            background-color: #81B29A; /* Greenish */
+            box-shadow: 0 4px 6px rgba(129, 178, 154, 0.4);
+        }
+        .codehs-button:hover {
+            background-color: #6A9E85;
+        }
+        .schoology-button {
+            background-color: #E07A5F; /* Orangish */
+            box-shadow: 0 4px 6px rgba(224, 122, 95, 0.4);
+        }
+        .schoology-button:hover {
+            background-color: #C96B54;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-sm shadow-md py-4 px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-center space-x-8 md:space-x-12">
+            <a href="index.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Home</a>
+            <a href="physics.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Physics</a>
+            <a href="cs.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Computer Science</a>
+            <a href="digitalelectronics.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Digital Electronics</a>
+            <a href="calendar.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Calendar</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-12 md:py-20 max-w-4xl text-center">
+        <header class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#3D405B] mb-4">Accessing Your Curriculum</h1>
+            <p class="text-lg text-gray-600">Find all course materials and assignments at the following links</p>
+        </header>
+
+        <main class="mb-16">
+            <section class="mb-12">
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                    Our curriculum is hosted on CodeHS.com where you'll find interactive lessons, coding exercises, and project submissions. For daily assignments, announcements, and important class resources, please refer to Schoology.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Click the buttons below to navigate directly to these platforms.
+                </p>
+            </section>
+
+            <section class="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-8">
+                <a href="https://codehs.com" target="_blank" rel="noopener noreferrer" class="link-button codehs-button">
+                    Go to CodeHS
+                    <span class="ml-2">&#8599;</span>
+                </a>
+                <a href="https://schoology.com" target="_blank" rel="noopener noreferrer" class="link-button schoology-button">
+                    Go to Schoology
+                    <span class="ml-2">&#8599;</span>
+                </a>
+            </section>
+        </main>
+
+        <footer class="mt-16 text-gray-500 text-sm">
+            <p>&copy; 2025 Robert Hile. All rights reserved.</p>
+            <p>For support, please contact your instructor at robert_hile@wasdpa.org</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+>>>>>>> c612a968054f2fa7eb4c0c0c6bdddb1e2c11b63b

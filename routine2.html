@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1034,4 +1035,1042 @@
 </script>
 
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Fluency Tracker (A2 to C1)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fc; }
+        .card { background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); }
+        .progress-bar-fill { transition: width 0.5s ease-in-out; }
+        .check-item { cursor: pointer; transition: background-color 0.2s; }
+        .check-item:hover { background-color: #f1f5f9; }
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        /* Flashcard Carousel Styles */
+        #flashcard-carousel {
+            position: relative;
+        }
+        #flashcard-container {
+            display: flex;
+            overflow: hidden;
+            scroll-behavior: smooth;
+            padding: 10px 0;
+            margin: 0 auto;
+        }
+        .flashcard-slide {
+            flex: 0 0 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+            /* Set height for the slide to contain the flip-card */
+            height: 300px; /* Adjusted height for stability */
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        #prev-btn { left: 10px; }
+        #next-btn { right: 10px; }
+        .carousel-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* --- 3D Flip Card Styles --- */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            perspective: 1000px; /* 3D effect */
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+        }
+        .flip-card-inner.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Hide the element when it's rotated */
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+        .flip-card-front {
+            background-color: #ffffff;
+            color: #3b82f6;
+            cursor: pointer;
+        }
+        .flip-card-back {
+            background-color: #f1f5f9;
+            color: #1a202c;
+            transform: rotateY(180deg);
+        }
+        /* --- End 3D Flip Card Styles --- */
+    </style>
+</head>
+<body>
+
+<!-- ID Selection Modal -->
+<div id="id-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2 class="text-2xl font-bold text-[#1a202c] mb-4 text-center">Set Your Student ID</h2>
+        <p class="text-gray-600 mb-4 text-sm">
+            Choose a unique ID (e.g., your name + number) to easily access your progress later on any device. 
+            This ID is required to start tracking.
+        </p>
+        <input type="text" id="student-id-input" placeholder="e.g., JaneS01, FrenchMaster24" 
+               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff69b4] focus:border-transparent transition" 
+               maxlength="20">
+        <p id="id-error" class="text-red-500 text-sm mt-2 hidden">ID must be 3-20 characters long and contain only letters and numbers.</p>
+        <button id="set-id-btn" class="w-full mt-6 p-3 bg-[#ff69b4] text-white font-semibold rounded-lg hover:bg-[#e35099] transition disabled:bg-gray-400">
+            Start Tracking
+        </button>
+    </div>
+</div>
+
+<div id="app" class="min-h-screen p-4 sm:p-8">
+    <header class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-[#1a202c]">A2 to C1 French Fluency Tracker</h1>
+        <p class="text-gray-500 mt-2">Track your daily 2-3 hour commitment over the 6-month regime.</p>
+    </header>
+
+    <!-- Loading/Auth Status -->
+    <div id="status" class="text-center text-sm text-gray-500 mb-6">Initializing...</div>
+
+    <div class="max-w-4xl mx-auto space-y-8">
+        
+        <!-- Overall Progress -->
+        <section id="overall-progress" class="card p-6">
+            <h2 class="text-2xl font-bold mb-4 text-[#3b82f6]">Overall Regime Progress</h2>
+            <div class="flex items-center space-x-4 mb-2">
+                <p class="text-lg font-medium">Current Month: <span id="current-month-display" class="font-extrabold text-blue-600">Loading...</span></p>
+                <p class="text-lg font-medium">Days Tracked: <span id="days-tracked-display" class="font-extrabold text-blue-600">0</span></p>
+            </div>
+            <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                <div id="regime-progress-bar" class="progress-bar-fill h-full bg-[#10b981] text-xs text-white flex items-center justify-center" style="width: 0%"></div>
+            </div>
+        </section>
+
+        <!-- Daily Check-in -->
+        <section class="card p-6">
+            <h2 class="text-2xl font-bold mb-4 text-[#ef4444]">Daily Check-in for <span id="today-date-display" class="text-gray-700"></span></h2>
+            <div id="daily-check-in-list" class="space-y-3">
+                <!-- Check-in items will be populated here -->
+            </div>
+            <p id="daily-message" class="mt-4 text-center font-semibold text-gray-600 hidden">You've completed today's study goals! Bravo!</p>
+        </section>
+
+        <!-- Flashcard App (Carousel) -->
+        <section id="flashcard-app" class="card p-6 border-l-4 border-[#10b981]">
+            <h2 class="text-2xl font-bold mb-4 text-[#10b981]">Daily Flashcards: Top French Words (20/day)</h2>
+            <p id="flashcard-status" class="text-gray-500 mb-4">Loading your personalized word list...</p>
+            
+            <div id="flashcard-carousel" class="relative max-w-lg mx-auto">
+                <div id="flashcard-container" class="flex overflow-x-scroll snap-x snap-mandatory scroll-x-hidden w-full h-80">
+                    <!-- Flashcard slides will be populated here -->
+                </div>
+                
+                <!-- Carousel Controls -->
+                <button id="prev-btn" class="carousel-button p-3 bg-white hover:bg-gray-100 disabled:opacity-50">
+                    &#10094;
+                </button>
+                <button id="next-btn" class="carousel-button p-3 bg-white hover:bg-gray-100 disabled:opacity-50">
+                    &#10095;
+                </button>
+
+                <p id="card-index-display" class="text-center text-sm text-gray-500 mt-4 h-5"></p>
+            </div>
+
+        </section>
+
+        <!-- Monthly Focus & Goals -->
+        <section id="monthly-focus-card" class="card p-6 border-l-4 border-[#3b82f6]">
+            <h2 class="text-2xl font-bold mb-4 text-[#3b82f6]">Month <span id="monthly-phase-number"></span> Focus: <span id="monthly-focus-title"></span></h2>
+            <p id="monthly-goal" class="text-gray-700 font-semibold mb-3"></p>
+            <h3 class="font-bold mt-4 mb-2">Key Grammar Topics:</h3>
+            <p id="monthly-grammar" class="text-sm text-gray-600"></p>
+            <h3 class="font-bold mt-4 mb-2">Key Practice Activities:</h3>
+            <p id="monthly-activities" class="text-sm text-gray-600"></p>
+        </section>
+
+         <!-- Log of Activities (Hidden until loaded) -->
+        <section class="card p-6 hidden" id="log-section">
+            <h2 class="text-xl font-bold mb-4 text-[#3b82f6]">Past 7 Days Activity Log</h2>
+            <div id="activity-log" class="space-y-2 text-sm text-gray-600">
+                <!-- Log entries will be added here -->
+            </div>
+        </section>
+
+        <!-- Unique Student ID Display for Sharing (MOVED TO BOTTOM) -->
+        <section id="user-id-display" class="card p-4 border-l-4 border-[#ff69b4] text-center hidden">
+            <h2 class="text-xl font-bold text-gray-700">Student ID</h2>
+            <div class="flex flex-col sm:flex-row items-center justify-center mt-2 space-y-2 sm:space-y-0 sm:space-x-3">
+                <code id="current-student-id" class="text-base sm:text-xl font-mono p-2 bg-gray-100 rounded-md text-[#ff69b4] break-all"></code>
+                <button id="copy-id-btn" class="p-2 w-full sm:w-auto bg-[#ff69b4] text-white rounded-lg hover:bg-[#e35099] transition text-sm font-semibold">
+                    Copy ID
+                </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Use this ID to access your progress on other devices.</p>
+        </section>
+
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, query, orderBy, serverTimestamp, setLogLevel, getDocs, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // --- FIREBASE CONFIGURATION & INITIALIZATION ---
+    setLogLevel('Debug');
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-french-tracker-app';
+    const firebaseConfig = {
+    apiKey: "AIzaSyB0VsqsC7GJJV8fyfcfK7FW69rYALW3Zb8",
+    authDomain: "language-course-24706.firebaseapp.com",
+    projectId: "language-course-24706",
+    storageBucket: "language-course-24706.firebasestorage.app",
+    messagingSenderId: "279546913950",
+    appId: "1:279546913950:web:87f3424aa102940102078f",
+    measurementId: "G-667E7JT3DD"
+    };
+    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+    let db, auth, userId = null;
+    let studentId = null; // New variable to store the friendly student ID
+    let isAuthReady = false;
+    
+    // Path segments for the public collection used to map Student IDs to Firebase UIDs
+    const ID_MAPPING_PATH_SEGMENTS = ['artifacts', appId, 'public', 'data', 'student_id_map'];
+    
+    // --- CAROUSEL STATE ---
+    let currentCardIndex = 0;
+    let totalCards = 0;
+    const flashcardContainer = document.getElementById('flashcard-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const cardIndexDisplay = document.getElementById('card-index-display');
+
+
+    // --- UTILITY FUNCTIONS (Auth and UI) ---
+
+    // Utility function to copy the userId to the clipboard
+    function copyUserId(id, button) {
+        // Use document.execCommand('copy') as navigator.clipboard might fail in iFrame
+        const tempInput = document.createElement('input');
+        tempInput.value = id;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try {
+            document.execCommand('copy');
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 1500);
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+            button.textContent = 'Failed!';
+            setTimeout(() => {
+                button.textContent = 'Copy ID';
+            }, 1500);
+        }
+        document.body.removeChild(tempInput);
+    }
+    
+    function showModal() {
+        document.getElementById('id-modal').classList.remove('hidden');
+    }
+
+    function hideModal() {
+        document.getElementById('id-modal').classList.add('hidden');
+    }
+
+    // Function to handle custom student ID setup
+    async function setupStudentId() {
+        if (!userId) return;
+
+        // 1. Check if the current user already has a saved Student ID
+        const userDocRef = doc(db, ...ID_MAPPING_PATH_SEGMENTS, userId);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists() && userDoc.data().studentId) {
+            studentId = userDoc.data().studentId;
+            console.log("Existing Student ID loaded:", studentId);
+            updateUserIdDisplay(studentId);
+            startTracker();
+            return;
+        }
+
+        // 2. If not found, show the modal
+        showModal();
+    }
+
+    // Function to save the chosen Student ID
+    async function saveStudentId(chosenId) {
+        if (!userId || !chosenId) return;
+        
+        // Basic validation
+        if (chosenId.length < 3 || chosenId.length > 20 || !/^[a-zA-Z0-9]+$/.test(chosenId)) {
+            document.getElementById('id-error').textContent = 'ID must be 3-20 characters long and contain only letters and numbers.';
+            document.getElementById('id-error').classList.remove('hidden');
+            return;
+        }
+        
+        // 3. Check for uniqueness by querying the custom ID
+        const studentIdMapCollectionRef = collection(db, ...ID_MAPPING_PATH_SEGMENTS);
+        const q = query(studentIdMapCollectionRef); 
+        const snapshot = await getDocs(q);
+        let isUnique = true;
+
+        // Note: Checking uniqueness client-side is a required workaround for the sandbox 
+        // environment's index limitations when using 'where'.
+        snapshot.forEach(d => {
+            if (d.data().studentId === chosenId && d.id !== userId) {
+                isUnique = false;
+            }
+        });
+
+        if (!isUnique) {
+            document.getElementById('id-error').textContent = 'This Student ID is already taken. Please choose another.';
+            document.getElementById('id-error').classList.remove('hidden');
+            return;
+        }
+
+        document.getElementById('id-error').classList.add('hidden');
+        
+        // 4. Save the mapping (Firebase UID -> Student ID)
+        const userDocRef = doc(db, ...ID_MAPPING_PATH_SEGMENTS, userId);
+        try {
+            await setDoc(userDocRef, { 
+                studentId: chosenId, 
+                firebaseUid: userId,
+                createdAt: serverTimestamp()
+            });
+            studentId = chosenId;
+            updateUserIdDisplay(studentId);
+            hideModal();
+            startTracker();
+        } catch (e) {
+            console.error("Error saving Student ID:", e);
+            document.getElementById('id-error').textContent = `Error saving ID: ${e.message}`;
+            document.getElementById('id-error').classList.remove('hidden');
+        }
+    }
+
+    function updateUserIdDisplay(id) {
+        document.getElementById('current-student-id').textContent = id;
+        document.getElementById('user-id-display').classList.remove('hidden');
+        
+        // Set up copy button
+        const copyBtn = document.getElementById('copy-id-btn');
+        copyBtn.onclick = () => copyUserId(id, copyBtn);
+    }
+    
+    // Attach event listener for the modal button
+    document.getElementById('set-id-btn').addEventListener('click', () => {
+        const input = document.getElementById('student-id-input').value.trim();
+        saveStudentId(input);
+    });
+
+    if (!firebaseConfig.projectId) {
+        document.getElementById('status').textContent = 'Using mock data (Firebase unavailable).';
+        console.error('Firebase config is missing or invalid.');
+        initializeMockApp();
+    } else {
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        auth = getAuth(app);
+
+        // 1. Authentication
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userId = user.uid;
+                document.getElementById('status').textContent = `Authentication successful. Checking Student ID...`;
+                isAuthReady = true;
+                await setupStudentId(); // Start ID setup/lookup process
+            } else {
+                try {
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    document.getElementById('status').textContent = `Authentication Failed: ${error.message}`;
+                    console.error("Auth error:", error);
+                    initializeMockApp();
+                }
+            }
+        });
+    }
+
+    // --- REGIME & FLASHCARD DATA ---
+
+    // A simplified list representing the top ~100 French words for demo purposes (part of the 2000 goal)
+    const FRENCH_WORDS = [
+        { french: 'le', english: 'the (masculine singular)' }, 
+        { french: 'la', english: 'the (feminine singular)' }, 
+        { french: 'un', english: 'a/an (masculine)' }, 
+        { french: 'une', english: 'a/an (feminine)' }, 
+        { french: 'être', english: 'to be' }, 
+        { french: 'avoir', english: 'to have' }, 
+        { french: 'je', english: 'I' }, 
+        { french: 'tu', english: 'you (singular informal)' }, 
+        { french: 'il', english: 'he/it (masculine)' }, 
+        { french: 'elle', english: 'she/it (feminine)' },
+        { french: 'nous', english: 'we' }, 
+        { french: 'vous', english: 'you (plural/formal)' }, 
+        { french: 'ils', english: 'they (masculine/mixed)' }, 
+        { french: 'elles', english: 'they (feminine)' }, 
+        { french: 'de', english: 'of/from' }, 
+        { french: 'à', english: 'to/at' }, 
+        { french: 'et', english: 'and' }, 
+        { french: 'dans', english: 'in/into' }, 
+        { french: 'ce', english: 'this/that (masculine)' }, 
+        { french: 'se', english: 'himself/herself/itself/themselves' },
+        { french: 'faire', english: 'to do/to make' }, 
+        { french: 'dire', english: 'to say/to tell' }, 
+        { french: 'pouvoir', english: 'to be able to/can' }, 
+        { french: 'aller', english: 'to go' }, 
+        { french: 'voir', english: 'to see' }, 
+        { french: 'vouloir', english: 'to want' }, 
+        { french: 'savoir', english: 'to know (a fact)' }, 
+        { french: 'falloir', english: 'to be necessary (must)' }, 
+        { french: 'prendre', english: 'to take' }, 
+        { french: 'donner', english: 'to give' },
+        { french: 'comme', english: 'like/as' }, 
+        { french: 'sur', english: 'on/upon' }, 
+        { french: 'plus', english: 'more' }, 
+        { french: 'tout', english: 'all/every' }, 
+        { french: 'bien', english: 'well/good' }, 
+        { french: 'même', english: 'same/even' }, 
+        { french: 'aussi', english: 'also/too' }, 
+        { french: 'si', english: 'if/so' }, 
+        { french: 'là', english: 'there' }, 
+        { french: 'où', english: 'where' },
+        { french: 'temps', english: 'time/weather' }, 
+        { french: 'homme', english: 'man' }, 
+        { french: 'femme', english: 'woman' }, 
+        { french: 'enfant', english: 'child' }, 
+        { french: 'jour', english: 'day' }, 
+        { french: 'nuit', english: 'night' }, 
+        { french: 'main', english: 'hand' }, 
+        { french: 'chose', english: 'thing' }, 
+        { french: 'vie', english: 'life' }, 
+        { french: 'travailler', english: 'to work' },
+        { french: 'petit', english: 'small' }, 
+        { french: 'grand', english: 'big/tall' }, 
+        { french: 'nouveau', english: 'new' }, 
+        { french: 'vieux', english: 'old' }, 
+        { french: 'bon', english: 'good' }, 
+        { french: 'mauvais', english: 'bad' }, 
+        { french: 'vrai', english: 'true/real' }, 
+        { french: 'faux', english: 'false/fake' }, 
+        { french: 'premier', english: 'first' }, 
+        { french: 'dernier', english: 'last' },
+        { french: 'parler', english: 'to speak' }, 
+        { french: 'trouver', english: 'to find' }, 
+        { french: 'rendre', english: 'to give back/render' }, 
+        { french: 'venir', english: 'to come' }, 
+        { french: 'passer', english: 'to pass/spend (time)' }, 
+        { french: 'rester', english: 'to stay' }, 
+        { french: 'mettre', english: 'to put/to place' }, 
+        { french: 'tenir', english: 'to hold/to keep' }, 
+        { french: 'montrer', english: 'to show' }, 
+        { french: 'écrire', english: 'to write' },
+        { french: 'monde', english: 'world/people' }, 
+        { french: 'ville', english: 'city' }, 
+        { french: 'pays', english: 'country' }, 
+        { french: 'maison', english: 'house' }, 
+        { french: 'porte', english: 'door' }, 
+        { french: 'fenêtre', english: 'window' }, 
+        { french: 'table', english: 'table' }, 
+        { french: 'chaise', english: 'chair' }, 
+        { french: 'livre', english: 'book' }, 
+        { french: 'argent', english: 'money/silver' },
+        { french: 'pourquoi', english: 'why' }, 
+        { french: 'comment', english: 'how' }, 
+        { french: 'quand', english: 'when' }, 
+        { french: 'quoi', english: 'what' }, 
+        { french: 'quel', english: 'which/what' }, 
+        { french: 'qui', english: 'who' }, 
+        { french: 'depuis', english: 'since/for (time)' }, 
+        { french: 'avant', english: 'before' }, 
+        { french: 'après', english: 'after' }, 
+        { french: 'pendant', english: 'during' },
+        { french: 'sans', english: 'without' }, 
+        { french: 'avec', english: 'with' }, 
+        { french: 'chez', english: 'at the home of/at' }, 
+        { french: 'sous', english: 'under' }, 
+        { french: 'devant', english: 'in front of' }, 
+        { french: 'derrière', english: 'behind' }, 
+        { french: 'vers', english: 'towards' }, 
+        { french: 'autour', english: 'around' }, 
+        { french: 'malgré', english: 'despite' }, 
+        { french: 'grâce', english: 'thanks to' },
+        { french: 'chacun', english: 'each one' }, 
+        { french: 'tous', english: 'all (masculine plural)' }, 
+        { french: 'rien', english: 'nothing' }, 
+        { french: 'quelque', english: 'some/a few' }, 
+        { french: 'ici', english: 'here' }, 
+        { french: 'loin', english: 'far' }, 
+        { french: 'bientôt', english: 'soon' }, 
+        { french: 'jamais', english: 'never' }, 
+        { french: 'souvent', english: 'often' }, 
+        { french: 'toujours', english: 'always/still' }
+    ];
+    const WORDS_PER_DAY = 20;
+
+    const REGIME_MONTHS = [
+        {
+            month: 1, title: 'A2 Consolidation & B1 Foundation', focus: 'Confidence',
+            goal: 'Solidify all A2 knowledge and comfortably transition into B1 territory.',
+            grammar: 'Review of Passé Composé and Imparfait. Introduce Future Simple and Conditional Present (basics). Master relative pronouns (qui, que, où, dont).',
+            activities: 'Write daily summaries (5-10 sentences). Shadowing: Repeat sentences immediately after hearing them.',
+        },
+        {
+            month: 2, title: 'B1 Mastery', focus: 'Structure & Argumentation',
+            goal: 'Comfortably use B1 grammar and start forming complex, structured arguments.',
+            grammar: 'The Subjunctive (Présent): Formation and key triggers. Master Y and EN pronouns. Introduction to Reported Speech (Discours indirect).',
+            activities: 'Write a 200-word opinion piece each week. Have 30-minute conversations focusing on expressing opinions.',
+        },
+        {
+            month: 3, title: 'B2 Transition & Nuance', focus: 'Complexity',
+            goal: 'Bridge the gap between B1 and B2 by using complex structures naturally and expanding depth of vocabulary.',
+            grammar: 'Advanced Subjunctive. Plus-que-parfait. Review and master the correct use of all tenses in sequence. Introduce the Passive Voice (basics).',
+            activities: 'Translate complex English news headlines into French. Practice summarizing a 5-minute news segment in writing (150 words).',
+        },
+        {
+            month: 4, title: 'B2 Mastery & Fluency', focus: 'Sophistication',
+            goal: 'Comfortably operate at a B2 level, expressing ideas clearly, naturally, and with high accuracy.',
+            grammar: 'Advanced Conditional and Hypothetical Structures (Si + imparfait/plus-que-parfait). Gerunds. Full mastery of the Passive Voice.',
+            activities: 'Write a 400-word essay each week. Start B2-level DELF exam practice tests.',
+        },
+        {
+            month: 5, title: 'C1 Preparation & Deepening', focus: 'Precision',
+            goal: 'Move beyond functional B2 to demonstrating a high degree of precision, fluency, and near-native ease (C1).',
+            grammar: 'Stylistic Variations and C1-specific constructions. Advanced Reported Speech.',
+            activities: 'Write an argumentative essay following C1 criteria. Prepare and deliver a 10-minute presentation on a technical subject.',
+        },
+        {
+            month: 6, title: 'C1 Refinement & Assessment', focus: 'Automaticity',
+            goal: 'Achieve automatic, effortless command of French, ready for C1 examination or professional use.',
+            grammar: 'Review of all complex structures, focusing on error reduction and automatic usage.',
+            activities: 'Practice full, timed B2 or C1 mock exams (DALF/DELF). Self-correction: record and transcribe speech to fix common errors.',
+        }
+    ];
+
+    const DAILY_TASKS = [
+        { key: 'input', label: 'Input (Listening/Reading)', time: '60-90 min', icon: '🎧' },
+        { key: 'output', label: 'Output (Speaking/Writing)', time: '45-60 min', icon: '🗣️' },
+        { key: 'grammar', label: 'Grammar Study (Targeted)', time: '30 min', icon: '📖' },
+        { key: 'review', label: 'Review/Flashcards (Vocab/Verbs)', time: '15-30 min', icon: '🧠' },
+    ];
+
+    // --- UTILITY FUNCTIONS (Data & Logic) ---
+    function getTodayDateString() {
+        return new Date().toISOString().split('T')[0];
+    }
+
+    function addDays(date, days) {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result.toISOString().split('T')[0];
+    }
+
+    function calculateMonth(daysTracked) {
+        // Assuming ~30 days per month
+        return Math.min(6, Math.ceil(daysTracked / 30)) || 1;
+    }
+
+    function initializeMockApp() {
+        document.getElementById('status').textContent = 'Using mock data (Firebase unavailable).';
+        const mockData = [{ date: getTodayDateString(), input: false, output: false, review: false, grammar: false, month: 1 }];
+        updateUserIdDisplay('MockUser123');
+        renderDashboard(mockData);
+    }
+
+    // --- CAROUSEL LOGIC ---
+    function updateCarousel() {
+        if (totalCards === 0) {
+            flashcardContainer.innerHTML = '';
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            cardIndexDisplay.textContent = '';
+            return;
+        }
+
+        // Calculate the scroll position
+        const slideWidth = flashcardContainer.clientWidth;
+        const scrollPosition = currentCardIndex * slideWidth;
+        
+        flashcardContainer.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
+
+        // Update buttons and index display
+        prevBtn.disabled = currentCardIndex === 0;
+        nextBtn.disabled = currentCardIndex >= totalCards - 1;
+        cardIndexDisplay.textContent = `Card ${currentCardIndex + 1} of ${totalCards}`;
+    }
+
+    function goToPrevCard() {
+        if (currentCardIndex > 0) {
+            currentCardIndex--;
+            updateCarousel();
+        }
+    }
+
+    function goToNextCard() {
+        if (currentCardIndex < totalCards - 1) {
+            currentCardIndex++;
+            updateCarousel();
+        }
+    }
+    
+    // Attach event listeners for carousel buttons
+    prevBtn.addEventListener('click', goToPrevCard);
+    nextBtn.addEventListener('click', goToNextCard);
+    
+    // Handle resizing (re-calculates scroll position)
+    window.addEventListener('resize', () => {
+        // Ensure the scroll position is correct after a resize
+        updateCarousel();
+    });
+
+    // --- RENDERING FUNCTIONS ---
+    function renderMonthlyFocus(monthNumber) {
+        const monthData = REGIME_MONTHS.find(m => m.month === monthNumber) || REGIME_MONTHS[0];
+
+        document.getElementById('monthly-phase-number').textContent = monthData.month;
+        document.getElementById('monthly-focus-title').textContent = monthData.focus;
+        document.getElementById('monthly-goal').textContent = `Goal: ${monthData.goal}`;
+        document.getElementById('monthly-grammar').textContent = monthData.grammar;
+        document.getElementById('monthly-activities').textContent = monthData.activities;
+    }
+
+    function renderDailyCheckin(todayLog, monthNumber) {
+        const checkInList = document.getElementById('daily-check-in-list');
+        checkInList.innerHTML = '';
+        document.getElementById('daily-message').classList.add('hidden');
+
+        const todayDate = getTodayDateString();
+        document.getElementById('today-date-display').textContent = new Date().toLocaleDateString();
+
+        const taskKeys = DAILY_TASKS.map(t => t.key);
+        const allCompleted = todayLog && taskKeys.every(key => todayLog[key]);
+
+        if (allCompleted) {
+            document.getElementById('daily-message').classList.remove('hidden');
+        }
+
+        DAILY_TASKS.forEach(task => {
+            const isCompleted = todayLog ? todayLog[task.key] : false;
+
+            const item = document.createElement('div');
+            item.className = `check-item flex items-center justify-between p-3 rounded-lg transition ${isCompleted ? 'bg-green-50 border border-green-200' : 'bg-white border border-gray-200'}`;
+            item.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl">${task.icon}</span>
+                    <div>
+                        <p class="font-semibold text-gray-800">${task.label}</p>
+                        <p class="text-xs text-gray-500">${task.time} minimum</p>
+                    </div>
+                </div>
+                <button data-key="${task.key}" class="toggle-task-btn p-2 rounded-full transition ${isCompleted ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-100 text-gray-400 hover:bg-gray-200'}">
+                    ${isCompleted ? '✔️ Completed' : 'Mark Complete'}
+                </button>
+            `;
+
+            if (db && userId) {
+                const button = item.querySelector('.toggle-task-btn');
+                button.addEventListener('click', () => {
+                    toggleTaskCompletion(db, userId, todayDate, monthNumber, task.key, !isCompleted);
+                });
+            } else {
+                 // Disable button if using mock data
+                 item.querySelector('.toggle-task-btn').disabled = true;
+            }
+            checkInList.appendChild(item);
+        });
+    }
+
+    function renderOverallProgress(logEntries) {
+        // Filter out logs that only contain the date field (if an error occurred during saving)
+        const validLogEntries = logEntries.filter(log => Object.keys(log).some(key => DAILY_TASKS.map(t => t.key).includes(key)));
+
+        const daysTracked = validLogEntries.length;
+        document.getElementById('days-tracked-display').textContent = daysTracked;
+
+        const currentMonthNumber = calculateMonth(daysTracked);
+        document.getElementById('current-month-display').textContent = `${currentMonthNumber} (${REGIME_MONTHS[currentMonthNumber-1].focus})`;
+
+        // Calculate progress percentage out of 6 months (180 days)
+        const totalDaysGoal = 180;
+        const percentage = Math.min(100, Math.round((daysTracked / totalDaysGoal) * 100));
+
+        const progressBar = document.getElementById('regime-progress-bar');
+        progressBar.style.width = `${percentage}%`;
+        progressBar.textContent = `${percentage}% Complete`;
+
+        return currentMonthNumber;
+    }
+
+    function renderActivityLog(logEntries) {
+        const logContainer = document.getElementById('activity-log');
+        logContainer.innerHTML = '';
+        document.getElementById('log-section').classList.remove('hidden');
+
+        // Show last 7 days activity
+        const recentLogs = logEntries.slice(0, 7);
+
+        if (recentLogs.length === 0) {
+            logContainer.innerHTML = '<p class="text-center text-gray-500">No study logs yet. Start checking off your tasks!</p>';
+            return;
+        }
+
+        recentLogs.forEach(log => {
+            const completedTasks = DAILY_TASKS.filter(t => log[t.key] === true).map(t => t.label.split('(')[0].trim());
+            const date = new Date(log.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+            const logEntry = document.createElement('div');
+            logEntry.className = 'flex justify-between items-center py-1 border-b border-gray-100';
+            logEntry.innerHTML = `
+                <span class="font-medium w-20">${date} (M${log.month})</span>
+                <span class="flex-1 text-right text-gray-500">${completedTasks.length > 0 ? completedTasks.join(', ') : 'No Tasks Completed'}</span>
+            `;
+            logContainer.appendChild(logEntry);
+        });
+    }
+
+
+    function renderDashboard(logEntries) {
+        // Sort logs by date descending
+        logEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const todayDate = getTodayDateString();
+        const todayLog = logEntries.find(log => log.date === todayDate);
+
+        // 1. Calculate overall progress and get current month
+        const currentMonthNumber = renderOverallProgress(logEntries);
+
+        // 2. Render monthly goals based on current month
+        renderMonthlyFocus(currentMonthNumber);
+
+        // 3. Render daily check-in based on today's log
+        renderDailyCheckin(todayLog, currentMonthNumber);
+
+        // 4. Render activity log
+        renderActivityLog(logEntries);
+    }
+
+    // --- FIRESTORE LOGIC - DAILY CHECK-IN ---
+
+    async function toggleTaskCompletion(db, userId, dateString, monthNumber, taskKey, isCompleted) {
+        const docRef = doc(db, 'artifacts', appId, 'users', userId, 'french_regime_log', dateString);
+        const updateData = {
+            date: dateString,
+            month: monthNumber,
+            timestamp: serverTimestamp(),
+            [taskKey]: isCompleted
+        };
+        try {
+            await setDoc(docRef, updateData, { merge: true });
+            console.log(`Task ${taskKey} on ${dateString} set to ${isCompleted}.`);
+        } catch (e) {
+            console.error("Error setting task completion:", e);
+        }
+    }
+
+    // --- FIRESTORE LOGIC - FLASHCARDS ---
+
+    // Function to update status in Firestore
+    async function updateWordStatus(collectionRef, word, action, today) {
+        const docRef = doc(collectionRef, word);
+
+        let reviewDays = 0;
+        if (action === 'review') {
+            reviewDays = 3; // Review in 3 days
+        } else if (action === 'master') {
+            reviewDays = 30; // Review in 30 days
+        }
+
+        const nextReviewDate = addDays(new Date(today), reviewDays);
+
+        try {
+            await setDoc(docRef, {
+                lastSeen: serverTimestamp(),
+                reviewDate: nextReviewDate,
+                markCount: action === 'review' ? increment(1) : 0
+            }, { merge: true });
+
+            console.log(`Word "${word}" status updated. Next review: ${nextReviewDate}`);
+
+            // To provide smooth UX for the current card set: just remove the card and update the carousel state
+            const currentSlide = flashcardContainer.children[currentCardIndex];
+            if(currentSlide) {
+                currentSlide.remove();
+                totalCards = flashcardContainer.children.length;
+                
+                // If the user was on the last card, move index back to the new last card (or 0 if none left)
+                if (currentCardIndex >= totalCards && totalCards > 0) {
+                    currentCardIndex = totalCards - 1;
+                } else if (totalCards === 0) {
+                    currentCardIndex = 0;
+                }
+                
+                // Reload the whole set if all cards in the daily set are completed
+                if (totalCards === 0) {
+                     loadDailyFlashcards();
+                } else {
+                    updateCarousel();
+                }
+            }
+
+
+        } catch (error) {
+            console.error("Error updating word status:", error);
+        }
+    }
+
+    // Function to render the words
+    function renderFlashcards(words, collectionRef, today) {
+        flashcardContainer.innerHTML = '';
+        currentCardIndex = 0;
+        totalCards = words.length;
+
+        if (totalCards === 0) {
+            document.getElementById('flashcard-status').textContent = 'You have mastered all the available words! Félicitations!';
+            updateCarousel(); // Updates buttons/display
+            return;
+        }
+
+        document.getElementById('flashcard-status').textContent = `Reviewing ${totalCards} words today.`;
+
+        words.forEach(wordData => {
+            const frenchWord = wordData.french;
+            const englishMeaning = wordData.english;
+            
+            const slide = document.createElement('div');
+            slide.className = 'flashcard-slide snap-center';
+            slide.setAttribute('data-word', frenchWord);
+
+            slide.innerHTML = `
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full" data-word="${frenchWord}">
+                        <!-- Card Front: French Word -->
+                        <div class="flip-card-front">
+                            <p class="text-6xl font-extrabold">${frenchWord}</p>
+                            <p class="mt-4 text-lg font-semibold text-gray-500">Tap to Flip</p>
+                        </div>
+                        
+                        <!-- Card Back: Meaning and Actions -->
+                        <div class="flip-card-back flex-col justify-between p-6">
+                            <div>
+                                <p class="text-4xl font-extrabold text-[#3b82f6] mb-3">${frenchWord}</p>
+                                <p class="text-xl font-medium text-gray-700 italic">${englishMeaning}</p>
+                            </div>
+                            <div class="space-y-3 w-full mt-4">
+                                <button data-word="${frenchWord}" data-action="review" class="w-full text-base bg-yellow-400 text-yellow-900 font-semibold p-3 rounded-lg hover:bg-yellow-500 transition shadow-md">
+                                    Mark for Review
+                                </button>
+                                <button data-word="${frenchWord}" data-action="master" class="w-full text-base bg-green-500 text-white font-semibold p-3 rounded-lg hover:bg-green-600 transition shadow-md">
+                                    Mastered (Revisit in 30 days)
+                                </button>
+                                <button class="w-full text-sm text-gray-600 hover:underline mt-2 flip-back-btn">
+                                    Flip Back
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const innerCard = slide.querySelector('.flip-card-inner');
+            const flipBackBtn = slide.querySelector('.flip-back-btn');
+            
+            // 1. Flip on front card click
+            innerCard.querySelector('.flip-card-front').addEventListener('click', () => {
+                innerCard.classList.add('is-flipped');
+            });
+            
+            // 2. Flip back on button click
+            flipBackBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card action from being triggered
+                innerCard.classList.remove('is-flipped');
+            });
+
+            // 3. Add event listeners for review buttons
+            slide.querySelectorAll('button[data-action]').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    if (!db || !userId) return;
+                    const action = e.target.dataset.action;
+                    const wordToUpdate = e.target.dataset.word;
+                    await updateWordStatus(collection(db, 'artifacts', appId, 'users', userId, 'french_flashcards'), wordToUpdate, action, today);
+                });
+            });
+
+            flashcardContainer.appendChild(slide);
+        });
+        
+        // Finalize carousel rendering
+        updateCarousel();
+    }
+
+    // Main logic for fetching and calculating daily flashcards
+    async function loadDailyFlashcards() {
+        if (!db || !userId) {
+            document.getElementById('flashcard-status').textContent = 'Cannot load flashcards until authenticated.';
+            return;
+        }
+        const today = getTodayDateString();
+        const flashcardCollectionRef = collection(db, 'artifacts', appId, 'users', userId, 'french_flashcards');
+        document.getElementById('flashcard-status').textContent = 'Fetching your personalized word list...';
+
+        try {
+            // 1. Get all words the user has interacted with
+            const snapshot = await getDocs(query(flashcardCollectionRef));
+            const wordStatusMap = {};
+            snapshot.forEach(doc => {
+                wordStatusMap[doc.id] = doc.data();
+            });
+
+            const wordsToReview = [];
+            const seenWordKeys = new Set(Object.keys(wordStatusMap));
+
+            // 2. Select words whose review date is today or earlier (or is null/undefined)
+            for (const [word, status] of Object.entries(wordStatusMap)) {
+                if (status.reviewDate && status.reviewDate <= today) {
+                    // Find the original word object from the static list
+                    const originalWordData = FRENCH_WORDS.find(w => w.french === word);
+                    if (originalWordData) {
+                        wordsToReview.push(originalWordData);
+                    }
+                }
+            }
+
+            // 3. Fill the remaining spots with new/unseen words
+            let dailyWords = wordsToReview.slice(0, WORDS_PER_DAY); // Prioritize review words
+
+            let newWordIndex = 0;
+            while (dailyWords.length < WORDS_PER_DAY && newWordIndex < FRENCH_WORDS.length) {
+                const wordData = FRENCH_WORDS[newWordIndex];
+                if (!seenWordKeys.has(wordData.french)) {
+                    dailyWords.push(wordData);
+                    seenWordKeys.add(wordData.french);
+                }
+                newWordIndex++;
+            }
+
+            // 4. Render the list
+            renderFlashcards(dailyWords, flashcardCollectionRef, today);
+
+        } catch (error) {
+            document.getElementById('flashcard-status').textContent = 'Error loading flashcards. Check console for details.';
+            console.error("Error loading flashcards:", error);
+            renderFlashcards([], null, today); // Render empty carousel on error
+        }
+    }
+
+
+    // Main function to start the tracker after authentication AND Student ID is set
+    function startTracker() {
+        if (!userId || !studentId) {
+            document.getElementById('status').textContent = 'Waiting for Student ID setup...';
+            return;
+        }
+        
+        document.getElementById('status').textContent = `Data loaded for Student ID: ${studentId}`;
+        
+        const logCollectionRef = collection(db, 'artifacts', appId, 'users', userId, 'french_regime_log');
+
+        // 1. Start listening to daily progress log (for the main dashboard)
+        // NOTE: We cannot use orderBy on timestamp in conjunction with other filters without adding an index in production. 
+        // We will fetch all data and sort client-side to avoid index requirement issues in the sandbox environment.
+        const q = query(logCollectionRef);
+
+        onSnapshot(q, (snapshot) => {
+            const logEntries = [];
+            snapshot.forEach((doc) => {
+                logEntries.push(doc.data());
+            });
+
+            renderDashboard(logEntries);
+
+        }, (error) => {
+            console.error("Error listening to log snapshot:", error);
+            document.getElementById('status').textContent = 'Error loading progress data.';
+        });
+
+        // 2. Load the flashcard system
+        loadDailyFlashcards();
+    }
+
+</script>
+
+<!-- Mock implementation of firestore/auth variables for local testing if not in Canvas -->
+<script>
+    if (typeof __app_id === 'undefined') {
+        window.__app_id = 'mock-app-id';
+        window.__firebase_config = JSON.stringify({
+            apiKey: "AIzaSyB0VsqsC7GJJV8fyfcfK7FW69rYALW3Zb8",
+            authDomain: "language-course-24706.firebaseapp.com",
+            projectId: "language-course-24706",
+            storageBucket: "language-course-24706.firebasestorage.app",
+            messagingSenderId: "279546913950",
+            appId: "1:279546913950:web:87f3424aa102940102078f"
+        });
+        window.__initial_auth_token = null;
+    }
+</script>
+
+</body>
+>>>>>>> c612a968054f2fa7eb4c0c0c6bdddb1e2c11b63b
 </html>

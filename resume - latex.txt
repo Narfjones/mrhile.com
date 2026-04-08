@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 % This is a LaTeX file. When compiled (e.g., using pdfLaTeX),
 % it will produce a professionally formatted PDF document.
 
@@ -134,4 +135,142 @@
 \cvitem{Engineering \& Maker}{CAD/CAM (AutoCAD, SolidWorks, Autodesk Inventor), 3D Printing, CNC, Robotics Programming, Circuit Design}
 \cvitem{Database \& IT}{MySQL, Microsoft SQL Server, MongoDB, SQLite, Database Design, Network Administration, Linux/UNIX Administration}
 
+=======
+% This is a LaTeX file. When compiled (e.g., using pdfLaTeX),
+% it will produce a professionally formatted PDF document.
+
+\documentclass[11pt, a4paper, sans]{moderncv}
+\moderncvstyle{classic} % 'classic' is a clean, standard style
+\moderncvcolor{blue}     % A professional color scheme
+
+\usepackage[a4paper, margin=2.5cm]{geometry} % Set reasonable margins
+% \usepackage{fontawesome} % For icons like GitHub <-- This line caused a conflict and is being removed. moderncv handles icons.
+
+% --- Personal Information ---
+% \name{<first name>}{<last name>}
+\name{Robert}{Hile}
+\address{Fayetteville, PA 17222}
+\phone[mobile]{(717) 446-6906}
+\email{rhile3@gmail.com}
+\social[github]{narfjones} % Cleaned from the Google search link
+
+% --- Document Start ---
+\begin{document}
+
+\makecvtitle % Generates the title block
+
+% --- 1. Education ---
+\section{Education}
+\cventry
+  {Completed} % Dates
+  {Master of Science, Curriculum and Instruction} % Degree
+  {Bloomsburg University of Pennsylvania} % Institution
+  {Bloomsburg, PA} % City
+  {} % Grade (empty)
+  {} % Description (empty)
+\cventry
+  {2010 – 2014} % Dates
+  {Bachelor of Science, Advanced Physics} % Degree
+  {Shippensburg University of Pennsylvania} % Institution
+  {Shippensburg, PA} % City
+  {} % Grade (empty)
+  {} % Description (empty)
+\cventry
+  {Completed 2003} % Dates
+  {Associate of Science, Computer Information Systems} % Degree
+  {Butler County Community College} % Institution
+  {Butler, PA} % City
+  {} % Grade (empty)
+  {} % Description (empty)
+
+% --- 2. Certifications & Licenses ---
+% Using \cvitem for a simple list format
+\section{Certifications \& Licenses}
+\cvlistitem{Professional Educator License, Pennsylvania}
+\cvlistitem{Teaching Certification}
+\cvlistitem{Fundamentals of Engineering (FE)}
+
+% --- 3. Teaching Experience ---
+\section{Teaching Experience}
+\cventry
+  {December 2017 – Present} % Dates
+  {Physics Teacher} % Title
+  {Waynesboro Area School District} % Employer
+  {Waynesboro, PA} % City
+  {} % Grade (empty)
+  { % Description
+    \begin{itemize}
+      \item Develop and instruct a comprehensive, hands-on physics curriculum, including courses in introductory Physics, Applied Science, and a novel Aviation and Aerospace elective.
+      \item Integrate modern technology and pedagogical strategies to support diverse learning styles in classroom and lab settings.
+      \item Serve as Faculty Advisor for the \textbf{Technology Student Association (TSA)} and the \textbf{Engineering Club}, mentoring students in project management, design principles, and competition.
+    \end{itemize}
+  }
+\cventry
+  {August 2016 – August 2017} % Dates
+  {Engineering \& Robotics Instructor / IT Administrator} % Title
+  {St. Joseph High School} % Employer
+  {Natrona Heights, PA} % City
+  {} % Grade (empty)
+  { % Description
+    \begin{itemize}
+      \item Developed and taught a project-based engineering and programming curriculum.
+      \item \textbf{Courses Taught:} Engineering/Robotics I, Engineering/Robotics II, Programming I (Java), Programming II (Java).
+      \item Served as Faculty Advisor for the \textbf{FIRST Robotics Competition} team, guiding students through the full engineering design lifecycle from concept to national competition.
+      \item Concurrently managed all IT and networking administration for the high school, supporting 300+ daily users and a one-to-one iPad program.
+    \end{itemize}
+  }
+
+% --- 4. Related Professional Experience ---
+\section{Related Professional Experience}
+\cventry
+  {October 2022 – Present} % Dates
+  {Backend Software Development Instructor} % Title
+  {Promineo Tech} % Employer
+  {Remote} % City
+  {} % Grade (empty)
+  { % Description
+    \begin{itemize}
+      \item Instruct and mentor adult learners in an 18-week remote software development boot camp.
+      \item Curriculum covers: Object-Oriented Programming, Java, MySQL, Database Design, Spring, and Spring Boot.
+      \item Provide 1-on-1 support, grade assignments, and adapt complex technical concepts for a diverse student body, emphasizing problem-solving and code design.
+    \end{itemize}
+  }
+\cventry
+  {August 2014 – November 2015} % Dates
+  {Systems Engineer} % Title
+  {Sunrise Computers and Electronics} % Employer
+  {Chambersburg, PA} % City
+  {} % Grade (empty)
+  { % Description
+    \begin{itemize}
+      \item Provided comprehensive IT and network support for corporate clients, including desktop support (Windows/Mac/Linux), network administration (Active Directory), and hardware installation.
+      \item Designed and built a fully functional e-commerce website for a client.
+    \end{itemize}
+  }
+
+% --- 5. Community & Service ---
+\section{Community \& Service}
+\cventry
+  {January 2012 – March 2016} % Dates
+  {Founder \& Director (Volunteer)} % Title
+  {Fight for Science} % Organization
+  {Fayetteville, PA} % City
+  {} % Grade (empty)
+  { % Description
+    \begin{itemize}
+      \item Founded and directed a 501(c)(3) non-profit organization dedicated to advancing public science and mathematical literacy.
+      \item Designed and delivered engaging lectures, hands-on experiments, and workshops for non-traditional, multi-generational audiences.
+      \item Managed all organizational aspects, including financial paperwork, community outreach, and video/audio content production.
+    \end{itemize}
+  }
+
+% --- 6. Technical Skills ---
+\section{Technical Skills}
+% Using \cvitem for a clean, categorized list
+\cvitem{Programming}{Java, Python, C/C++, JavaScript, HTML5, CSS3}
+\cvitem{Software \& Frameworks}{Spring, Spring Boot, React, Node.js, Git, TensorFlow, OpenCV, MATLAB}
+\cvitem{Engineering \& Maker}{CAD/CAM (AutoCAD, SolidWorks, Autodesk Inventor), 3D Printing, CNC, Robotics Programming, Circuit Design}
+\cvitem{Database \& IT}{MySQL, Microsoft SQL Server, MongoDB, SQLite, Database Design, Network Administration, Linux/UNIX Administration}
+
+>>>>>>> c612a968054f2fa7eb4c0c0c6bdddb1e2c11b63b
 \end{document}

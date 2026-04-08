@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -478,4 +479,486 @@
     };
 </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omegaforge | Tactical Raid Intelligence V2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f1115;
+            --card-bg: #1a1d23;
+            --input-bg: #252a31;
+            --border: #323942;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-green: #10b981;
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * { box-sizing: border-box; font-family: var(--font-family); }
+        body { background: var(--bg-dark); color: var(--text-main); margin: 0; padding: 20px; line-height: 1.5; }
+        
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        h1 { margin: 0; font-size: 1.5rem; letter-spacing: 0.5px; }
+        
+        .config-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 24px; }
+        .input-group { display: flex; flex-direction: column; gap: 6px; }
+        .input-group label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        input { background: var(--input-bg); border: 1px solid var(--border); color: white; padding: 10px 12px; border-radius: 6px; outline: none; transition: border-color 0.2s; font-size: 14px; }
+        input:focus { border-color: var(--accent-blue); }
+
+        .dashboard { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .dashboard.active { opacity: 1; }
+        
+        @media (max-width: 1024px) {
+            .dashboard { display: flex; flex-direction: column; }
+        }
+
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; overflow-x: auto; }
+        .col-span-12 { grid-column: span 12; }
+        .col-span-8 { grid-column: span 8; }
+        .col-span-4 { grid-column: span 4; }
+
+        .card-header { margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .card-title { font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin: 0; display: flex; align-items: center; gap: 8px; }
+        .card-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+        .ai-summary-content { line-height: 1.6; color: var(--text-main); font-size: 0.95rem; }
+        .ai-summary-content strong { color: var(--accent-orange); display: block; margin-top: 15px; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .ai-summary-content ul { margin: 10px 0; padding-left: 20px; list-style: none; }
+        .ai-summary-content li { margin-bottom: 8px; position: relative; }
+        .ai-summary-content li::before { content: "→"; position: absolute; left: -22px; color: var(--accent-orange); font-weight: bold; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+        th { text-align: left; font-size: 11px; color: var(--text-muted); text-transform: uppercase; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+        td { padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+        
+        .btn { padding: 10px 20px; border-radius: 6px; border: none; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-primary { background: var(--accent-blue); color: white; }
+        .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
+        .btn-ai { background: var(--accent-orange); color: white; }
+        .btn-ai:hover { background: #d97706; transform: translateY(-1px); }
+        
+        .btn-spell { background: var(--input-bg); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 6px 12px; border-radius: 20px; transition: 0.2s; }
+        .btn-spell:hover { border-color: var(--text-muted); color: white; }
+        .btn-spell.active { background: rgba(59, 130, 246, 0.1); border-color: var(--accent-blue); color: var(--accent-blue); }
+
+        #status-bar { position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; border-radius: 6px; display: none; z-index: 1000; font-weight: 500; font-size: 14px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); animation: slideIn 0.3s ease-out; }
+        
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .empty-state { padding: 30px 20px; text-align: center; color: var(--text-muted); font-size: 14px; background: rgba(0,0,0,0.2); border-radius: 6px; border: 1px dashed var(--border); }
+        
+        .fight-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; display: none; }
+        .btn-filter { background: var(--input-bg); border: 1px solid var(--border); color: var(--text-muted); font-size: 13px; padding: 8px 16px; border-radius: 6px; transition: 0.2s; cursor: pointer; }
+        .btn-filter:hover { border-color: var(--accent-blue); color: white; }
+        .btn-filter.active { background: rgba(59, 130, 246, 0.15); border-color: var(--accent-blue); color: var(--accent-blue); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>OMEGAFORGE <span style="color:var(--text-muted); font-weight: 300;">| Tactical Intel V2</span></h1>
+        <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+            <button onclick="Engine.init()" class="btn btn-primary" id="btn-generate"><i class="fas fa-sync"></i> Generate Report</button>
+            <button onclick="AIEngine.generateSummary()" class="btn btn-ai" id="btn-ai" style="display: none;"><i class="fas fa-brain"></i> Generate AI Tactics</button>
+        </div>
+    </div>
+
+    <div class="config-grid">
+        <div class="input-group">
+            <label>WCL Report Code <span style="text-transform:none; font-weight:normal;">(Type 'demo' for mock data)</span></label>
+            <input type="text" id="reportCode" placeholder="e.g. ABCdef123ghI" value="demo">
+        </div>
+        <div class="input-group">
+            <label>Gemini API Key</label>
+            <input type="password" id="geminiApiKey" placeholder="AI Intelligence Key (Optional)" value="AIzaSyABVxYxCPFTGtIFv9fIdvzgRZS0uGQsTpQ">
+        </div>
+    </div>
+
+    <div id="fight-filters" class="fight-filters"></div>
+    <div id="dashboard" class="dashboard"></div>
+</div>
+
+<div id="status-bar"></div>
+
+<script>
+    /**
+     * MODULE DEFINITIONS
+     */
+    const REGISTERED_MODULES = [
+        {
+            id: 'deaths',
+            title: '<i class="fas fa-skull"></i> Casualty Report',
+            subtitle: 'Total deaths and killing blows per player',
+            colSpan: 'col-span-8',
+            requirements: [{ type: 'death' }],
+            process: (player, fight, events, module) => {
+                const deaths = events.filter(e => e.type === 'death' && e.targetID === player.id);
+                return deaths.map(d => {
+                    const recentDamage = events
+                        .filter(e => e.type === 'damage' && e.targetID === player.id && e.timestamp <= d.timestamp && e.timestamp >= (d.timestamp - 5000))
+                        .sort((a, b) => b.timestamp - a.timestamp);
+                    const killingBlow = recentDamage.length > 0 ? recentDamage[0].ability : { name: 'Unknown / Melee' };
+                    return { ...d, fightStartTime: fight.startTime, ability: killingBlow };
+                });
+            },
+            render: (ctx) => {
+                let html = '<table><thead><tr><th>Player</th><th>Deaths</th><th>Killing Blows</th></tr></thead><tbody>';
+                const ranked = ctx.results.map(p => {
+                    let total = 0, killingBlows = {};
+                    p.data.forEach(deathsInFight => {
+                        deathsInFight.forEach(d => {
+                            total++;
+                            const ability = d.ability?.name || 'Unknown';
+                            killingBlows[ability] = (killingBlows[ability] || 0) + 1;
+                        });
+                    });
+                    return { name: p.name, total, killingBlows };
+                }).filter(p => p.total > 0).sort((a, b) => b.total - a.total);
+                if (ranked.length === 0) return '<div class="empty-state"><i class="fas fa-check-circle" style="color:var(--accent-green); margin-bottom:10px; font-size:24px; display:block;"></i>No deaths recorded.</div>';
+                ranked.forEach((p) => {
+                    const kbSpells = Object.entries(p.killingBlows).sort((a, b) => b[1] - a[1]).map(([n,v]) => `<span style="display:inline-block; background:rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding:2px 6px; border-radius:4px; margin:2px;">${n}: <span style="color:var(--accent-red); font-weight:bold;">${v}</span></span>`).join(' ');
+                    html += `<tr><td><b>${p.name}</b></td><td style="color:var(--accent-red); font-weight:bold; font-size: 16px;">${p.total}</td><td>${kbSpells}</td></tr>`;
+                });
+                return html + '</tbody></table>';
+            }
+        },
+        {
+            id: 'interrupts',
+            title: '<i class="fas fa-bolt"></i> Interrupts',
+            subtitle: 'Successful interrupts executed',
+            colSpan: 'col-span-4',
+            requirements: [{ type: 'interrupt' }],
+            process: (player, fight, events, module) => events.filter(e => e.type === 'interrupt' && e.sourceID === player.id),
+            render: (ctx) => {
+                let html = '<table><thead><tr><th>Player</th><th>Interrupts</th></tr></thead><tbody>';
+                const ranked = ctx.results.map(p => {
+                    let total = 0;
+                    p.data.forEach(d => total += d.length);
+                    return { name: p.name, total };
+                }).filter(p => p.total > 0).sort((a,b) => b.total - a.total);
+                if (ranked.length === 0) return '<div class="empty-state">No interrupts recorded.</div>';
+                ranked.forEach(p => html += `<tr><td><b>${p.name}</b></td><td style="color:var(--accent-green); font-weight:bold;">${p.total}</td></tr>`);
+                return html + '</tbody></table>';
+            }
+        },
+        {
+            id: 'defensives',
+            title: '<i class="fas fa-shield-alt"></i> Defensive Usage',
+            subtitle: 'Personal cooldowns and healthstones',
+            colSpan: 'col-span-12',
+            requirements: [{ type: 'cast' }],
+            process: (player, fight, events, module) => {
+                const breakdown = {};
+                let total = 0;
+                events.filter(e => e.type === 'cast' && e.sourceID === player.id).forEach(e => {
+                    const name = e.ability?.name || 'Unknown';
+                    breakdown[name] = (breakdown[name] || 0) + 1;
+                    total++;
+                });
+                return { total, breakdown };
+            },
+            render: (ctx) => {
+                const ranked = ctx.results.map(p => {
+                    let total = 0, breakdown = {};
+                    p.data.forEach(d => { if(d){ total += d.total; Object.entries(d.breakdown).forEach(([k,v]) => breakdown[k] = (breakdown[k]||0)+v); }});
+                    return { name: p.name, total, breakdown };
+                }).filter(p => p.total > 0).sort((a,b) => b.total - a.total);
+                if (ranked.length === 0) return '<div class="empty-state">No defensives recorded.</div>';
+                let html = '<table><thead><tr><th>Player</th><th>Total Uses</th><th>Breakdown</th></tr></thead><tbody>';
+                ranked.forEach(p => {
+                    const spells = Object.entries(p.breakdown).sort((a, b) => b[1] - a[1]).map(([n,v]) => `<span style="display:inline-block; background:rgba(16, 185, 129, 0.1); border:1px solid rgba(16, 185, 129, 0.3); padding:2px 6px; border-radius:4px; margin:2px;">${n}: <span style="color:var(--accent-green); font-weight:bold;">${v}</span></span>`).join(' ');
+                    html += `<tr><td><b>${p.name}</b></td><td style="color:var(--accent-green); font-weight:bold;">${p.total}</td><td>${spells}</td></tr>`;
+                });
+                return html + '</tbody></table>';
+            }
+        },
+        {
+            id: 'avoidable_damage',
+            title: '<i class="fas fa-fire-alt"></i> Avoidable Damage Discovery',
+            subtitle: 'Click abilities to track damage taken',
+            colSpan: 'col-span-12',
+            requirements: [],
+            process: (player, fight, events, module) => {
+                const breakdown = {};
+                let total = 0;
+                const activeIds = new Set(module.requirements.flatMap(r => r.abilityIds).map(id => parseInt(id)));
+                events.filter(e => e.type === 'damage' && e.targetID === player.id).forEach(e => {
+                    if (activeIds.has(parseInt(e.ability?.id))) {
+                        const name = e.ability?.name || 'Unknown';
+                        breakdown[name] = (breakdown[name] || 0) + (e.amount || 0);
+                        total += (e.amount || 0);
+                    }
+                });
+                return { total, breakdown };
+            },
+            render: (ctx) => {
+                const discovered = Engine.state.discoveredSpells || [];
+                let html = `<div style="margin-bottom:20px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 6px;"><div style="display:flex; flex-wrap:wrap; gap:8px;">`;
+                discovered.forEach(s => {
+                    const active = ctx.module.requirements.some(r => r.abilityName === s.name);
+                    html += `<button onclick="Engine.toggleRequirement('${s.name.replace(/'/g, "\\'")}')" class="btn btn-spell ${active ? 'active' : ''}">${s.name}</button>`;
+                });
+                html += `</div></div>`;
+                const ranked = ctx.results.map(p => {
+                    let total = 0, breakdown = {};
+                    p.data.forEach(d => { if(d){ total += d.total; Object.entries(d.breakdown).forEach(([k,v]) => breakdown[k] = (breakdown[k]||0)+v); }});
+                    return { name: p.name, total, breakdown };
+                }).filter(p => p.total > 0).sort((a,b) => b.total - a.total);
+                if (ranked.length === 0) return html + '<div class="empty-state">Select abilities above.</div>';
+                html += '<table><thead><tr><th>Player</th><th>Total Damage</th><th>Breakdown</th></tr></thead><tbody>';
+                ranked.forEach(p => {
+                    const spells = Object.entries(p.breakdown).map(([n,v]) => `<span style="display:inline-block; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:4px; margin:2px;">${n}: ${(v/1000).toFixed(1)}k</span>`).join(' ');
+                    html += `<tr><td><b>${p.name}</b></td><td style="color:var(--accent-red); font-weight:bold;">${(p.total/1000).toFixed(1)}k</td><td>${spells}</td></tr>`;
+                });
+                return html + '</tbody></table>';
+            }
+        }
+    ];
+
+    /**
+     * CORE ENGINE (V2 GraphQL)
+     */
+    const Engine = {
+        CLIENT_ID: "a154a784-f5b3-49c6-abb2-0150648a0c7f",
+        CLIENT_SECRET: "dksvlkZx9Utazml9SYTQjRgtz4PSJ1f2bNo8t2bB",
+        GQL_URL: "https://www.warcraftlogs.com/api/v2/client",
+        token: null,
+        state: { fights: [], actors: [], events: [], discoveredSpells: [], isDemo: false, selectedBoss: 'all' },
+
+        async getAccessToken() {
+            if (this.token) return this.token;
+            const res = await fetch('https://www.warcraftlogs.com/oauth/token', {
+                method: 'POST',
+                headers: { 'Authorization': 'Basic ' + btoa(this.CLIENT_ID + ':' + this.CLIENT_SECRET), 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'grant_type=client_credentials'
+            });
+            const data = await res.json();
+            this.token = data.access_token;
+            return this.token;
+        },
+
+        async query(gql, variables = {}) {
+            const token = await this.getAccessToken();
+            const res = await fetch(this.GQL_URL, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: gql, variables })
+            });
+            const json = await res.json();
+            if (json.errors) throw new Error(json.errors[0].message);
+            return json.data;
+        },
+
+        status(msg, type = 'neutral') {
+            const bar = document.getElementById('status-bar');
+            bar.style.display = 'block';
+            bar.style.background = type === 'error' ? 'var(--accent-red)' : type === 'success' ? 'var(--accent-green)' : 'var(--accent-blue)';
+            bar.innerHTML = msg;
+            if(type !== 'neutral') setTimeout(() => bar.style.display = 'none', 4000);
+        },
+
+        uiLoading(active) {
+            document.getElementById('btn-generate').disabled = active;
+            document.body.style.cursor = active ? 'wait' : 'default';
+        },
+
+        async fetchFights(code) {
+            if (this.state.isDemo) return this.getDemoData('fights');
+            const data = await this.query(`query($code: String!) {
+                reportData {
+                    report(code: $code) {
+                        masterData { actors(type: "Player") { id name } }
+                        fights(killType: All) { id name startTime endTime difficulty bossPercentage }
+                    }
+                }
+            }`, { code });
+            const r = data.reportData.report;
+            this.state.actors = r.masterData.actors;
+            return r.fights.filter(f => f.startTime > 0).map(f => ({ ...f, selected: true }));
+        },
+
+        async fetchEventStream(code, fightIDs) {
+            if (this.state.isDemo) return this.getDemoData('events');
+            
+            const DEFENSIVES = ["Shield Wall", "Ice Block", "Healthstone", "Divine Shield", "Barkskin", "Anti-Magic Shell", "Blur", "Aspect of the Turtle", "Dispersion"];
+            let allEvents = [];
+            let pages = { deaths: 0, interrupts: 0, damage: 0, casts: 0 };
+            
+            const eventQuery = `query($code: String!, $ids: [Int], $tDeath: Float, $tInt: Float, $tDmg: Float, $tCast: Float) {
+                reportData {
+                    report(code: $code) {
+                        deaths: events(fightIDs: $ids, startTime: $tDeath, dataType: Deaths) { data nextPageTimestamp }
+                        interrupts: events(fightIDs: $ids, startTime: $tInt, dataType: Interrupts) { data nextPageTimestamp }
+                        damage: events(fightIDs: $ids, startTime: $tDmg, dataType: DamageTaken, hostilityType: Friendlies) { data nextPageTimestamp }
+                        casts: events(fightIDs: $ids, startTime: $tCast, dataType: Casts, hostilityType: Friendlies) { data nextPageTimestamp }
+                    }
+                }
+            }`;
+
+            while (pages.deaths !== null || pages.interrupts !== null || pages.damage !== null || pages.casts !== null) {
+                const data = await this.query(eventQuery, { 
+                    code, ids: fightIDs, 
+                    tDeath: pages.deaths, tInt: pages.interrupts, tDmg: pages.damage, tCast: pages.casts 
+                });
+                
+                const r = data.reportData.report;
+                ['deaths', 'interrupts', 'damage', 'casts'].forEach(key => {
+                    if (pages[key] === null) return;
+                    let list = r[key].data;
+                    if (key === 'casts') list = list.filter(e => DEFENSIVES.includes(e.abilityGameID?.name || e.ability?.name));
+                    if (key === 'damage') list = list.filter(e => e.hitType !== 0); // Ignore misses/dodges
+                    
+                    allEvents.push(...list.map(e => ({
+                        type: key === 'deaths' ? 'death' : key === 'interrupts' ? 'interrupt' : key === 'casts' ? 'cast' : 'damage',
+                        targetID: e.targetID, sourceID: e.sourceID, timestamp: e.timestamp, amount: e.amount || 0,
+                        ability: e.abilityGameID ? { id: e.abilityGameID, name: e.abilityGameID.name } : { id: 0, name: 'Unknown' }
+                    })));
+                    pages[key] = r[key].nextPageTimestamp || null;
+                });
+            }
+            return allEvents;
+        },
+
+        getDemoData(t) {
+            if(t === 'fights') return [{ id: 1, name: "Nexus Princess Ky'veza", startTime: 0, endTime: 100000, selected: true }];
+            if(t === 'actors') return [{ id: 1, name: "Hero" }];
+            return [{ type: 'death', targetID: 1, timestamp: 50000, ability: { name: "Void Rift" } }];
+        },
+
+        toggleRequirement(name) {
+            const mod = REGISTERED_MODULES.find(m => m.id === 'avoidable_damage');
+            const idx = mod.requirements.findIndex(r => r.abilityName === name);
+            if (idx > -1) mod.requirements.splice(idx, 1);
+            else {
+                const s = this.state.discoveredSpells.find(s => s.name === name);
+                mod.requirements.push({ type: 'damage', abilityName: name, abilityIds: s.ids });
+            }
+            this.updateDashboard(); 
+        },
+
+        processEvents(fights, actors, events) {
+            const res = {};
+            REGISTERED_MODULES.forEach(m => res[m.id] = actors.map(a => ({ id: a.id, name: a.name, data: [] })));
+            fights.forEach(f => {
+                const fe = events.filter(e => e.timestamp >= f.startTime && e.timestamp <= f.endTime);
+                REGISTERED_MODULES.forEach(m => res[m.id].forEach(p => p.data.push(m.process(p, f, fe, m))));
+            });
+            return res;
+        },
+
+        updateDashboard() {
+            const ff = this.state.selectedBoss === 'all' ? this.state.fights : this.state.fights.filter(f => f.name === this.state.selectedBoss);
+            const res = this.processEvents(ff, this.state.actors, this.state.events);
+            this.renderDashboard(ff, res);
+        },
+
+        renderFilters() {
+            const container = document.getElementById('fight-filters');
+            const bosses = [...new Set(this.state.fights.map(f => f.name))];
+            let html = `<button onclick="Engine.filterByBoss('all')" class="btn-filter ${this.state.selectedBoss === 'all' ? 'active' : ''}">All Bosses</button>`;
+            bosses.forEach(b => html += `<button onclick="Engine.filterByBoss('${b.replace(/'/g, "\\'")}')" class="btn-filter ${this.state.selectedBoss === b ? 'active' : ''}">${b}</button>`);
+            container.innerHTML = html;
+            container.style.display = 'flex';
+        },
+
+        filterByBoss(n) { this.state.selectedBoss = n; this.renderFilters(); this.updateDashboard(); },
+
+        renderDashboard(fights, results) {
+            const container = document.getElementById('dashboard');
+            const ai = document.getElementById('ai-card');
+            container.innerHTML = '';
+            if (ai) container.appendChild(ai);
+            container.classList.add('active');
+            document.getElementById('btn-ai').style.display = 'inline-flex';
+            REGISTERED_MODULES.forEach(mod => {
+                const card = document.createElement('div');
+                card.className = `card ${mod.colSpan}`;
+                card.innerHTML = `<div class="card-header"><div><h3 class="card-title">${mod.title}</h3><div class="card-subtitle">${mod.subtitle}</div></div></div>
+                                  <div id="content-${mod.id}">${mod.render({ results: results[mod.id], fights, module: mod })}</div>`;
+                container.appendChild(card);
+            });
+        },
+
+        async init() {
+            this.uiLoading(true);
+            try {
+                const code = document.getElementById('reportCode').value.trim();
+                this.state.isDemo = (code.toLowerCase() === 'demo');
+                this.status("Authenticating & Fetching Fights...", "neutral");
+                this.state.fights = await this.fetchFights(code);
+                await this.analyze();
+            } catch (e) { this.status(e.message, "error"); }
+            finally { this.uiLoading(false); }
+        },
+
+        async analyze() {
+            this.uiLoading(true);
+            try {
+                const code = document.getElementById('reportCode').value.trim();
+                const ids = this.state.fights.map(f => f.id);
+                this.status("Downloading Batched Telemetry...", "neutral");
+                this.state.events = await this.fetchEventStream(code, ids);
+                
+                const spellMap = new Map();
+                this.state.events.forEach(e => {
+                    if (e.type === 'damage' && e.ability.name) {
+                        if (!spellMap.has(e.ability.name)) spellMap.set(e.ability.name, new Set());
+                        spellMap.get(e.ability.name).add(e.ability.id);
+                    }
+                });
+                this.state.discoveredSpells = Array.from(spellMap.entries()).map(([n, ids]) => ({ name: n, ids: Array.from(ids) }));
+                
+                this.renderFilters();
+                this.updateDashboard();
+                this.status("V2 Analysis Complete", "success");
+            } catch (e) { this.status(e.message, "error"); }
+            finally { this.uiLoading(false); }
+        }
+    };
+
+    /**
+     * AI INTELLIGENCE ENGINE (Unchanged)
+     */
+    const AIEngine = {
+        formatAIResponse(t) { return t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/^\* (.*$)/gim, '<li>$1</li>').replace(/(<li>.*<\/li>)/gms, '<ul>$1</ul>').replace(/\n/g, '<br>'); },
+        async callGeminiWithBackoff(p, s) {
+            const key = document.getElementById('geminiApiKey').value || "AIzaSyABVxYxCPFTGtIFv9fIdvzgRZS0uGQsTpQ";
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
+            const res = await fetch(url, { method: 'POST', body: JSON.stringify({ contents: [{ parts: [{ text: p }] }], systemInstruction: { parts: [{ text: s }] } }) });
+            const data = await res.json();
+            return data.candidates[0].content.parts[0].text;
+        },
+        async generateSummary() {
+            const btn = document.getElementById('btn-ai');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            try {
+                const ctx = document.getElementById('dashboard').innerText;
+                const resp = await this.callGeminiWithBackoff(`Summarize: ${ctx}`, "You are a WoW Raid Leader. Provide: 1. CORE ISSUE, 2. MVP, 3. ACTION PLAN.");
+                const old = document.getElementById('ai-card'); if(old) old.remove();
+                const card = document.createElement('div');
+                card.id = 'ai-card'; card.className = 'card col-span-12'; card.style.borderLeft = '4px solid var(--accent-orange)';
+                card.innerHTML = `<div class="card-title" style="color:var(--accent-orange)"><i class="fas fa-robot"></i> AI TACTICAL REPORT</div><div class="ai-summary-content">${this.formatAIResponse(resp)}</div>`;
+                document.getElementById('dashboard').prepend(card);
+            } catch (e) { Engine.status(e.message, "error"); }
+            finally { btn.innerHTML = '<i class="fas fa-brain"></i> Generate AI Tactics'; }
+        }
+    };
+</script>
+</body>
+>>>>>>> c612a968054f2fa7eb4c0c0c6bdddb1e2c11b63b
 </html>

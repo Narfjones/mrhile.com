@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -515,3 +516,522 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Physics Curriculum Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals -->
+    <!-- Application Structure Plan: A single-page application with a clear header, a main section presenting the curriculum as a series of collapsible accordion units, and a footer. This structure allows users to progressively disclose information, preventing cognitive overload and facilitating focused exploration of each unit's details. Midterm and Final Projects will use a tabbed interface for their internal structure. -->
+    <!-- Visualization & Content Choices: 1. Unit Details (Topics/Activities/Key Concepts) -> Goal: Organized, digestible content -> Viz: Accordion (HTML/CSS/JS) -> Interaction: Click to expand/collapse details -> Justification: Prevents information overload, allows users to focus on specific units. 2. Midterm/Final Projects -> Goal: Clearly separate project phases and criteria -> Viz: Tabbed content within accordion (HTML/CSS/JS) -> Interaction: Click tabs to switch views -> Justification: Efficiently organizes multiple facets of a project within a confined space. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4; /* Light neutral background */
+            color: #3D405B; /* Dark blue-gray for text */
+        }
+        .unit-card.highlight {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(129, 178, 154, 0.7); /* Greenish highlight */
+        }
+        .accordion-button svg {
+            transition: transform 0.3s ease;
+        }
+        .accordion-button[aria-expanded="true"] svg {
+            transform: rotate(90deg);
+        }
+        .tab-button[aria-selected="true"] {
+            border-color: #81B29A; /* Greenish border for active tab */
+            color: #3D405B;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-sm shadow-md py-4 px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-center space-x-8 md:space-x-12">
+            <a href="index.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Home</a>
+            <a href="physics.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Physics</a>
+            <a href="cs.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Computer Science</a>
+            <a href="digitalelectronics.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Digital Electronics</a>
+            <a href="calendar.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">Calendar</a>
+            <a href="DEFCON.html" class="text-[#3D405B] hover:text-[#81B29A] font-semibold text-lg transition-colors duration-200">DEFCON</a>
+
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#3D405B] mb-2">High School Physics Curriculum Map</h1>
+            <p class="text-lg text-gray-600">STEELS Aligned - One Semester - 84 Minute Sessions</p>
+        </header>
+
+        <main>
+            <section id="curriculum-timeline">
+                <h2 class="text-2xl font-bold text-center mb-2 text-[#3D405B]">Semester Timeline</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">
+                    Explore the units of study for this physics course. Each section details the topics, key concepts, activities, and assessments, designed to provide a comprehensive and engaging learning experience. Click on any unit to expand its details.
+                </p>
+                <div class="space-y-4 max-w-4xl mx-auto">
+                    
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-1">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">1</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Introduction to Physics & Scientific Toolkit</h3>
+                                    <span class="text-sm text-gray-500">5 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>What is Physics? Branches of Physics.</li>
+                                <li>The Scientific Method and Experimental Design.</li>
+                                <li>Measurement, Significant Figures, and Scientific Notation.</li>
+                                <li>Units and Dimensional Analysis (SI system).</li>
+                                <li>Graphing Techniques and Data Interpretation.</li>
+                                <li>Algebra and Trigonometry Review for Physics.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Observation, Hypothesis, Experimentation, Data Analysis, Precision, Accuracy, Variables.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Lab: Designing and conducting a simple experiment (e.g., pendulum period).</li>
+                                <li>Graphing exercises (linear, non-linear relationships).</li>
+                                <li>Problem-solving: Unit conversions and basic algebraic manipulations.</li>
+                           </ul>
+                           <h4 class="font-semibold mt-4 mb-2">Assessment:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Quiz on scientific method and units, lab report.</li>
+                           </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-2">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">2</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">One-Dimensional Kinematics</h3>
+                                    <span class="text-sm text-gray-500">12 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Position, Distance, Displacement.</li>
+                                <li>Speed, Velocity (average and instantaneous).</li>
+                                <li>Acceleration.</li>
+                                <li>Kinematic Equations for Constant Acceleration.</li>
+                                <li>Free Fall.</li>
+                                <li>Graphical Analysis of Motion (position-time, velocity-time, acceleration-time graphs).</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Motion, Rate of Change, Vector vs. Scalar.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Lab: Measuring and graphing motion (e.g., cart on a track, falling objects).</li>
+                                <li>Problem-solving sessions applying kinematic equations.</li>
+                                <li>Interpreting and sketching motion graphs.</li>
+                           </ul>
+                           <h4 class="font-semibold mt-4 mb-2">Assessment:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Problem sets, lab report, quiz.</li>
+                           </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-3">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">3</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Two-Dimensional Kinematics</h3>
+                                    <span class="text-sm text-gray-500">12 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Vectors and Scalars (review and expansion).</li>
+                                <li>Vector Addition and Subtraction (graphical and component methods).</li>
+                                <li>Projectile Motion (horizontal launch, angled launch).</li>
+                                <li>Relative Motion (basic concepts).</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Independence of Perpendicular Motion, Trajectory.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Lab: Projectile motion investigation (e.g., launching projectiles, analyzing range and height).</li>
+                                <li>Vector addition practice.</li>
+                                <li>Problem-solving: Complex projectile motion scenarios.</li>
+                           </ul>
+                           <h4 class="font-semibold mt-4 mb-2">Assessment:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Problem sets, lab report, quiz.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-4">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">4</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Forces and Newton's Laws of Motion</h3>
+                                    <span class="text-sm text-gray-500">15 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Introduction to Forces (contact vs. field forces).</li>
+                                <li>Newton's First Law (Inertia).</li>
+                                <li>Newton's Second Law ($F = ma$).</li>
+                                <li>Newton's Third Law (Action-Reaction Pairs).</li>
+                                <li>Types of Forces: Weight, Normal Force, Tension, Friction (static and kinetic).</li>
+                                <li>Free-Body Diagrams.</li>
+                                <li>Applications of Newton's Laws (inclined planes, multiple objects).</li>
+                                
+                           </ul>
+                           <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Interaction, Equilibrium, Net Force, Acceleration, Mass.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Lab: Investigating Newton's Laws (e.g., force and acceleration, friction coefficients).</li>
+                                <li>Drawing and analyzing free-body diagrams.</li>
+                                <li>Problem-solving: Applying Newton's Laws to various scenarios.</li>
+                           </ul>
+                           <h4 class="font-semibold mt-4 mb-2">Assessment:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Problem sets, lab report, quiz.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-5">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#E07A5F] mr-4">5</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Midterm Project</h3>
+                                    <span class="text-sm text-gray-500">5 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                            <div class="mb-4 border-b border-gray-200">
+                                <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500" data-target="midterm-topics" aria-selected="true">Topics</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="midterm-concepts" aria-selected="false">Key Concepts</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="midterm-activities" aria-selected="false">Activities</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="midterm-assessment" aria-selected="false">Assessment</button>
+                                </nav>
+                            </div>
+                            <div class="tab-content" id="midterm-topics">
+                                <h4 class="font-semibold mb-2">Topics:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Application of Kinematics, Forces, Work & Energy, and Momentum concepts.</li>
+                                    <li>Scientific and Engineering Practices: Planning investigations, analyzing data, constructing explanations.</li>
+                                </ul>
+                            </div>
+                            <div class="tab-content hidden" id="midterm-concepts">
+                                <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Synthesis of learned concepts, problem-solving through design.</li>
+                                </ul>
+                            </div>
+                            <div class="tab-content hidden" id="midterm-activities">
+                                <h4 class="font-semibold mb-2">Activities:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Students will work individually or in small groups to design, build, and test a device or model that demonstrates a specific physics principle from Units 1-4.</li>
+                                    <li>Examples: A device demonstrating projectile motion, a system illustrating conservation of energy, or a collision experiment.</li>
+                                    <li>Project proposal, design, construction, testing, and presentation.</li>
+                                </ul>
+                            </div>
+                            <div class="tab-content hidden" id="midterm-assessment">
+                                <h4 class="font-semibold mb-2">Assessment:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Project functionality, design process, presentation, and explanation of physics principles.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-6">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">6</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Work, Energy, and Power</h3>
+                                    <span class="text-sm text-gray-500">12 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Work done by a constant force.</li>
+                                <li>Kinetic Energy.</li>
+                                <li>Work-Energy Theorem.</li>
+                                <li>Potential Energy (Gravitational Potential Energy, Elastic Potential Energy).</li>
+                                <li>Conservation of Mechanical Energy.</li>
+                                <li>Power.</li>
+                                <li>Introduction to simple machines (brief).</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Energy Transformation, Conservation, Efficiency.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Lab: Investigating conservation of energy (e.g., roller coaster simulations, spring energy).</li>
+                                <li>Calculating work, energy, and power in different systems.</li>
+                                <li>Analyzing energy transformations in real-world examples.</li>
+                           </ul>
+                           <h4 class="font-semibold mt-4 mb-2">Assessment:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Problem sets, lab report, quiz.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-7">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">7</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Momentum and Collisions</h3>
+                                    <span class="text-sm text-gray-500">10 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Momentum.</li>
+                                <li>Impulse and Impulse-Momentum Theorem.</li>
+                                <li>Conservation of Momentum.</li>
+                                <li>Types of Collisions: Elastic and Inelastic Collisions.</li>
+                                <li>Applications of Momentum (e.g., rockets, recoil).</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Conservation of Momentum, Force over Time.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Lab: Investigating momentum conservation in collisions (e.g., carts on a track).</li>
+                                <li>Problem-solving: Analyzing various collision scenarios.</li>
+                                <li>Designing experiments to test impulse.</li>
+                           </ul>
+                           <h4 class="font-semibold mt-4 mb-2">Assessment:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Problem sets, lab report, quiz.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-8">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">8</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Sound and Waves</h3>
+                                    <span class="text-sm text-gray-500">5 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Introduction to Waves (transverse vs. longitudinal).</li>
+                                <li>Properties of Waves: Wavelength, Frequency, Amplitude, Speed.</li>
+                                <li>Sound as a Longitudinal Wave.</li>
+                                <li>Speed of Sound.</li>
+                                <li>Intensity and Loudness.</li>
+                                <li>Resonance and Standing Waves (brief).</li>
+                                <li>The Doppler Effect (brief).</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Wave Propagation, Energy Transfer, Vibration.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Lab: Measuring the speed of sound or investigating resonance.</li>
+                                <li>Exploring wave properties using simulations.</li>
+                                <li>Listening activities to identify pitch and loudness.</li>
+                           </ul>
+                           <h4 class="font-semibold mt-4 mb-2">Assessment:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Short problem set, mini-demonstration/explanation.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-9">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                            <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#81B29A] mr-4">9</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Introduction to Optics</h3>
+                                    <span class="text-sm text-gray-500">4 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                           <h4 class="font-semibold mb-2">Topics:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Nature of Light (wave-particle duality, brief).</li>
+                                <li>Reflection: Law of Reflection, Plane Mirrors.</li>
+                                <li>Refraction: Snell's Law, Lenses (converging/diverging - basic ray tracing).</li>
+                                <li>Total Internal Reflection (brief).</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                                <li>Light Interaction with Matter, Image Formation.</li>
+                           </ul>
+                           <h4 class="font-semibold mb-2">Activities:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Lab: Investigating reflection with mirrors and refraction with lenses.</li>
+                                <li>Ray tracing diagrams for simple optical systems.</li>
+                                <li>Observing optical phenomena.</li>
+                           </ul>
+                           <h4 class="font-semibold mt-4 mb-2">Assessment:</h4>
+                           <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Diagramming exercises, short quiz.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="unit-card bg-white rounded-2xl shadow-sm overflow-hidden" id="unit-10">
+                        <button class="accordion-button w-full flex justify-between items-center p-5 text-left" aria-expanded="false">
+                             <div class="flex items-center">
+                                <span class="text-2xl font-bold text-[#E07A5F] mr-4">10</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Final Project</h3>
+                                    <span class="text-sm text-gray-500">5 Days</span>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden p-5 border-t border-gray-200">
+                            <div class="mb-4 border-b border-gray-200">
+                                <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500" data-target="final-topics" aria-selected="true">Topics</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="final-concepts" aria-selected="false">Key Concepts</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="final-activities" aria-selected="false">Activities</button>
+                                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="final-assessment" aria-selected="false">Assessment</button>
+                                </nav>
+                            </div>
+                            <div class="tab-content" id="final-topics">
+                                <h4 class="font-semibold mb-2">Topics:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Application of all course concepts.</li>
+                                    <li>Advanced Scientific and Engineering Practices: Refining designs, communicating complex ideas.</li>
+                                </ul>
+                            </div>
+                            <div class="tab-content hidden" id="final-concepts">
+                                <h4 class="font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Comprehensive application of physics principles, iterative design, problem-solving.</li>
+                                </ul>
+                            </div>
+                            <div class="tab-content hidden" id="final-activities">
+                                <h4 class="font-semibold mb-2">Activities:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Students will undertake a more complex design challenge or research project that integrates multiple physics concepts learned throughout the semester.</li>
+                                    <li>Examples: Designing a simple musical instrument based on wave principles, building a periscope or simple telescope, or creating a device that uses energy transformations.</li>
+                                    <li>Detailed project proposal, iterative design and testing, final presentation, and written report.</li>
+                                </ul>
+                            </div>
+                            <div class="tab-content hidden" id="final-assessment">
+                                <h4 class="font-semibold mb-2">Assessment:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Project functionality, scientific rigor, engineering design process, presentation, and comprehensive written report.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            const tabContainers = document.querySelectorAll('.unit-card .accordion-content');
+            tabContainers.forEach(container => {
+                const tabs = container.querySelectorAll('.tab-button');
+                const contents = container.querySelectorAll('.tab-content');
+                
+                if (tabs.length === 0) return;
+
+                // Set the first tab as active by default
+                tabs[0].setAttribute('aria-selected', 'true');
+                contents[0].classList.remove('hidden');
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+                        tab.setAttribute('aria-selected', 'true');
+
+                        contents.forEach(c => c.classList.add('hidden'));
+                        const targetId = tab.getAttribute('data-target');
+                        const targetContent = container.querySelector(`#${targetId}`);
+                        if(targetContent) {
+                           targetContent.classList.remove('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+>>>>>>> c612a968054f2fa7eb4c0c0c6bdddb1e2c11b63b
